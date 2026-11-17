@@ -1,19 +1,23 @@
 # gd-business-site-boilerplate
 
 ## Repo map
-- `api/` — Laravel API (PHP 8.5, MariaDB; cache, sessions and queue use the database)
-- `web/admin` — Next.js admin app
-- `web/portal` — Next.js public portal
+- `api/` — Express 5 API for one Cloudflare Worker (MongoDB Atlas, wrangler); stub until Phase M1
+- `legacy-api/` — read-only Laravel reference (tag laravel-v1.0.0); nothing imports from it; deleted in M10
+- `web/admin` — Vite React admin app (served at /admin/)
+- `web/portal` — Next.js static-export public portal
 - `packages/` — shared packages
-- `docker/` — Dockerfiles and compose config
-- `docs/` — PHASES.md, VERSIONS.md, ENV.md, DECISIONS.md, PATTERNS.md
+- `media/` — uploaded images, committed through the GitHub API (from M3)
+- `docker/` — local dev Dockerfiles and compose config (MongoDB for dev; replaced in M1)
+- `.github/workflows/` — build and deploy with wrangler (GitHub Actions, no Cloudflare build minutes)
+- `docs/` — PHASES.md, VERSIONS.md, ENV.md, DECISIONS.md (ADR 012), PATTERNS.md
 
 ## Make commands
-- `make up` / `make down` — start (builds, waits for healthy) / stop the stack
+Planned for the new stack; Phase M1 replaces the current Makefile (still the Laravel one until then).
+- `make up` / `make down` — start / stop the local stack (API on wrangler dev, MongoDB, admin, portal)
 - `make ports` — check host ports from .env are free or ours
 - `make versions` — check .env *_VERSION pins against docs/VERSIONS.md
-- `make t FILTER=...` — targeted Pest tests inside the php container
-- `make check` — compose config, script syntax, nginx -t, Pint, Larastan, Pest, composer audit, version pins (run once, at the end of a phase; needs the stack up)
+- `make t FILTER=...` — targeted API tests
+- `make check` — lint, typecheck, tests, npm audit, version pins (run once, at the end of a phase)
 
 ## Rules
 1) One phase at a time; read only CLAUDE.md, the phase row and files it names.

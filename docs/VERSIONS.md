@@ -76,3 +76,10 @@ Checked 2026-11-17. Advisories: GitHub advisory database queried per pin (affect
 | Node image (Debian) | 24.22.3-trixie-slim | 24.22.3 | https://hub.docker.com/_/node/tags?name=24.22.3-trixie-slim | 2026-11-17 | `node:24.22.3-trixie-slim` exists (`24.22.3-bookworm-slim` also exists) |
 
 Decided in Phase M1 (no pins yet): password hashing, HTML sanitiser, OpenAPI generator, email provider.
+
+Spike-only candidates (Phase M1; removed with the spikes unless a spike result adopts them):
+
+| Component | Pin | Floor | Source | Date | Docker Hub |
+|-----------|-----|-------|--------|------|------------|
+| bcryptjs | 3.0.3 | 3.0.3 | https://www.npmjs.com/package/bcryptjs/v/3.0.3 | 2026-11-17 | n/a (npm; 0 advisories) |
+| hash-wasm | 4.13.0 | 4.13.0 | https://www.npmjs.com/package/hash-wasm/v/4.13.0 | 2026-11-17 | n/a (npm; 0 advisories) |

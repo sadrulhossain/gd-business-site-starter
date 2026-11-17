@@ -1,0 +1,16 @@
+{
+  "name": "gd-business-site",
+  "main": "src/worker.ts",
+  "compatibility_date": "2026-11-17",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": { "enabled": true },
+  "vars": {
+    "APP_ENV": "production",
+    "APP_DEBUG": "false",
+    "MONGODB_DB": "gdsite",
+    "CORS_ALLOWED_ORIGINS": "",
+    "LOCALE_DEFAULT": "en",
+    "LOCALE_FALLBACK": "en",
+    "LOCALE_SUPPORTED": "en"
+  }
+}

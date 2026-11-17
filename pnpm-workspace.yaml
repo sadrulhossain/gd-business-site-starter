@@ -1,4 +1,5 @@
 packages:
+  - api
   - web/*
   - packages/*
 
@@ -12,5 +13,21 @@ catalog:
   '@types/react': 19.3.0
   '@types/react-dom': 19.3.0
 # Next 16.4.6 pins postcss 8.5.23, below our floor (docs/VERSIONS.md). Force the pinned one everywhere.
+minimumReleaseAgeExclude:
+  - '@cloudflare/workerd-darwin-64@1.20261117.1'
+  - '@cloudflare/workerd-darwin-arm64@1.20261117.1'
+  - '@cloudflare/workerd-linux-64@1.20261117.1'
+  - '@cloudflare/workerd-linux-arm64@1.20261117.1'
+  - '@cloudflare/workerd-windows-64@1.20261117.1'
+  - '@cloudflare/workers-types@5.20261117.1'
+  - miniflare@5.20261117.0-beta
+  - mongoose@9.12.2
+  - workerd@1.20261117.1
+  - wrangler@4.164.0
 overrides:
   postcss: 8.5.32
+
+# Build scripts allowed to run: esbuild and workerd (wrangler dev) ship native binaries.
+allowBuilds:
+  esbuild: true
+  workerd: true

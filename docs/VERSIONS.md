@@ -75,4 +75,20 @@ Checked 2026-11-17. Advisories: GitHub advisory database queried per pin (affect
 | MongoDB server (dev) | 8.0.38 | 8.0.38 | https://hub.docker.com/_/mongo/tags?name=8.0.38 | 2026-11-17 | `mongo:8.0.38` exists; Atlas M0 server version not verified, check in M1 |
 | Node image (Debian) | 24.22.3-trixie-slim | 24.22.3 | https://hub.docker.com/_/node/tags?name=24.22.3-trixie-slim | 2026-11-17 | `node:24.22.3-trixie-slim` exists (`24.22.3-bookworm-slim` also exists) |
 
-Decided in Phase M1 (no pins yet): password hashing, HTML sanitiser, OpenAPI generator, email provider.
+Decided in Phase M1: HTML sanitiser (sanitize-html), OpenAPI generator (zod-to-openapi). Still open: password hashing (spike a), email provider.
+
+Spike-only candidates (Phase M1; removed with the spikes unless a spike result adopts them):
+
+| Component | Pin | Floor | Source | Date | Docker Hub |
+|-----------|-----|-------|--------|------|------------|
+| bcryptjs | 3.0.3 | 3.0.3 | https://www.npmjs.com/package/bcryptjs/v/3.0.3 | 2026-11-17 | n/a (npm; 0 advisories) |
+| hash-wasm | 4.13.0 | 4.13.0 | https://www.npmjs.com/package/hash-wasm/v/4.13.0 | 2026-11-17 | n/a (npm; 0 advisories) |
+
+Adopted by M1 spikes (2026-11-17, 0 advisories each):
+
+| Component | Pin | Floor | Source | Date | Docker Hub |
+|-----------|-----|-------|--------|------|------------|
+| sanitize-html | 2.18.2 | 2.18.2 | https://www.npmjs.com/package/sanitize-html/v/2.18.2 | 2026-11-17 | n/a (npm) |
+| @asteasolutions/zod-to-openapi | 9.1.0 | 9.1.0 | https://www.npmjs.com/package/@asteasolutions/zod-to-openapi/v/9.1.0 | 2026-11-17 | n/a (npm) |
+
+Rejected in spike b (not installed): xss 1.0.17, dompurify 3.4.18, linkedom 0.18.15.

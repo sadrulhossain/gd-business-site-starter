@@ -19,17 +19,13 @@ const cmp = (a, b) => {
 
 const checks = []
 const env = existsSync('.env') ? readFileSync('.env', 'utf8') : readFileSync('.env.example', 'utf8')
-for (const [key, row] of Object.entries({ PHP_VERSION: /^PHP$/, NODE_VERSION: /^Node/, NGINX_VERSION: /^nginx/, MARIADB_VERSION: /^MariaDB/, MAILPIT_VERSION: /^Mailpit/, COMPOSER_VERSION: /^Composer/ })) {
+for (const [key, row] of Object.entries({ NODE_VERSION: /^Node/, MONGO_VERSION: /^MongoDB server/, MAILPIT_VERSION: /^Mailpit/ })) {
   const v = env.match(new RegExp(`^${key}=(.+)$`, 'm'))?.[1]
   if (v) checks.push([key, v, floorOf(row)])
 }
 
-const lock = JSON.parse(readFileSync('api/composer.lock', 'utf8'))
-const php = { 'laravel/framework': /^Laravel/, 'laravel/passport': /passport/, 'spatie/laravel-permission': /spatie/, 'ezyang/htmlpurifier': /htmlpurifier/, 'phpseclib/phpseclib': /phpseclib/, 'dedoc/scramble': /scramble/ }
-for (const p of [...lock.packages, ...lock['packages-dev']]) if (php[p.name]) checks.push([p.name, p.version, floorOf(php[p.name])])
-
-const pnpm = readFileSync('pnpm-lock.yaml', 'utf8')
-const js = { next: /^Next/, vite: /^Vite/, react: /^React/, 'react-dom': /^React/, tailwindcss: /^tailwindcss$/, postcss: /^postcss$/, typescript: /^typescript$/, '@tiptap/react': /tiptap\/react/, '@tiptap/starter-kit': /starter-kit/ }
+const pnpm = existsSync('pnpm-lock.yaml') ? readFileSync('pnpm-lock.yaml', 'utf8') : ''
+const js = { express: /^express$/, mongoose: /^mongoose$/, mongodb: /^mongodb driver/, zod: /^zod$/, jose: /^jose$/, wrangler: /^wrangler$/, supertest: /^supertest$/, next: /^Next/, vite: /^Vite/, react: /^React/, 'react-dom': /^React/, tailwindcss: /^tailwindcss$/, postcss: /^postcss$/, typescript: /^typescript$/, '@tiptap/react': /tiptap\/react/, '@tiptap/starter-kit': /starter-kit/ }
 const installed = new Map()
 for (const line of pnpm.split(/\r?\n/)) {
   const m = /^ {2}'?(.+?)@(\d+\.\d+\.\d+)'?:$/.exec(line)

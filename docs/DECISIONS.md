@@ -85,3 +85,12 @@ Operating rules: no server rendering; `run_worker_first` is only the path list `
 builds run on GitHub Actions; at most 3 of the 5 free cron triggers; weekly mongodump, encrypted before upload, kept as a GitHub Actions artifact
 (artifacts of a public repository are readable by anyone); Atlas touched daily; `media/` is capped by file size (5 MB upload) and file count
 (6,000 files; Cloudflare allows 20,000 per version).
+
+## 013 - HTML sanitiser: sanitize-html
+2026-11-17 (spike b, docs/SPIKES.md). sanitize-html 2.18.2 with the legacy allowlist (tags, `a[href|title|target]`, `img[src|alt|width|height]`, schemes http/https/mailto/tel, images http/https only, no protocol-relative URLs). It passed 35/35 hostile payloads and 10/10 allowed checks inside workerd. DOMPurify with linkedom was rejected because DOMPurify silently returns unsanitised input there; xss was rejected as a tokenizer, not a parser. Sanitise on write (never trust the editor) and keep the corpus as a permanent test.
+
+## 014 - OpenAPI from zod: @asteasolutions/zod-to-openapi
+2026-11-17 (spike c). Request and response schemas are zod 4 schemas; @asteasolutions/zod-to-openapi 9.1.0 generates the OpenAPI 3.1 document and reproduced two legacy schemas exactly. The zod built-in JSON Schema output differs in nullable, integer and date-time shapes. Deliberate differences from `docs/legacy-openapi.json` are logged in the M5 parity check.
+
+## 015 - Rate limiting: Mongo TTL counters
+2026-11-17 (spike f). The Workers Rate Limiting binding is approximate and per location, and the docs do not confirm it for the Free plan; WAF rate limiting needs a zone, and `workers.dev` has none. Login and contact use a fixed-window counter in a `rate_limits` collection (`_id` = route + hashed IP, or hashed email for login; `$inc` upsert; TTL index on `expiresAt`). One Mongo write per limited request. Revisit the binding after a deployed check.

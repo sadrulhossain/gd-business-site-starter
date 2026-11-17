@@ -30,3 +30,4 @@ Planned for the new stack; Phase M1 replaces the current Makefile (still the Lar
    (done, deviations, decisions I must make), then STOP and wait for approval.
 8) Commits and PRs: never add a Claude signature, Co-Authored-By trailer, "Generated with" line
    or any other Claude attribution to commit messages, PR descriptions, code or docs. Anywhere.
+9) Branch names: `feature/phase-<phase_no>-<task-name-in-kebab-case>` (e.g. `feature/phase-m1-worker-foundation`). One branch per phase, opened as a PR to main.

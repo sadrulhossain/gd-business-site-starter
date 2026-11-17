@@ -30,13 +30,21 @@ export const modules: ModuleDef[] = [
   { key: 'hero', actions: ['view', 'update'], menu: { title: 'Hero', path: '/hero', icon: 'home', sort: 5, group: CONTENT } },
   { key: 'about', actions: ['view', 'update'], menu: { title: 'About us', path: '/about', icon: 'info', sort: 6, group: CONTENT } },
   { key: 'sections', actions: ['view', 'update'], menu: { title: 'Sections', path: '/sections', icon: 'layers', sort: 10, group: CONTENT } },
+  { key: 'faqs', actions: ['view', 'create', 'update', 'delete'], menu: { title: 'FAQs', path: '/faqs', icon: 'help-circle', sort: 60, group: CONTENT } },
+  { key: 'services', actions: ['view', 'create', 'update', 'delete'], menu: { title: 'Services', path: '/services', icon: 'briefcase', sort: 20, group: CONTENT } },
+  { key: 'pricing', actions: ['view', 'create', 'update', 'delete'], menu: { title: 'Pricing', path: '/pricing', icon: 'price', sort: 25, group: CONTENT } },
+  { key: 'testimonials', actions: ['view', 'create', 'update', 'delete'], menu: { title: 'Testimonials', path: '/testimonials', icon: 'message-square', sort: 30, group: CONTENT } },
+  { key: 'team', actions: ['view', 'create', 'update', 'delete'], menu: { title: 'Team', path: '/team', icon: 'users', sort: 40, group: CONTENT } },
+  { key: 'gallery', actions: ['view', 'create', 'update', 'delete'], menu: { title: 'Gallery', path: '/gallery', icon: 'image', sort: 50, group: CONTENT } },
 ];
 
 export const permissionNames = (): string[] => modules.flatMap((m) => m.actions.map((a) => `${m.key}.${a}`)).sort();
 
 /** Permissions given to a role on first seed (never re-applied, so edits stick). */
 export const roleGrants: Record<string, string[]> = {
-  admin: ['dashboard.view', 'settings.view', 'settings.update', 'hero.view', 'hero.update', 'about.view', 'about.update', 'sections.view', 'sections.update'],
+  admin: ['dashboard.view', 'settings.view', 'settings.update', 'hero.view', 'hero.update', 'about.view', 'about.update', 'sections.view', 'sections.update',
+    ...['faqs', 'services', 'pricing', 'testimonials', 'team', 'gallery'].flatMap((k) => ['view', 'create', 'update', 'delete'].map((a) => `${k}.${a}`)),
+  ],
 };
 
 /** The menu permission of a module is its view action. */

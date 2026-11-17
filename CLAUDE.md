@@ -15,6 +15,7 @@
 Planned for the new stack; Phase M1 replaces the current Makefile (still the Laravel one until then).
 - `make up` / `make down` — start / stop the local stack (API on wrangler dev, MongoDB, admin, portal)
 - `make ports` — check host ports from .env are free or ours
+- `make seed` / `make seed-core` — idempotent seed with / without the demo content
 - `make versions` — check .env *_VERSION pins against docs/VERSIONS.md
 - `make t FILTER=...` — targeted API tests
 - `make check` — lint, typecheck, tests, npm audit, version pins (run once, at the end of a phase)

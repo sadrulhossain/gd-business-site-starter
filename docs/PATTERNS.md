@@ -58,8 +58,14 @@ Vitest + Supertest on the compose Mongo; `useDb()` drops and re-indexes `<MONGOD
 ### Content change tracking (M3)
 - `schema.plugin(markDirtyPlugin, {tags:['faqs']})` records `{dirty_at, tags}` in `site_state` after every create, update, delete and bulk write of the model. Call `markDirty(db, tags)` for changes made outside a model. M5 turns it into a rebuild.
 
+### Content modules with contentRoutes (M4)
+- A plain ordered content module (FAQs, services, testimonials, team, gallery) is: its Mongoose model in models.ts (via `content()`, which adds the tag plugin and the is_visible+sort_order index), `modules/<name>/schema.ts` (zod create/update with `bilingual()` and `orderFields`, plus the resource mapper) and `modules/<name>/routes.ts` (one `contentRoutes()` call).
+- `contentRoutes` (src/support/content.ts) registers GET/POST /<path>, GET/PATCH/PUT/DELETE /<path>/:id, optional POST/DELETE /<path>/:id/image, GET /public/<path> and optionally /public/<path>/:id. Order is always sort_order then _id. Hooks: `check` (refuse before writing), `map`, `prepare` (related rows), `list` (custom queries), `afterDelete` (cascade).
+- Legacy lists are not paginated and have no reorder routes, so these modules do not add either. Delete returns 204, create 201, price-like decimals are stored as numbers and returned as "120.00".
+- Cascades are explicit: deleting a service deletes its pricings in `afterDelete` (legacy FK ON DELETE CASCADE).
+
 ### New content module checklist (M3)
-1. Schema in models.ts with the plugin and `getModels` entry; 2. zod schema with `bilingual()`; 3. routes via `Api` (public ones with `localizePublic`); 4. entry in access/modules.ts (permissions, menu, admin grant); 5. seed with `$setOnInsert` only; 6. media owner added to `countMediaFiles`; 7. routeAudit public list; 8. tests (auth, validation, ?lang, markDirty).
+1. Schema in models.ts with the plugin and `getModels` entry; 2. zod schema with `bilingual()`; 3. routes via `Api` (public ones with `localizePublic`); 4. entry in access/modules.ts (permissions, menu, admin grant); 5. seed with `$setOnInsert` only; 6. media owner added to `countMediaFiles` (src/media/service.ts, list of models with an image); 7. routeAudit public list; 8. tests (auth, validation, ?lang, markDirty).
 
 ## Legacy (Laravel)
 

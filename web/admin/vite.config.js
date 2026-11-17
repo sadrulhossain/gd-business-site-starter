@@ -4,15 +4,15 @@ import { defineConfig } from 'vite'
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  // Public PKCE client id, passed in by compose (OAUTH_ADMIN_CLIENT_ID).
-  define: { __OAUTH_CLIENT_ID__: JSON.stringify(process.env.OAUTH_ADMIN_CLIENT_ID ?? '') },
+  // Served by the single Worker under /admin/ (M8 copies dist/ to dist/site/admin/).
+  base: '/admin/',
   server: {
     host: '0.0.0.0',
     port: Number(process.env.ADMIN_DEV_PORT || 28301),
     strictPort: true,
-    allowedHosts: [`admin.${process.env.APP_DOMAIN}`],
+    // Development: /api goes to the Worker (wrangler dev) so the page and the API share an origin, as in production.
+    proxy: { '/api': `http://localhost:${process.env.API_DEV_PORT || 28302}` },
     watch: { usePolling: true },
-    hmr: { clientPort: Number(process.env.NGINX_HTTP_PORT || 80) },
   },
   test: {
     environment: 'jsdom',

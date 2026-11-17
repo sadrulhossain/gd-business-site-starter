@@ -11,7 +11,7 @@ Tick a phase only when it is finished and committed.
 | [x] | M3 | settings, sections, media | |
 | [x] | M4 | content modules | |
 | [x] | M5 | blog, contact, publish pipeline | |
-| [ ] | M6 | admin | |
+| [x] | M6 | admin | |
 | [ ] | M7 | portal static export | |
 | [ ] | M8 | Cloudflare delivery | |
 | [ ] | M9 | hardening and QA | |

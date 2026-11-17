@@ -1,24 +1,26 @@
 import { useEffect, type ReactNode } from 'react'
-import { useLocation } from 'react-router'
+import { Navigate, useLocation } from 'react-router'
 import { Splash } from '../components/Splash'
 import { Forbidden } from '../pages/errors'
-import { startLogin } from './oauth'
+import { restoreSession } from './session'
 import { useAuth } from './store'
 
 /**
- * Renders children only for a signed-in user whose account is loaded. Without a session it starts the sign-in
- * (a full-page redirect to the API login page, which returns here); until then it shows a status line.
+ * Renders children only for a signed-in user whose account is loaded. On the first visit it tries one silent refresh
+ * (the refresh cookie); without a session it goes to /login with the target in router state (never in storage).
  */
 export function RequireAuth({ children }: { children: ReactNode }) {
   const status = useAuth((s) => s.status)
   const user = useAuth((s) => s.user)
+  const restored = useAuth((s) => s.restored)
   const location = useLocation()
 
   useEffect(() => {
-    if (status === 'anonymous') void startLogin(location.pathname + location.search)
-  }, [status, location.pathname, location.search])
+    if (status === 'anonymous' && !restored) void restoreSession()
+  }, [status, restored])
 
   if (status === 'authenticated' && user) return <>{children}</>
+  if (status === 'anonymous' && restored) return <Navigate to="/login" replace state={{ from: location.pathname + location.search }} />
 
   return <Splash />
 }

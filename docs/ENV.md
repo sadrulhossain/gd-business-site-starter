@@ -24,7 +24,7 @@ each service lists its own `environment:` (no `env_file`). Commit only `*.exampl
 | API_INTERNAL_URL | node (portal) | http://api.${APP_DOMAIN}/api | where the portal's server reaches the API inside compose (nginx answers to the `api.` alias); never exposed to the browser |
 | LOCALE_DEFAULT / LOCALE_SUPPORTED | also node (portal) | | the portal derives its locales from these: default has no URL prefix, the first other supported locale is served at `/<code>` |
 | PORTAL_REVALIDATE_URL / PORTAL_REVALIDATE_SECRET | php*, node (secret) | empty / change-me | content changes queue a signed POST of `{"tags":[...]}` to the URL; headers `X-Webhook-Timestamp`, `X-Webhook-Signature: sha256=hmac(secret, "<timestamp>.<body>")`. Empty URL disables it |
-| OAUTH_ADMIN_CLIENT_ID | node (admin SPA) | fixed UUID | public PKCE client id; must equal `OAUTH_ADMIN_CLIENT_ID` in `api/.env` (the redirect URI is `<admin origin>/auth/callback`) |
+| VITE_API_URL | admin build (M6) | empty | API origin at build time. Empty in production: every call goes to `/api/...` on the same origin. In development the Vite dev server proxies `/api` to the Worker (`API_DEV_PORT`), so leave it empty there too. The admin is built with base `/admin/`. |
 | CONTACT_NOTIFY_TO | php* | empty | contact form notification recipient when Settings has no email |
 
 | APP_DEBUG | php* | true | |

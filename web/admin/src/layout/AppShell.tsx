@@ -6,6 +6,7 @@ import { signOut } from '../auth/signOut'
 import { useAuth } from '../auth/store'
 import { Brand } from '../components/Brand'
 import { Icon } from '../components/Icon'
+import { PublishStatus } from '../components/PublishStatus'
 import { ThemeToggle } from '../components/ThemeToggle'
 import { ToastHost } from '../components/Toast'
 import { useFavicon } from '../lib/branding'
@@ -13,6 +14,18 @@ import type { MenuItem } from '../types'
 
 const navLink = 'flex items-center gap-3 rounded-lg px-3 py-2 font-medium text-sidebar-text transition-colors hover:bg-white/30 dark:hover:bg-white/10'
 const navActive = '!bg-primary-600 !text-white shadow-md'
+
+/** Unread contact messages for the Messages menu item (the inbox is the only way a message is noticed when no mail is sent). */
+function useUnread(enabled: boolean): number {
+  const unread = useQuery({
+    queryKey: ['unread'],
+    enabled,
+    refetchInterval: 120_000,
+    queryFn: async () => ((await api.request('GET', '/v1/contact-messages', { query: { unread: 1 } })) as { meta: { total: number } }).meta.total,
+  })
+
+  return unread.data ?? 0
+}
 
 const GROUP_ICONS: Record<string, string> = { content: 'layers', access: 'shield', blog: 'file-text' }
 
@@ -75,6 +88,12 @@ function MenuNode({ item, collapsed, open, onToggle, nested = false }: { item: M
     )
   }
 
+  return <Leaf item={item} collapsed={collapsed} nested={nested} />
+}
+
+function Leaf({ item, collapsed, nested }: { item: MenuItem; collapsed: boolean; nested: boolean }) {
+  const unread = useUnread(item.path === '/messages')
+
   return (
     <li className={nested ? 'ml-5 border-l border-sidebar-line pl-2' : ''}>
       <NavLink
@@ -84,7 +103,12 @@ function MenuNode({ item, collapsed, open, onToggle, nested = false }: { item: M
         className={({ isActive }) => `${navLink} ${nested ? '!py-1.5 text-[0.95rem]' : ''} ${collapsed ? 'justify-center' : ''} ${isActive ? navActive : ''}`}
       >
         <Icon name={item.icon} className="size-[18px]" />
-        <span className={collapsed ? 'sr-only' : 'truncate'}>{item.title}</span>
+        <span className={collapsed ? 'sr-only' : 'flex-1 truncate'}>{item.title}</span>
+        {unread > 0 && (
+          <span className="rounded-full bg-danger-solid px-1.5 text-[11px] leading-5 font-semibold text-white" aria-label={`${unread} unread`}>
+            {unread}
+          </span>
+        )}
       </NavLink>
     </li>
   )
@@ -200,7 +224,7 @@ export function AppShell() {
         className={`fixed inset-y-0 left-0 z-40 flex shrink-0 flex-col border-r border-sidebar-line bg-cover bg-center transition-all lg:sticky lg:top-0 lg:h-screen lg:translate-x-0 ${
           drawer ? 'translate-x-0' : '-translate-x-full'
         } ${slim ? 'w-[4.5rem]' : 'w-72'}`}
-        style={{ backgroundImage: 'url(/images/sidebar-bg-img.jpg)' }}
+        style={{ backgroundImage: `url(${import.meta.env.BASE_URL}images/sidebar-bg-img.jpg)` }}
       >
         <div className="flex h-full flex-col bg-sidebar-glass p-3 backdrop-blur-md">
           <div className={`flex h-12 items-center gap-3 px-2 ${slim ? 'justify-center' : ''}`}>
@@ -227,6 +251,7 @@ export function AppShell() {
             <Icon name="menu" className="size-5" />
           </button>
           <div className="ml-auto flex items-center gap-1">
+            <PublishStatus />
             <ThemeToggle />
             <UserMenu />
           </div>

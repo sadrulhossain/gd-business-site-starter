@@ -74,6 +74,12 @@ Vitest + Supertest on the compose Mongo; `useDb()` drops and re-indexes `<MONGOD
 - Operators in filters must be built with the helpers in db.ts (`after`, `before`, `upTo`, `between`, `inList`, `notEq`); spreading two trusted objects loses the trust, use one helper call.
 - The contract: `make openapi` regenerates packages/api-types from the zod schemas and the route registry (src/openapi). A new route needs: its body schema in src/openapi/spec.ts (`bodies`), a response schema in src/openapi/responses.ts when it is a new resource, and any deliberate difference from legacy in docs/CONTRACT-DIFFS.md. test/openapi.test.ts fails when the committed file is stale.
 
+### Admin app (M6)
+- Auth: `auth/session.ts` is the only place that talks to /auth/*. The access token lives in the zustand store (memory); the refresh token is an httpOnly cookie. `refreshTokens()` is single-flight, `getValidToken()` renews within 60 s of expiry, a 401 triggers one refresh and one retry (api-client `onUnauthorized`). `RequireAuth` runs one silent `restoreSession()` per page load, then redirects to /login with `{ from }` in router state.
+- The api-client takes `baseUrl` and `credentials` from the app; the admin passes `include`. Cookie calls need the header `X-Requested-With: gd-admin`.
+- Images: `lib/upload.ts` `uploadImage()` builds WebP variants in the browser (480/960/1600, never upscaled, 36 MP cap read from the file header before decoding) and sends only those with `width` and `height`; the favicon goes as the plain file. `ImagePanel` shows the local blob until the published file loads.
+- Base path: Vite `base` and router `basename` are `/admin`; use `import.meta.env.BASE_URL` for public assets. Admin CSP rules live in `web/admin/public/_headers.admin` for M8 to merge.
+
 ### New content module checklist (M3)
 1. Schema in models.ts with the plugin and `getModels` entry; 2. zod schema with `bilingual()`; 3. routes via `Api` (public ones with `localizePublic`); 4. entry in access/modules.ts (permissions, menu, admin grant); 5. seed with `$setOnInsert` only; 6. media owner added to `countMediaFiles` (src/media/service.ts, list of models with an image); 7. routeAudit public list; 8. tests (auth, validation, ?lang, markDirty).
 

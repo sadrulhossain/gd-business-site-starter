@@ -46,6 +46,8 @@ export interface ClientOptions {
   /** Bearer token for authenticated routes; called per request. */
   getToken?: () => string | null | undefined | Promise<string | null | undefined>
   fetch?: typeof fetch
+  /** Fetch credentials mode, injected by the app (the admin sends the refresh cookie, so it passes `include`). */
+  credentials?: RequestCredentials
   /** Default `?lang=` for public reads (`/v1/public/*`). */
   lang?: string
   /**
@@ -76,7 +78,7 @@ export function createClient(options: ClientOptions) {
     method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE',
     path: string,
     // Loosely typed on purpose: the public methods below carry the precise per-operation types.
-    init: { path?: unknown; query?: unknown; body?: unknown } = {},
+    init: { path?: unknown; query?: unknown; body?: unknown; headers?: Record<string, string> } = {},
     retried = false,
   ): Promise<unknown> {
     const pathParams = (init.path ?? {}) as Record<string, unknown>
@@ -96,6 +98,7 @@ export function createClient(options: ClientOptions) {
     const token = await options.getToken?.()
     if (token) headers.Authorization = `Bearer ${token}`
 
+    Object.assign(headers, init.headers)
     let body: BodyInit | undefined
     if (init.body instanceof FormData) {
       body = init.body // the browser sets the multipart boundary
@@ -104,7 +107,7 @@ export function createClient(options: ClientOptions) {
       headers['Content-Type'] = 'application/json'
     }
 
-    const response = await doFetch(url, { method, headers, body })
+    const response = await doFetch(url, { method, headers, body, ...(options.credentials ? { credentials: options.credentials } : {}) })
 
     if (response.status === 401 && !retried && options.onUnauthorized && (await options.onUnauthorized())) {
       return request(method, path, init, true)
@@ -123,7 +126,7 @@ export function createClient(options: ClientOptions) {
 
   return {
     /** Untyped escape hatch for config-driven pages (CrudPage) whose endpoints are data, not literals. */
-    request: (method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE', path: string, init?: { path?: Record<string, unknown>; query?: Record<string, unknown>; body?: unknown }) =>
+    request: (method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE', path: string, init?: { path?: Record<string, unknown>; query?: Record<string, unknown>; body?: unknown; headers?: Record<string, string> }) =>
       request(method, path, init),
     get: <P extends PathsFor<'get'>>(path: P, ...args: Args<Op<P, 'get'>>) =>
       request('GET', path, args[0]) as Promise<ResponseOf<Op<P, 'get'>>>,

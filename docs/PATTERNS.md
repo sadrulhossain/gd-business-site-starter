@@ -1,9 +1,58 @@
 # Reference patterns
 
+## Express API (Cloudflare Worker, MongoDB)
+
+Reference module: access (users, roles, menus). Code lives in `api/src`. Copy these shapes.
+
+### Module folder
+`src/modules/<module>/{model,schema,routes}.ts` (single-file models live in `src/models.ts` until a module needs its own file).
+- **schema.ts**: zod schemas, always `z.strictObject` (unknown keys are a 422). Bilingual text = `x` + `x_2nd`.
+- **routes.ts**: `export function <module>Routes(api: Api)`, thin handlers: parse -> policy check -> query -> `toResource` -> `res.json({data})`.
+- Register the function in `src/routes/v1.ts`.
+
+### Routes and access
+Every route goes through `Api` (`src/http/route.ts`): `api.get(path, access, ...handlers)`, where access is
+`{public:true}`, `{permission:"module.action"}` or `{own:true}`. The helper applies `authenticate` and `can()`, records the
+route, and answers other methods on a known path with a JSON 405. `test/routeAudit.test.ts` fails for a route outside
+the helper, an unknown permission, or an unexpected public endpoint. Register fixed paths (`/menus/reorder`) before `/:id`.
+
+### Permissions
+One registry: `src/access/modules.ts` (`{key, actions, menu}`). It feeds the seeder, `GET /v1/permissions` and `can()`. Names are
+`<module>.<action>`. The superadmin role bypasses every check and is never assignable, editable or deletable via the API; a
+non-superadmin can grant only permissions they hold. Policies that depend on the target (superadmin users, self-delete) live in the handler.
+
+### Data
+- Numeric ids: `_id: Number`, allocated by `nextId(m, "<collection>")` (atomic `$inc` upsert on `counters`).
+- One Mongoose connection per request (`res.locals.db()`, closed after the response); models via `res.locals.models()`.
+- `sanitizeFilter` is on: an operator in a filter needs `inList()`, `notEq()` or `before()` from `src/db.ts`, and only with validated values.
+  Never pass `req.query` or `req.body` into a filter; parse with zod first.
+- Serialise with an explicit `toResource`; never return a document.
+
+### Errors
+`throw new HttpError(status, code, message, details?)` or `validationError({field:[messages]})` (422, legacy shape:
+`{error:{code:"unprocessable", message:<first>, details:{field:[...]}}}`). 5xx messages are hidden unless APP_DEBUG.
+Lists are Laravel-shaped (`paginate()`: `{data, links, meta}`, 15 per page).
+
+### Auth (ADR 016)
+Access JWT (HS256, jose, 15 min, memory only in the admin) + rotating refresh token in a host-only httpOnly cookie. Cookie endpoints
+(`/auth/refresh`, `/logout`) need `X-Requested-With: gd-admin` and a trusted Origin. Rate limits are Mongo TTL counters (`hit()`).
+
+### Seeds
+`pnpm --filter @gd/api seed` (`src/seed/seed.ts`): create-if-missing only, so edits survive; the superadmin is created from `SUPERADMIN_*`.
+
+### Tests
+Vitest + Supertest on the compose Mongo; `useDb()` drops and re-indexes `<MONGODB_DB>_testing`; `actingAs(m, role, permissions)` returns a bearer header.
+
+---
+
+## Legacy (Laravel)
+
+Kept until M10. Reference module: Sections (`Section*` under `legacy-api/app`); singleton reference: Settings.
+
 Copy these shapes, do not invent new ones. Reference module: Sections (`Section*` under `api/app`);
 singleton reference: Settings. Paths below are relative to `api/app` unless noted.
 
-## New module checklist
+### New module checklist
 1. **Migration + Model**: `#[Fillable]`, `casts()`. Bilingual text = columns `x` + `x_2nd`, `use HasSecondLanguage`.
 2. **Policy** `Policies/<Model>Policy.php`: one method per action, `$user->checkPermissionTo('<module>.<action>')`.
    Permission names are `<module>.<action>`; the superadmin passes via `Gate::before`.
@@ -21,19 +70,19 @@ singleton reference: Settings. Paths below are relative to `api/app` unless note
 8. **Tests** `tests/Feature/<Module>/`: 401 anonymous, 403 missing permission, happy path, 422 validation
    (assert the field keys), seeder idempotence. Authenticate with `actingAsRole($role, [$perms])` (`tests/Pest.php`).
 
-## Uploads
+### Uploads
 - `Services/MediaService`: `store($file, '<dir>')` returns the path kept in the model's `image` column;
   `describe($path)` goes in the Resource; `delete($old)` on replace or remove.
 - Images upload through their own multipart endpoint: `POST|DELETE <resource>/{id}/image`
   (`SectionImageController`). Validate with `MediaService::imageRules()` (mime by content, size, dimensions).
 - Files live at `<dir>/<random>/original.<ext>`; the queued `Jobs/GenerateWebpVariants` adds `<width>.webp`.
 
-## Config and environment
+### Config and environment
 - `env()` is read only in `config/*.php` (e.g. `config/locales.php`, `config/uploads.php`).
 - Tests force their environment in `tests/bootstrap.php` (testing DB, array cache, sync queue); compose env
   beats phpunit.xml. Each compose service lists its own `environment:` (see `x-php` in `docker-compose.yml`).
 
-## Public reads, contact, webhook (phase 6)
+### Public reads, contact, webhook (phase 6)
 - Public reads live in the `LocalizePublicResponse` route group (`public/*`): the controller's `publicIndex`/`publicShow` skips
   `Gate::authorize` and returns visible rows only. `?lang=` collapses `x`/`x_2nd` pairs; no per-resource code is needed.
 - Rich text: assign it to a model attribute whose setter calls `Services/HtmlSanitizer` (see `Post::body`); never sanitise in controllers.
@@ -43,14 +92,14 @@ singleton reference: Settings. Paths below are relative to `api/app` unless note
   Not for private data (contact messages). Tests use `Http::fake()` per test.
 - OpenAPI: `make openapi` exports Scramble's spec to `packages/api-types/openapi.json`; commit it when routes change.
 
-## Frontend (phase 7)
+### Frontend (phase 7)
 - Theme: import `tailwindcss` then `@gd/tokens/<app>.css` in the app's one CSS file. Use token utilities (`bg-primary-600`, `text-ink`,
   `border-line`, `font-display`), never raw hex. New tokens go in packages/tokens, not in an app.
 - Data: type API data with `components['schemas'][...]` from `@gd/api-types`; call the API with `@gd/api-client` (`createClient`), never raw fetch.
 - Regenerate after API changes: `make openapi` (migrated DB), then `pnpm generate:types`; commit both outputs.
 - Tailwind only sees literal class names: map values to full class strings, do not build them with template pieces.
 
-## Admin module (phase 8)
+### Admin module (phase 8)
 - A CRUD screen is one entry in `web/admin/src/modules.ts`: `key` (permission prefix: `<key>.view|create|update|delete`), `path` (matches the
   `/me/menus` row), `endpoint`, `columns`, `fields` (`bilingual: true` renders "Title (EN)" / "Title (FR)" from `/v1/meta/locales`). The router,
   permission gate and buttons follow from it; add a page component only when the screen is not plain CRUD.
@@ -58,7 +107,7 @@ singleton reference: Settings. Paths below are relative to `api/app` unless note
   the API remains the authority.
 - Shared pieces: `DataTable`, `FormField`, `BilingualField`, `ConfirmDialog`, `Toast`; do not add a second of any.
 
-## Admin modules (phase 9)
+### Admin modules (phase 9)
 - CrudPage extensions, each used by two modules: `type: 'checkgroup'` (string[]; grouped options render a matrix) with `optionsFrom`
   (options fetched from the API) for users/roles; `reorder: {endpoint, group?}` (drag rows, sends `PUT {ids}`) for sections/menus.
 - Inline boolean save in a table cell: `ToggleCell` from a column's `render`. Not a CrudPage feature.
@@ -66,19 +115,19 @@ singleton reference: Settings. Paths below are relative to `api/app` unless note
 - API: reorder endpoints are `PUT <resource>/reorder {ids}` registered before the resource route (`ReorderRequest` subclass per table).
   The superadmin role is never assignable, editable or deletable through the API; a non-superadmin can only grant permissions they hold.
 
-## Content modules (phase 10)
+### Content modules (phase 10)
 - `image: true` on a CrudConfig adds the image panel to the edit form (`POST|DELETE <endpoint>/<id>/image`); show it in the list with a column `render`.
 - Uploads use `lib/upload.ts` `uploadFile` (XHR, for progress; same token refresh as the client). Validate with `checkImage` first, the API stays the authority.
 - Bulk upload is `GalleryUploader` (create item, then upload; a failed upload deletes the empty item), mounted via `pages` in router.tsx.
 - Read-only screens that are not CrudPage (contact inbox) are a page plus an `InboxConfig` (`messagesConfig.ts`).
 
-## Blog and profile (phase 11)
+### Blog and profile (phase 11)
 - Rich text: field `type: 'richtext'` (TipTap, `components/RichText.tsx`, HTML in and out; works with `bilingual`). Keep its extensions inside the
   HtmlSanitizer allowlist (api `HtmlSanitizer::ALLOWED`); add a tag there first if the editor needs one.
 - `status` (draft|published) is the API's view of `is_published` (`ResolvesPostStatus`); forms use `status`, never the boolean.
 - Own account: `PATCH /v1/me` (`ProfileController`), page `pages/Profile.tsx`; no permission, any signed-in user.
 
-## Portal (phase 12)
+### Portal (phase 12)
 - Locales: `lib/i18n.ts` reads LOCALE_DEFAULT / LOCALE_SUPPORTED. `proxy.ts` rewrites unprefixed paths to `/<default>/...` and redirects an explicit
   default prefix away; pages live under `app/[locale]/`. Build links with `localePath(locale, path)`, never by hand. Env is server-only: client
   components take `locales` / `unprefixed` as props (see `LanguageSwitcher`).
@@ -90,7 +139,7 @@ singleton reference: Settings. Paths below are relative to `api/app` unless note
 - Dev note: after changing a server component that a client component consumes, a stale Turbopack cache can serve old props; `rm -rf web/portal/.next` and restart node.
 - Screenshots: `docker compose --profile e2e run --rm --no-deps -T -w /app/web/portal e2e npx playwright test`.
 
-## Portal pages (phase 13)
+### Portal pages (phase 13)
 - A page for a section is `lib/section-page.tsx` `sectionPage('<key>', [extra keys])` in a two-line `page.tsx`: it renders the same `SectionBlock` view as Home
   (title becomes the h1) and 404s when the section is hidden. Add the key to `SECTION_PAGES` so the header links to the page instead of a Home anchor.
 - Static legal text (`privacy`, `terms`) lives in `messages/*.json` under `legal`, with `{site}` / `{email}` filled from settings (`lib/legal-page.tsx`).
@@ -99,7 +148,7 @@ singleton reference: Settings. Paths below are relative to `api/app` unless note
 - 404: `app/[locale]/[...rest]/page.tsx` calls `notFound()` for unknown paths; `not-found.tsx` must not read request headers (that makes every locale route dynamic, no ISR): `NotFoundContent` picks the locale from the URL.
 - Proxy matcher: keep the double backslash in `.*\..*`; a single one silently matches nothing useful. After editing `proxy.ts` restart node with a clean `.next`.
 
-## Blog, contact and SEO (phase 14)
+### Blog, contact and SEO (phase 14)
 - Every page builds its metadata with `lib/seo.ts` `pageMetadata({locale, path, siteName, ...})`: title, description, canonical, hreflang (all locales + x-default), Open Graph, Twitter.
   `SITE_URL` is the public origin used for all absolute URLs; `metadataBase` is set in the locale layout.
 - JSON-LD goes through `components/JsonLd.tsx` (escapes `<`): LocalBusiness on Home, Article on a post. Build the objects in `lib/seo.ts`.
@@ -108,14 +157,14 @@ singleton reference: Settings. Paths below are relative to `api/app` unless note
 - Contact: `components/ContactForm.tsx` talks only to `app/api/contact/*` (server proxies to the API; the captcha is one-time, refetched after every submit). The honeypot field is `website`.
 - Smoke tests: `web/portal/e2e/smoke.spec.ts` (`docker compose --profile e2e run --rm --no-deps -T -w /app/web/portal e2e npx playwright test smoke`). The contact test leaves one message with subject `e2e-smoke`; the blog test skips without published posts.
 
-## Security and quality gates (phase 15)
+### Security and quality gates (phase 15)
 - `make security` (also part of `make check`): `php artisan security:routes` (every `auth:api` route needs `can:` or a policy/Gate call; own-account routes are listed in `AuditRoutes::ALLOWED`), `scripts/check-secrets.sh`, `scripts/check-floors.mjs`. A new route gets its check; do not add allowlist entries.
 - nginx: `include /etc/nginx/snippets/security-headers.conf;` in every server and in every location that sets its own `add_header` (those replace inherited ones). Set the CSP per vhost.
 - The OAuth authorize step is S256-only (`RequirePkceS256`). Cross-origin API access is closed; list origins in `CORS_ALLOWED_ORIGINS` only when a browser app needs it.
 - Portal: never read `headers()` or `cookies()` in the locale layout, `not-found.tsx` or shared components (every page turns dynamic and loses ISR). `web/portal/e2e/a11y.spec.ts` (axe) must stay at zero violations; white text needs `bg-brand-700` or darker.
 - Dev edits do not reach the node container's file watcher on Windows: after changing code, stop node, delete `web/portal/.next` and start it again.
 
-## Production (phase 16)
+### Production (phase 16)
 - Production lives in `docker-compose.prod.yml` + `docker/prod/` + `.env.prod`, never in the dev compose file. Images contain the code; nothing is bind-mounted except TLS certs. Do not publish ports other than 80/443.
 - A new env variable: add it to the `x-php` (or service) `environment:` in the prod file, to `.env.prod.example` and to the production table in ENV.md. Required secrets use `${VAR:?message}`.
 - A new service needs `restart: always`, a `healthcheck`, the `logging` anchor and a `depends_on` with `condition: service_healthy`.

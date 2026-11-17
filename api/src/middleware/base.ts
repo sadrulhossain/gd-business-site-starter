@@ -1,6 +1,6 @@
 import { randomUUID } from 'node:crypto';
 import type { RequestHandler } from 'express';
-import type { Env } from '../env.js';
+import type { Env } from '../env.ts';
 
 export const requestId: RequestHandler = (req, res, next) => {
   const incoming = req.get('x-request-id');

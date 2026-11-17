@@ -1,7 +1,7 @@
 import { httpServerHandler } from 'cloudflare:node';
 import { env as bindings } from 'cloudflare:workers';
-import { createApp } from './app.js';
-import type { Env } from './env.js';
+import { createApp } from './app.ts';
+import type { Env } from './env.ts';
 
 // Express listens on a virtual port; httpServerHandler routes Worker fetches to it (nodejs_compat).
 const app = createApp(bindings as unknown as Env);

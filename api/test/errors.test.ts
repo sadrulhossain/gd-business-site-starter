@@ -1,8 +1,8 @@
 import express from 'express';
 import supertest from 'supertest';
 import { expect, it } from 'vitest';
-import { errorHandler, HttpError } from '../src/errors.js';
-import { client, testEnv } from './helpers.js';
+import { errorHandler, HttpError } from '../src/errors.ts';
+import { client, testEnv } from './helpers.ts';
 
 it('renders unknown routes as a json 404 error', async () => {
   const res = await client().get('/api/v1/nope');

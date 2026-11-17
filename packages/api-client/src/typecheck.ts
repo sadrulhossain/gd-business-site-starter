@@ -8,12 +8,12 @@ export async function typeChecks() {
   const health = await api.get('/v1/health')
   void health
 
-  const faq = await api.get('/v1/faqs/{faq}', { path: { faq: 1 } })
+  const faq = await api.get('/v1/faqs/{id}', { path: { id: 1 } })
   const question: string = faq.data.question
   void question
 
-  await api.patch('/v1/faqs/{faq}', { path: { faq: 1 }, body: { answer: 'New' } })
-  const gone: void = await api.delete('/v1/faqs/{faq}', { path: { faq: 1 } })
+  await api.patch('/v1/faqs/{id}', { path: { id: 1 }, body: { answer: 'New' } })
+  const gone: void = await api.delete('/v1/faqs/{id}', { path: { id: 1 } })
   void gone
 
   await api.post('/v1/contact', {
@@ -24,13 +24,13 @@ export async function typeChecks() {
   await api.get('/v1/nope')
 
   // @ts-expect-error path params are required
-  await api.get('/v1/faqs/{faq}')
+  await api.get('/v1/faqs/{id}')
 
   // @ts-expect-error wrong param type
-  await api.get('/v1/faqs/{faq}', { path: { faq: 'one' } })
+  await api.get('/v1/faqs/{id}', { path: { id: 'one' } })
 
   // @ts-expect-error body field has the wrong type
-  await api.patch('/v1/faqs/{faq}', { path: { faq: 1 }, body: { sort_order: 'first' } })
+  await api.patch('/v1/faqs/{id}', { path: { id: 1 }, body: { sort_order: 'first' } })
 
   // @ts-expect-error GET-only path
   await api.delete('/v1/health')

@@ -37,7 +37,7 @@ describe('route audit', () => {
 
   it('keeps the public surface to the expected endpoints', () => {
     const open = routes.filter((r) => 'public' in r.access).map((r) => `${r.method.toUpperCase()} ${r.path}`).sort();
-    expect(open).toEqual(['GET /health', 'GET /meta/locales', 'GET /public/faqs', 'GET /public/gallery', 'GET /public/pricing', 'GET /public/sections', 'GET /public/services', 'GET /public/services/:id', 'GET /public/settings', 'GET /public/team', 'GET /public/testimonials', 'POST /auth/login', 'POST /auth/refresh', 'POST /logout']);
+    expect(open).toEqual(['GET /health', 'GET /meta/locales', 'GET /public/captcha', 'GET /public/categories', 'GET /public/faqs', 'GET /public/gallery', 'GET /public/posts', 'GET /public/posts/:slug', 'GET /public/pricing', 'GET /public/sections', 'GET /public/services', 'GET /public/services/:id', 'GET /public/settings', 'GET /public/team', 'GET /public/testimonials', 'POST /auth/login', 'POST /auth/refresh', 'POST /contact', 'POST /logout']);
   });
 
   it('answers 401 on every non-public route without a token', async () => {

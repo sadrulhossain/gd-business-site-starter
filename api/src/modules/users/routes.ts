@@ -74,7 +74,7 @@ export function userRoutes(api: Api): void {
     res.status(201).json({ data: (await toResources(m, [doc.toObject()]))[0] });
   });
 
-  api.patch('/users/:id', { permission: 'users.update' }, async (req, res) => {
+  const updateUser: Parameters<Api['patch']>[2] = async (req, res) => {
     const m = res.locals.models();
     const auth = res.locals.auth!;
     const target = await m.User.findOne({ _id: idParam(req) }).lean();
@@ -105,7 +105,9 @@ export function userRoutes(api: Api): void {
     const updated = await m.User.findOneAndUpdate({ _id: target._id }, { $set: set }, { returnDocument: 'after' }).lean();
     if (set.password_hash) await m.RefreshToken.updateMany({ user_id: target._id, revoked_at: null }, { $set: { revoked_at: new Date() } });
     res.json({ data: (await toResources(m, [updated!]))[0] });
-  });
+  };
+  api.patch('/users/:id', { permission: 'users.update' }, updateUser);
+  api.put('/users/:id', { permission: 'users.update' }, updateUser); // legacy apiResource accepts PUT and PATCH
 
   api.delete('/users/:id', { permission: 'users.delete' }, async (req, res) => {
     const m = res.locals.models();

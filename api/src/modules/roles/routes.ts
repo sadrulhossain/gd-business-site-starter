@@ -9,8 +9,8 @@ import { nextId, type Models, type RoleDoc } from '../../models.ts';
 
 const nameField = z.string().max(60).regex(/^[a-z0-9_-]+$/, 'The name may only contain lowercase letters, numbers, dashes and underscores.');
 const permissions = z.array(z.string().max(120));
-const storeSchema = z.strictObject({ name: nameField, permissions: permissions.optional() });
-const updateSchema = z.strictObject({ name: nameField.optional(), permissions: permissions.optional() });
+export const storeRoleSchema = z.strictObject({ name: nameField, permissions: permissions.optional() });
+export const updateRoleSchema = z.strictObject({ name: nameField.optional(), permissions: permissions.optional() });
 
 const toResource = (r: RoleDoc) => ({ id: r._id, name: r.name, permissions: [...r.permissions].sort() });
 
@@ -44,7 +44,7 @@ export function roleRoutes(api: Api): void {
   });
 
   api.post('/roles', { permission: 'roles.create' }, async (req, res) => {
-    const body = parse(storeSchema, req.body);
+    const body = parse(storeRoleSchema, req.body);
     const m = res.locals.models();
     await assertNameFree(m, body.name);
     const grant = assertGrantable(res.locals.auth!, body.permissions);
@@ -52,12 +52,12 @@ export function roleRoutes(api: Api): void {
     res.status(201).json({ data: toResource(role.toObject()) });
   });
 
-  api.patch('/roles/:id', { permission: 'roles.update' }, async (req, res) => {
+  const updateRole: Parameters<Api['patch']>[2] = async (req, res) => {
     const m = res.locals.models();
     const role = await m.Role.findOne({ _id: idParam(req) }).lean();
     if (!role) throw notFoundError();
     if (role.name === SUPERADMIN_ROLE) throw forbidden(); // never editable through the API
-    const body = parse(updateSchema, req.body);
+    const body = parse(updateRoleSchema, req.body);
     const set: Record<string, unknown> = {};
     if (body.name !== undefined) {
       await assertNameFree(m, body.name, role._id);
@@ -66,7 +66,9 @@ export function roleRoutes(api: Api): void {
     if (body.permissions !== undefined) set.permissions = assertGrantable(res.locals.auth!, body.permissions);
     const updated = await m.Role.findOneAndUpdate({ _id: role._id }, { $set: set }, { returnDocument: 'after' }).lean();
     res.json({ data: toResource(updated!) });
-  });
+  };
+  api.patch('/roles/:id', { permission: 'roles.update' }, updateRole);
+  api.put('/roles/:id', { permission: 'roles.update' }, updateRole); // legacy apiResource accepts PUT and PATCH
 
   api.delete('/roles/:id', { permission: 'roles.delete' }, async (req, res) => {
     const m = res.locals.models();

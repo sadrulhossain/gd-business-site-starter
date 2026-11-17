@@ -4,6 +4,921 @@
  */
 
 export interface paths {
+    "/v1/health": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GET /health */
+        get: operations["get.health"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/meta/locales": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GET /meta/locales */
+        get: operations["get.meta.locales"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/auth/login": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** POST /auth/login */
+        post: operations["post.auth.login"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/auth/refresh": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** POST /auth/refresh */
+        post: operations["post.auth.refresh"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/logout": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** POST /logout */
+        post: operations["post.logout"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GET /me */
+        get: operations["get.me"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** PATCH /me */
+        patch: operations["patch.me"];
+        trace?: never;
+    };
+    "/v1/me/menus": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GET /me/menus */
+        get: operations["get.me.menus"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/users": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GET /users */
+        get: operations["get.users"];
+        put?: never;
+        /** POST /users */
+        post: operations["post.users"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/users/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GET /users/:id */
+        get: operations["get.users.id"];
+        /** PUT /users/:id */
+        put: operations["put.users.id"];
+        post?: never;
+        /** DELETE /users/:id */
+        delete: operations["delete.users.id"];
+        options?: never;
+        head?: never;
+        /** PATCH /users/:id */
+        patch: operations["patch.users.id"];
+        trace?: never;
+    };
+    "/v1/roles": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GET /roles */
+        get: operations["get.roles"];
+        put?: never;
+        /** POST /roles */
+        post: operations["post.roles"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/roles/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GET /roles/:id */
+        get: operations["get.roles.id"];
+        /** PUT /roles/:id */
+        put: operations["put.roles.id"];
+        post?: never;
+        /** DELETE /roles/:id */
+        delete: operations["delete.roles.id"];
+        options?: never;
+        head?: never;
+        /** PATCH /roles/:id */
+        patch: operations["patch.roles.id"];
+        trace?: never;
+    };
+    "/v1/permissions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GET /permissions */
+        get: operations["get.permissions"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/menus": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GET /menus */
+        get: operations["get.menus"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/menus/reorder": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** PUT /menus/reorder */
+        put: operations["put.menus.reorder"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/menus/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** PATCH /menus/:id */
+        patch: operations["patch.menus.id"];
+        trace?: never;
+    };
+    "/v1/public/settings": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GET /public/settings */
+        get: operations["get.public.settings"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/settings": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GET /settings */
+        get: operations["get.settings"];
+        /** PUT /settings */
+        put: operations["put.settings"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** PATCH /settings */
+        patch: operations["patch.settings"];
+        trace?: never;
+    };
+    "/v1/settings/logo": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** POST /settings/logo */
+        post: operations["post.settings.logo"];
+        /** DELETE /settings/logo */
+        delete: operations["delete.settings.logo"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/settings/favicon": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** POST /settings/favicon */
+        post: operations["post.settings.favicon"];
+        /** DELETE /settings/favicon */
+        delete: operations["delete.settings.favicon"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/public/sections": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GET /public/sections */
+        get: operations["get.public.sections"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/sections": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GET /sections */
+        get: operations["get.sections"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/sections/reorder": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** PUT /sections/reorder */
+        put: operations["put.sections.reorder"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/sections/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GET /sections/:id */
+        get: operations["get.sections.id"];
+        /** PUT /sections/:id */
+        put: operations["put.sections.id"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** PATCH /sections/:id */
+        patch: operations["patch.sections.id"];
+        trace?: never;
+    };
+    "/v1/sections/{id}/image": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** POST /sections/:id/image */
+        post: operations["post.sections.id.image"];
+        /** DELETE /sections/:id/image */
+        delete: operations["delete.sections.id.image"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/hero": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GET /hero */
+        get: operations["get.hero"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** PATCH /hero */
+        patch: operations["patch.hero"];
+        trace?: never;
+    };
+    "/v1/hero/image": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** POST /hero/image */
+        post: operations["post.hero.image"];
+        /** DELETE /hero/image */
+        delete: operations["delete.hero.image"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/about": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GET /about */
+        get: operations["get.about"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** PATCH /about */
+        patch: operations["patch.about"];
+        trace?: never;
+    };
+    "/v1/about/image": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** POST /about/image */
+        post: operations["post.about.image"];
+        /** DELETE /about/image */
+        delete: operations["delete.about.image"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/public/faqs": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GET /public/faqs */
+        get: operations["get.public.faqs"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/faqs": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GET /faqs */
+        get: operations["get.faqs"];
+        put?: never;
+        /** POST /faqs */
+        post: operations["post.faqs"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/faqs/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GET /faqs/:id */
+        get: operations["get.faqs.id"];
+        /** PUT /faqs/:id */
+        put: operations["put.faqs.id"];
+        post?: never;
+        /** DELETE /faqs/:id */
+        delete: operations["delete.faqs.id"];
+        options?: never;
+        head?: never;
+        /** PATCH /faqs/:id */
+        patch: operations["patch.faqs.id"];
+        trace?: never;
+    };
+    "/v1/public/services": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GET /public/services */
+        get: operations["get.public.services"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/public/services/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GET /public/services/:id */
+        get: operations["get.public.services.id"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/services": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GET /services */
+        get: operations["get.services"];
+        put?: never;
+        /** POST /services */
+        post: operations["post.services"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/services/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GET /services/:id */
+        get: operations["get.services.id"];
+        /** PUT /services/:id */
+        put: operations["put.services.id"];
+        post?: never;
+        /** DELETE /services/:id */
+        delete: operations["delete.services.id"];
+        options?: never;
+        head?: never;
+        /** PATCH /services/:id */
+        patch: operations["patch.services.id"];
+        trace?: never;
+    };
+    "/v1/services/{id}/image": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** POST /services/:id/image */
+        post: operations["post.services.id.image"];
+        /** DELETE /services/:id/image */
+        delete: operations["delete.services.id.image"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/public/pricing": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GET /public/pricing */
+        get: operations["get.public.pricing"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/pricing": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GET /pricing */
+        get: operations["get.pricing"];
+        put?: never;
+        /** POST /pricing */
+        post: operations["post.pricing"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/pricing/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GET /pricing/:id */
+        get: operations["get.pricing.id"];
+        /** PUT /pricing/:id */
+        put: operations["put.pricing.id"];
+        post?: never;
+        /** DELETE /pricing/:id */
+        delete: operations["delete.pricing.id"];
+        options?: never;
+        head?: never;
+        /** PATCH /pricing/:id */
+        patch: operations["patch.pricing.id"];
+        trace?: never;
+    };
+    "/v1/public/testimonials": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GET /public/testimonials */
+        get: operations["get.public.testimonials"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/testimonials": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GET /testimonials */
+        get: operations["get.testimonials"];
+        put?: never;
+        /** POST /testimonials */
+        post: operations["post.testimonials"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/testimonials/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GET /testimonials/:id */
+        get: operations["get.testimonials.id"];
+        /** PUT /testimonials/:id */
+        put: operations["put.testimonials.id"];
+        post?: never;
+        /** DELETE /testimonials/:id */
+        delete: operations["delete.testimonials.id"];
+        options?: never;
+        head?: never;
+        /** PATCH /testimonials/:id */
+        patch: operations["patch.testimonials.id"];
+        trace?: never;
+    };
+    "/v1/testimonials/{id}/image": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** POST /testimonials/:id/image */
+        post: operations["post.testimonials.id.image"];
+        /** DELETE /testimonials/:id/image */
+        delete: operations["delete.testimonials.id.image"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/public/team": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GET /public/team */
+        get: operations["get.public.team"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/team": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GET /team */
+        get: operations["get.team"];
+        put?: never;
+        /** POST /team */
+        post: operations["post.team"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/team/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GET /team/:id */
+        get: operations["get.team.id"];
+        /** PUT /team/:id */
+        put: operations["put.team.id"];
+        post?: never;
+        /** DELETE /team/:id */
+        delete: operations["delete.team.id"];
+        options?: never;
+        head?: never;
+        /** PATCH /team/:id */
+        patch: operations["patch.team.id"];
+        trace?: never;
+    };
+    "/v1/team/{id}/image": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** POST /team/:id/image */
+        post: operations["post.team.id.image"];
+        /** DELETE /team/:id/image */
+        delete: operations["delete.team.id.image"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/public/gallery": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GET /public/gallery */
+        get: operations["get.public.gallery"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/gallery": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GET /gallery */
+        get: operations["get.gallery"];
+        put?: never;
+        /** POST /gallery */
+        post: operations["post.gallery"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/gallery/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GET /gallery/:id */
+        get: operations["get.gallery.id"];
+        /** PUT /gallery/:id */
+        put: operations["put.gallery.id"];
+        post?: never;
+        /** DELETE /gallery/:id */
+        delete: operations["delete.gallery.id"];
+        options?: never;
+        head?: never;
+        /** PATCH /gallery/:id */
+        patch: operations["patch.gallery.id"];
+        trace?: never;
+    };
+    "/v1/gallery/{id}/image": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** POST /gallery/:id/image */
+        post: operations["post.gallery.id.image"];
+        /** DELETE /gallery/:id/image */
+        delete: operations["delete.gallery.id.image"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/public/categories": {
         parameters: {
             query?: never;
@@ -11,11 +926,8 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /**
-         * List blog categories (public)
-         * @description Ordered by `sort_order`. No authentication.
-         */
-        get: operations["category.publicIndex"];
+        /** GET /public/categories */
+        get: operations["get.public.categories"];
         put?: never;
         post?: never;
         delete?: never;
@@ -31,34 +943,122 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** List blog categories */
-        get: operations["categories.index"];
+        /** GET /categories */
+        get: operations["get.categories"];
         put?: never;
-        /** Create a blog category */
-        post: operations["categories.store"];
+        /** POST /categories */
+        post: operations["post.categories"];
         delete?: never;
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/v1/categories/{category}": {
+    "/v1/categories/{id}": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        /** Show a blog category */
-        get: operations["categories.show"];
-        /** Update a blog category */
-        put: operations["categories.update"];
+        /** GET /categories/:id */
+        get: operations["get.categories.id"];
+        /** PUT /categories/:id */
+        put: operations["put.categories.id"];
         post?: never;
-        /**
-         * Delete a blog category
-         * @description Its posts are kept and become uncategorised.
-         */
-        delete: operations["categories.destroy"];
+        /** DELETE /categories/:id */
+        delete: operations["delete.categories.id"];
+        options?: never;
+        head?: never;
+        /** PATCH /categories/:id */
+        patch: operations["patch.categories.id"];
+        trace?: never;
+    };
+    "/v1/public/posts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GET /public/posts */
+        get: operations["get.public.posts"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/public/posts/{slug}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GET /public/posts/:slug */
+        get: operations["get.public.posts.slug"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/posts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GET /posts */
+        get: operations["get.posts"];
+        put?: never;
+        /** POST /posts */
+        post: operations["post.posts"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/posts/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GET /posts/:id */
+        get: operations["get.posts.id"];
+        /** PUT /posts/:id */
+        put: operations["put.posts.id"];
+        post?: never;
+        /** DELETE /posts/:id */
+        delete: operations["delete.posts.id"];
+        options?: never;
+        head?: never;
+        /** PATCH /posts/:id */
+        patch: operations["patch.posts.id"];
+        trace?: never;
+    };
+    "/v1/posts/{id}/image": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** POST /posts/:id/image */
+        post: operations["post.posts.id.image"];
+        /** DELETE /posts/:id/image */
+        delete: operations["delete.posts.id.image"];
         options?: never;
         head?: never;
         patch?: never;
@@ -71,11 +1071,8 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /**
-         * Get a contact captcha (public)
-         * @description A simple sum. Send `captcha_id` and `captcha_answer` with the message; each captcha works once.
-         */
-        get: operations["contact.captcha"];
+        /** GET /public/captcha */
+        get: operations["get.public.captcha"];
         put?: never;
         post?: never;
         delete?: never;
@@ -93,12 +1090,8 @@ export interface paths {
         };
         get?: never;
         put?: never;
-        /**
-         * Send a contact message (public)
-         * @description Needs a valid captcha. The `website` field is a honeypot and must be left out or empty.
-         *     Throttled per IP. The site owner is notified by queued email.
-         */
-        post: operations["contact.store"];
+        /** POST /contact */
+        post: operations["post.contact"];
         delete?: never;
         options?: never;
         head?: never;
@@ -112,11 +1105,8 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /**
-         * List contact messages
-         * @description Newest first, 20 per page. `?unread=1` shows only unread messages.
-         */
-        get: operations["contact-messages.index"];
+        /** GET /contact-messages */
+        get: operations["get.contact-messages"];
         put?: never;
         post?: never;
         delete?: never;
@@ -125,15 +1115,15 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/v1/contact-messages/{contactMessage}": {
+    "/v1/contact-messages/{id}": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        /** Show a contact message */
-        get: operations["contact-messages.show"];
+        /** GET /contact-messages/:id */
+        get: operations["get.contact-messages.id"];
         put?: never;
         post?: never;
         delete?: never;
@@ -142,7 +1132,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/v1/contact-messages/{contactMessage}/read": {
+    "/v1/contact-messages/{id}/read": {
         parameters: {
             query?: never;
             header?: never;
@@ -151,11 +1141,8 @@ export interface paths {
         };
         get?: never;
         put?: never;
-        /**
-         * Mark a contact message as read
-         * @description Idempotent: an already read message keeps its original `read_at`.
-         */
-        post: operations["contactMessage.markRead"];
+        /** POST /contact-messages/:id/read */
+        post: operations["post.contact-messages.id.read"];
         delete?: never;
         options?: never;
         head?: never;
@@ -169,12 +1156,8 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /**
-         * Dashboard counts
-         * @description Row counts for every module the user may view, plus unread contact messages.
-         *     Modules the user cannot view are left out.
-         */
-        get: operations["v1.dashboard"];
+        /** GET /dashboard */
+        get: operations["get.dashboard"];
         put?: never;
         post?: never;
         delete?: never;
@@ -183,18 +1166,15 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/v1/public/faqs": {
+    "/v1/site/status": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        /**
-         * List visible FAQs (public)
-         * @description Visible FAQs ordered by `sort_order`. No authentication.
-         */
-        get: operations["faq.publicIndex"];
+        /** GET /site/status */
+        get: operations["get.site.status"];
         put?: never;
         post?: never;
         delete?: never;
@@ -203,113 +1183,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/v1/faqs": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List FAQs
-         * @description All FAQs ordered by `sort_order`, hidden ones included.
-         */
-        get: operations["faqs.index"];
-        put?: never;
-        /** Create a FAQ */
-        post: operations["faqs.store"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/faqs/{faq}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Show a FAQ */
-        get: operations["faqs.show"];
-        /**
-         * Update a FAQ
-         * @description Partial update of question, answer (both languages), sort order and visibility.
-         */
-        put: operations["faqs.update"];
-        post?: never;
-        /** Delete a FAQ */
-        delete: operations["faqs.destroy"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/public/gallery": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List visible gallery items (public)
-         * @description Visible gallery items ordered by `sort_order`. No authentication.
-         */
-        get: operations["galleryItem.publicIndex"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/gallery": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List gallery items
-         * @description All gallery items ordered by `sort_order`, hidden ones included.
-         */
-        get: operations["gallery.index"];
-        put?: never;
-        /** Create a gallery item */
-        post: operations["gallery.store"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/gallery/{galleryItem}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Show a gallery item */
-        get: operations["gallery.show"];
-        /**
-         * Update a gallery item
-         * @description Partial update of the text (both languages), sort order and visibility. The image has its own endpoint.
-         */
-        put: operations["gallery.update"];
-        post?: never;
-        /** Delete a gallery item */
-        delete: operations["gallery.destroy"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/gallery/{galleryItem}/image": {
+    "/v1/site/publish": {
         parameters: {
             query?: never;
             header?: never;
@@ -318,1003 +1192,9 @@ export interface paths {
         };
         get?: never;
         put?: never;
-        /**
-         * Upload a gallery item image
-         * @description Multipart field `image` (jpeg, png or webp). Replaces the current image;
-         *     WebP variants are generated in the background.
-         */
-        post: operations["galleryItemImage.store"];
-        /** Remove the gallery item image */
-        delete: operations["galleryItemImage.destroy"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/health": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Health check
-         * @description Reports `ok` (200) when the database and the cache answer, otherwise `degraded` (503).
-         */
-        get: operations["v1.health"];
-        put?: never;
-        post?: never;
+        /** POST /site/publish */
+        post: operations["post.site.publish"];
         delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/meta/locales": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Supported locales
-         * @description Values come from the LOCALE_DEFAULT, LOCALE_FALLBACK and LOCALE_SUPPORTED env vars.
-         */
-        get: operations["v1.locales"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/logout": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Sign out
-         * @description Revokes the current access token and its refresh tokens. The browser session on the
-         *     login page is ended separately by visiting `/logout`.
-         */
-        post: operations["v1.logout"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/me": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Current user
-         * @description The authenticated user with role and permission names. The superadmin
-         *     gets every permission name.
-         */
-        get: operations["v1.me"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        /**
-         * Update own profile
-         * @description `name`, and/or `password` with `current_password` and `password_confirmation`. Other sessions are signed out
-         *     when the password changes. Returns the same body as `GET /me`.
-         */
-        patch: operations["profile.update"];
-        trace?: never;
-    };
-    "/v1/me/menus": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Current user's menus
-         * @description The navigation tree filtered by the user's permissions.
-         */
-        get: operations["v1.meMenus"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/menus/reorder": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        /**
-         * Reorder menu entries
-         * @description `ids` is the new order of one set of siblings; entries keep their parent. Ids from different parents are rejected.
-         */
-        put: operations["menu.reorder"];
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/menus": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List all menu entries
-         * @description The whole tree, unfiltered, flattened depth-first (`depth` 0 = top level) in display order.
-         */
-        get: operations["menu.index"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/menus/{menu}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        /** Update a menu entry's title or icon */
-        patch: operations["menu.update"];
-        trace?: never;
-    };
-    "/v1/permissions": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List permissions
-         * @description Every permission name (`<module>.<action>`), for the role matrix. The route is gated by `roles.view`.
-         */
-        get: operations["v1.permission"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/public/posts": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List published posts (public)
-         * @description Newest first, 12 per page. Filter with `?category=<slug>`. No authentication.
-         */
-        get: operations["post.publicIndex"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/public/posts/{slug}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Show a published post by slug (public) */
-        get: operations["post.publicShow"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/posts": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List posts
-         * @description All posts including drafts, newest first, 20 per page.
-         */
-        get: operations["posts.index"];
-        put?: never;
-        /**
-         * Create a post
-         * @description `body` is rich-text HTML and is sanitised server-side; disallowed tags, attributes and URL schemes are removed.
-         */
-        post: operations["posts.store"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/posts/{post}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Show a post */
-        get: operations["posts.show"];
-        /** Update a post */
-        put: operations["posts.update"];
-        post?: never;
-        /** Delete a post */
-        delete: operations["posts.destroy"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/posts/{post}/image": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Upload a post image
-         * @description Multipart field `image` (jpeg, png or webp). Replaces the current image;
-         *     WebP variants are generated in the background.
-         */
-        post: operations["postImage.store"];
-        /** Remove the post image */
-        delete: operations["postImage.destroy"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/public/pricing": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List prices (public)
-         * @description Visible prices of visible services, ordered by service then `sort_order`. Optional `service_id` filter. No authentication.
-         */
-        get: operations["pricing.publicIndex"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/pricing": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List prices
-         * @description All prices with their service, hidden ones included.
-         */
-        get: operations["pricing.index"];
-        put?: never;
-        /** Create a price for a service */
-        post: operations["pricing.store"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/pricing/{pricing}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Show a price */
-        get: operations["pricing.show"];
-        /**
-         * Update a price
-         * @description Partial update of the service, name, price, unit, description and features (both languages), flags and order.
-         */
-        put: operations["pricing.update"];
-        post?: never;
-        /** Delete a price */
-        delete: operations["pricing.destroy"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/roles": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List roles
-         * @description Every role except the superadmin, with its permission names. Not paginated.
-         */
-        get: operations["roles.index"];
-        put?: never;
-        /** Create a role */
-        post: operations["roles.store"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/roles/{role}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Show a role */
-        get: operations["roles.show"];
-        /**
-         * Update a role
-         * @description `permissions` replaces the role's permission names. A permission you do not hold yourself is rejected (422).
-         */
-        put: operations["roles.update"];
-        post?: never;
-        /** Delete a role */
-        delete: operations["roles.destroy"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/public/sections": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List visible sections (public)
-         * @description Visible sections ordered by `sort_order`. The portal renders them by `key`. No authentication.
-         */
-        get: operations["section.publicIndex"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/sections/reorder": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        /**
-         * Reorder sections
-         * @description `ids` is the new order; `sort_order` becomes 10, 20, 30... in that sequence.
-         */
-        put: operations["section.reorder"];
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/sections": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List sections
-         * @description All sections ordered by `sort_order`. Sections are seeded, so there is no create or delete.
-         */
-        get: operations["sections.index"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/sections/{section}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Show a section */
-        get: operations["sections.show"];
-        /**
-         * Update a section
-         * @description Partial update of title, content (both languages), sort order and visibility.
-         */
-        put: operations["sections.update"];
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/sections/{section}/image": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Upload a section image
-         * @description Multipart field `image` (jpeg, png or webp). Replaces the current image;
-         *     WebP variants are generated in the background.
-         */
-        post: operations["sectionImage.store"];
-        /** Remove the section image */
-        delete: operations["sectionImage.destroy"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/hero": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Show a section panel
-         * @description Title and text (both languages) and image of the hero or about section.
-         */
-        get: operations["v1.sectionPanel.show_21"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        /**
-         * Update a section panel
-         * @description Partial update of the title and text (both languages).
-         */
-        patch: operations["v1.sectionPanel.update_22"];
-        trace?: never;
-    };
-    "/v1/hero/image": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Upload the section image
-         * @description Multipart field `image` (jpeg, png or webp). Replaces the current image.
-         */
-        post: operations["v1.sectionPanel.storeImage_23"];
-        /** Remove the section image */
-        delete: operations["v1.sectionPanel.destroyImage_24"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/about": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Show a section panel
-         * @description Title and text (both languages) and image of the hero or about section.
-         */
-        get: operations["v1.sectionPanel.show_25"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        /**
-         * Update a section panel
-         * @description Partial update of the title and text (both languages).
-         */
-        patch: operations["v1.sectionPanel.update_26"];
-        trace?: never;
-    };
-    "/v1/about/image": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Upload the section image
-         * @description Multipart field `image` (jpeg, png or webp). Replaces the current image.
-         */
-        post: operations["v1.sectionPanel.storeImage_27"];
-        /** Remove the section image */
-        delete: operations["v1.sectionPanel.destroyImage_28"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/public/services": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List visible Services (public)
-         * @description Visible Services ordered by `sort_order`. No authentication.
-         */
-        get: operations["service.publicIndex"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/public/services/{service}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Show a visible service (public)
-         * @description One service by id; a hidden service answers 404. No authentication.
-         */
-        get: operations["service.publicShow"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/services": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List Services
-         * @description All Services ordered by `sort_order`, hidden ones included.
-         */
-        get: operations["services.index"];
-        put?: never;
-        /** Create a service */
-        post: operations["services.store"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/services/{service}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Show a service */
-        get: operations["services.show"];
-        /**
-         * Update a service
-         * @description Partial update of the text (both languages), sort order and visibility. The image has its own endpoint.
-         */
-        put: operations["services.update"];
-        post?: never;
-        /** Delete a service */
-        delete: operations["services.destroy"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/services/{service}/image": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Upload a service image
-         * @description Multipart field `image` (jpeg, png or webp). Replaces the current image;
-         *     WebP variants are generated in the background.
-         */
-        post: operations["serviceImage.store"];
-        /** Remove the service image */
-        delete: operations["serviceImage.destroy"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/public/settings": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Show settings (public)
-         * @description The single settings record, for the site header, footer and metadata. No authentication.
-         */
-        get: operations["setting.publicShow"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/settings": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Show settings
-         * @description The single settings record (edit-only: there is no create or delete).
-         */
-        get: operations["settings.show"];
-        /**
-         * Update settings
-         * @description Partial update; only the fields sent are changed.
-         */
-        put: operations["settings.update"];
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/settings/logo": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Upload the site logo
-         * @description Multipart field `image` (jpeg, png or webp). Replaces the current logo.
-         */
-        post: operations["settingImage.storeLogo"];
-        /** Remove the site logo */
-        delete: operations["settingImage.destroyLogo"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/settings/favicon": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Upload the favicon
-         * @description Multipart field `image` (ico, jpeg, png or webp), ideally square. Replaces the current favicon.
-         */
-        post: operations["settingImage.storeFavicon"];
-        /** Remove the favicon */
-        delete: operations["settingImage.destroyFavicon"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/public/team": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List visible team members (public)
-         * @description Visible team members ordered by `sort_order`. No authentication.
-         */
-        get: operations["teamMember.publicIndex"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/team": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List team members
-         * @description All team members ordered by `sort_order`, hidden ones included.
-         */
-        get: operations["team.index"];
-        put?: never;
-        /** Create a team member */
-        post: operations["team.store"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/team/{teamMember}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Show a team member */
-        get: operations["team.show"];
-        /**
-         * Update a team member
-         * @description Partial update of the text (both languages), sort order and visibility. The image has its own endpoint.
-         */
-        put: operations["team.update"];
-        post?: never;
-        /** Delete a team member */
-        delete: operations["team.destroy"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/team/{teamMember}/image": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Upload a team member image
-         * @description Multipart field `image` (jpeg, png or webp). Replaces the current image;
-         *     WebP variants are generated in the background.
-         */
-        post: operations["teamMemberImage.store"];
-        /** Remove the team member image */
-        delete: operations["teamMemberImage.destroy"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/public/testimonials": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List visible Testimonials (public)
-         * @description Visible Testimonials ordered by `sort_order`. No authentication.
-         */
-        get: operations["testimonial.publicIndex"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/testimonials": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List Testimonials
-         * @description All Testimonials ordered by `sort_order`, hidden ones included.
-         */
-        get: operations["testimonials.index"];
-        put?: never;
-        /** Create a testimonial */
-        post: operations["testimonials.store"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/testimonials/{testimonial}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Show a testimonial */
-        get: operations["testimonials.show"];
-        /**
-         * Update a testimonial
-         * @description Partial update of the text (both languages), sort order and visibility. The image has its own endpoint.
-         */
-        put: operations["testimonials.update"];
-        post?: never;
-        /** Delete a testimonial */
-        delete: operations["testimonials.destroy"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/testimonials/{testimonial}/image": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Upload a testimonial image
-         * @description Multipart field `image` (jpeg, png or webp). Replaces the current image;
-         *     WebP variants are generated in the background.
-         */
-        post: operations["testimonialImage.store"];
-        /** Remove the testimonial image */
-        delete: operations["testimonialImage.destroy"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/users": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * List users
-         * @description Paginated, 15 per page, oldest first.
-         */
-        get: operations["users.index"];
-        put?: never;
-        /** Create a user */
-        post: operations["users.store"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/v1/users/{user}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Show a user */
-        get: operations["users.show"];
-        /**
-         * Update a user
-         * @description A blank password keeps the current one. `roles` replaces the user's roles (the superadmin role is never touched here).
-         */
-        put: operations["users.update"];
-        post?: never;
-        /** Delete a user (never yourself) */
-        delete: operations["users.destroy"];
         options?: never;
         head?: never;
         patch?: never;
@@ -1324,30 +1204,101 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
-        /** CategoryResource */
-        CategoryResource: {
-            id: number;
-            name: string;
-            name_2nd: string | null;
-            slug: string;
-            sort_order: number;
-            /** Format: date-time */
-            updated_at: string | null;
-        };
-        /** ContactMessageResource */
-        ContactMessageResource: {
+        MeResource: {
             id: number;
             name: string;
             email: string;
-            phone: string | null;
-            subject: string | null;
-            message: string;
-            /** Format: date-time */
-            read_at: string | null;
+            is_superadmin: boolean;
+            roles: string[];
+            permissions: string[];
+        };
+        UserResource: {
+            id: number;
+            name: string;
+            email: string;
+            roles: string[];
+            is_superadmin: boolean;
             /** Format: date-time */
             created_at: string | null;
         };
-        /** FaqResource */
+        RoleResource: {
+            id: number;
+            name: string;
+            permissions: string[];
+        };
+        MenuResource: {
+            id: number;
+            parent_id: number | null;
+            depth: number;
+            title: string;
+            icon: string | null;
+            path: string | null;
+            permission_name: string | null;
+            sort: number;
+        };
+        SettingResource: {
+            site_name: string;
+            site_name_2nd: string | null;
+            tagline: string | null;
+            tagline_2nd: string | null;
+            currency: string | null;
+            currency_symbol: string | null;
+            logo: {
+                url: string;
+                webp: {
+                    [key: string]: string;
+                };
+                width: number | null;
+                height: number | null;
+                committed_at: string | null;
+            } | null;
+            favicon: {
+                url: string;
+                webp: {
+                    [key: string]: string;
+                };
+                width: number | null;
+                height: number | null;
+                committed_at: string | null;
+            } | null;
+            address: string | null;
+            address_2nd: string | null;
+            phone: string | null;
+            email: string | null;
+            hours: {
+                [key: string]: {
+                    open: string | null;
+                    close: string | null;
+                    closed: boolean;
+                };
+            } | null;
+            social_links: {
+                [key: string]: string | null;
+            };
+            /** Format: date-time */
+            updated_at: string | null;
+        };
+        SectionResource: {
+            id: number;
+            key: string;
+            title: string;
+            title_2nd: string | null;
+            content: string | null;
+            content_2nd: string | null;
+            image: {
+                url: string;
+                webp: {
+                    [key: string]: string;
+                };
+                width: number | null;
+                height: number | null;
+                committed_at: string | null;
+            } | null;
+            sort_order: number;
+            is_visible: boolean;
+            /** Format: date-time */
+            updated_at: string | null;
+        };
         FaqResource: {
             id: number;
             question: string;
@@ -1359,65 +1310,34 @@ export interface components {
             /** Format: date-time */
             updated_at: string | null;
         };
-        /** GalleryItemResource */
-        GalleryItemResource: {
+        ServiceResource: {
             id: number;
-            title: string | null;
+            title: string;
             title_2nd: string | null;
-            caption: string | null;
-            caption_2nd: string | null;
-            image: string;
+            description: string | null;
+            description_2nd: string | null;
+            image: {
+                url: string;
+                webp: {
+                    [key: string]: string;
+                };
+                width: number | null;
+                height: number | null;
+                committed_at: string | null;
+            } | null;
             sort_order: number;
             is_visible: boolean;
             /** Format: date-time */
             updated_at: string | null;
         };
-        /** MenuResource */
-        MenuResource: {
-            id: number;
-            parent_id: number | null;
-            /** @description Set by MenuController::index: rows come depth-first, so the UI can indent without rebuilding the tree. */
-            depth: string | 0;
-            title: string;
-            icon: string | null;
-            path: string | null;
-            permission_name: string | null;
-            sort: number;
-        };
-        /** PostResource */
-        PostResource: {
-            id: number;
-            category_id: number | null;
-            category?: components["schemas"]["CategoryResource"] | null;
-            title: string;
-            title_2nd: string | null;
-            slug: string;
-            excerpt: string | null;
-            excerpt_2nd: string | null;
-            body: string | null;
-            body_2nd: string | null;
-            seo_title: string | null;
-            seo_title_2nd: string | null;
-            seo_description: string | null;
-            seo_description_2nd: string | null;
-            image: string;
-            is_published: boolean;
-            /** @enum {string} */
-            status: "published" | "draft";
-            /** Format: date-time */
-            published_at: string | null;
-            /** Format: date-time */
-            updated_at: string | null;
-        };
-        /** PricingResource */
         PricingResource: {
             id: number;
             service_id: number;
-            service?: {
+            service: {
                 id: number;
                 title: string;
                 title_2nd: string | null;
-            };
+            } | null;
             name: string;
             name_2nd: string | null;
             price: string;
@@ -1433,266 +1353,6 @@ export interface components {
             /** Format: date-time */
             updated_at: string | null;
         };
-        /** ReorderMenusRequest */
-        ReorderMenusRequest: {
-            ids: number[];
-        };
-        /** ReorderSectionsRequest */
-        ReorderSectionsRequest: {
-            ids: number[];
-        };
-        /** RoleResource */
-        RoleResource: {
-            id: number;
-            name: string;
-            permissions: unknown[];
-        };
-        /** SectionResource */
-        SectionResource: {
-            id: number;
-            key: string;
-            title: string;
-            title_2nd: string | null;
-            content: string | null;
-            content_2nd: string | null;
-            image: string;
-            sort_order: number;
-            is_visible: boolean;
-            /** Format: date-time */
-            updated_at: string | null;
-        };
-        /** ServiceResource */
-        ServiceResource: {
-            id: number;
-            title: string;
-            title_2nd: string | null;
-            description: string | null;
-            description_2nd: string | null;
-            image: string;
-            sort_order: number;
-            is_visible: boolean;
-            /** Format: date-time */
-            updated_at: string | null;
-        };
-        /** SettingResource */
-        SettingResource: {
-            site_name: string;
-            site_name_2nd: string | null;
-            tagline: string | null;
-            tagline_2nd: string | null;
-            currency: string | null;
-            currency_symbol: string | null;
-            logo: string;
-            favicon: string;
-            address: string | null;
-            address_2nd: string | null;
-            phone: string | null;
-            email: string | null;
-            hours: unknown[] | null;
-            social_links: string;
-            /** Format: date-time */
-            updated_at: string | null;
-        };
-        /** StoreCategoryRequest */
-        StoreCategoryRequest: {
-            name: string;
-            name_2nd?: string | null;
-            slug: string;
-            sort_order?: number;
-        };
-        /**
-         * StoreContactMessageRequest
-         * @description Public contact form. `website` is the honeypot: real visitors never see or fill it.
-         */
-        StoreContactMessageRequest: {
-            name: string;
-            /** Format: email */
-            email: string;
-            phone?: string | null;
-            subject?: string | null;
-            message: string;
-            captcha_id: string;
-            captcha_answer: number;
-            website?: string;
-        };
-        /** StoreFaqRequest */
-        StoreFaqRequest: {
-            question: string;
-            answer: string;
-            question_2nd?: string | null;
-            answer_2nd?: string | null;
-            sort_order?: number;
-            is_visible?: boolean;
-        };
-        /** StoreGalleryItemImageRequest */
-        StoreGalleryItemImageRequest: {
-            /**
-             * Format: binary
-             * @description Maximum file size: 5120 kilobytes.
-             */
-            image: string;
-        };
-        /** StoreGalleryItemRequest */
-        StoreGalleryItemRequest: {
-            title?: string | null;
-            caption?: string | null;
-            title_2nd?: string | null;
-            caption_2nd?: string | null;
-            sort_order?: number;
-            is_visible?: boolean;
-        };
-        /** StorePostImageRequest */
-        StorePostImageRequest: {
-            /**
-             * Format: binary
-             * @description Maximum file size: 5120 kilobytes.
-             */
-            image: string;
-        };
-        /** StorePostRequest */
-        StorePostRequest: {
-            title: string;
-            excerpt?: string | null;
-            seo_title?: string | null;
-            seo_description?: string | null;
-            body?: string | null;
-            title_2nd?: string | null;
-            excerpt_2nd?: string | null;
-            seo_title_2nd?: string | null;
-            seo_description_2nd?: string | null;
-            body_2nd?: string | null;
-            slug: string;
-            category_id?: number | null;
-            is_published?: boolean;
-            /** @enum {string} */
-            status?: "draft" | "published";
-            /** Format: date-time */
-            published_at?: string | null;
-        };
-        /** StorePricingRequest */
-        StorePricingRequest: {
-            service_id: number;
-            name: string;
-            unit?: string | null;
-            description?: string | null;
-            features?: string | null;
-            name_2nd?: string | null;
-            unit_2nd?: string | null;
-            description_2nd?: string | null;
-            features_2nd?: string | null;
-            price: number;
-            is_featured?: boolean;
-            sort_order?: number;
-            is_visible?: boolean;
-        };
-        /** StoreRoleRequest */
-        StoreRoleRequest: {
-            name: string;
-            permissions?: ""[];
-        };
-        /** StoreSectionImageRequest */
-        StoreSectionImageRequest: {
-            /**
-             * Format: binary
-             * @description Maximum file size: 5120 kilobytes.
-             */
-            image: string;
-        };
-        /** StoreSectionPanelImageRequest */
-        StoreSectionPanelImageRequest: {
-            /**
-             * Format: binary
-             * @description Maximum file size: 5120 kilobytes.
-             */
-            image: string;
-        };
-        /** StoreServiceImageRequest */
-        StoreServiceImageRequest: {
-            /**
-             * Format: binary
-             * @description Maximum file size: 5120 kilobytes.
-             */
-            image: string;
-        };
-        /** StoreServiceRequest */
-        StoreServiceRequest: {
-            title: string;
-            description?: string | null;
-            title_2nd?: string | null;
-            description_2nd?: string | null;
-            sort_order?: number;
-            is_visible?: boolean;
-        };
-        /**
-         * StoreSettingImageRequest
-         * @description Logo and favicon uploads: multipart field `image` (the favicon may also be an .ico).
-         */
-        StoreSettingImageRequest: {
-            /**
-             * Format: binary
-             * @description Maximum file size: 5120 kilobytes.
-             */
-            image: string;
-        };
-        /** StoreTeamMemberImageRequest */
-        StoreTeamMemberImageRequest: {
-            /**
-             * Format: binary
-             * @description Maximum file size: 5120 kilobytes.
-             */
-            image: string;
-        };
-        /** StoreTeamMemberRequest */
-        StoreTeamMemberRequest: {
-            role: string;
-            bio?: string | null;
-            role_2nd?: string | null;
-            bio_2nd?: string | null;
-            name: string;
-            sort_order?: number;
-            is_visible?: boolean;
-        };
-        /** StoreTestimonialImageRequest */
-        StoreTestimonialImageRequest: {
-            /**
-             * Format: binary
-             * @description Maximum file size: 5120 kilobytes.
-             */
-            image: string;
-        };
-        /** StoreTestimonialRequest */
-        StoreTestimonialRequest: {
-            author_role?: string | null;
-            quote: string;
-            author_role_2nd?: string | null;
-            quote_2nd?: string | null;
-            author_name: string;
-            sort_order?: number;
-            is_visible?: boolean;
-        };
-        /** StoreUserRequest */
-        StoreUserRequest: {
-            name: string;
-            /** Format: email */
-            email: string;
-            password: string;
-            roles?: string[];
-        };
-        /** TeamMemberResource */
-        TeamMemberResource: {
-            id: number;
-            name: string;
-            role: string;
-            role_2nd: string | null;
-            bio: string | null;
-            bio_2nd: string | null;
-            image: string;
-            sort_order: number;
-            is_visible: boolean;
-            /** Format: date-time */
-            updated_at: string | null;
-        };
-        /** TestimonialResource */
         TestimonialResource: {
             id: number;
             author_name: string;
@@ -1700,244 +1360,120 @@ export interface components {
             author_role_2nd: string | null;
             quote: string;
             quote_2nd: string | null;
-            image: string;
+            image: {
+                url: string;
+                webp: {
+                    [key: string]: string;
+                };
+                width: number | null;
+                height: number | null;
+                committed_at: string | null;
+            } | null;
             sort_order: number;
             is_visible: boolean;
             /** Format: date-time */
             updated_at: string | null;
         };
-        /** UpdateCategoryRequest */
-        UpdateCategoryRequest: {
-            name?: string;
-            name_2nd?: string | null;
-            slug?: string;
-            sort_order?: number;
-        };
-        /** UpdateFaqRequest */
-        UpdateFaqRequest: {
-            question?: string;
-            answer?: string;
-            question_2nd?: string | null;
-            answer_2nd?: string | null;
-            sort_order?: number;
-            is_visible?: boolean;
-        };
-        /** UpdateGalleryItemRequest */
-        UpdateGalleryItemRequest: {
-            title?: string | null;
-            caption?: string | null;
-            title_2nd?: string | null;
-            caption_2nd?: string | null;
-            sort_order?: number;
-            is_visible?: boolean;
-        };
-        /** UpdateMenuRequest */
-        UpdateMenuRequest: {
-            title?: string;
-            icon?: string | null;
-        };
-        /** UpdatePostRequest */
-        UpdatePostRequest: {
-            title?: string;
-            excerpt?: string | null;
-            seo_title?: string | null;
-            seo_description?: string | null;
-            body?: string | null;
-            title_2nd?: string | null;
-            excerpt_2nd?: string | null;
-            seo_title_2nd?: string | null;
-            seo_description_2nd?: string | null;
-            body_2nd?: string | null;
-            slug?: string;
-            category_id?: number | null;
-            is_published?: boolean;
-            /** @enum {string} */
-            status?: "draft" | "published";
+        TeamMemberResource: {
+            id: number;
+            name: string;
+            role: string;
+            role_2nd: string | null;
+            bio: string | null;
+            bio_2nd: string | null;
+            image: {
+                url: string;
+                webp: {
+                    [key: string]: string;
+                };
+                width: number | null;
+                height: number | null;
+                committed_at: string | null;
+            } | null;
+            sort_order: number;
+            is_visible: boolean;
             /** Format: date-time */
-            published_at?: string | null;
+            updated_at: string | null;
         };
-        /** UpdatePricingRequest */
-        UpdatePricingRequest: {
-            service_id?: number;
-            name?: string;
-            unit?: string | null;
-            description?: string | null;
-            features?: string | null;
-            name_2nd?: string | null;
-            unit_2nd?: string | null;
-            description_2nd?: string | null;
-            features_2nd?: string | null;
-            price?: number;
-            is_featured?: boolean;
-            sort_order?: number;
-            is_visible?: boolean;
+        GalleryItemResource: {
+            id: number;
+            title: string | null;
+            title_2nd: string | null;
+            caption: string | null;
+            caption_2nd: string | null;
+            image: {
+                url: string;
+                webp: {
+                    [key: string]: string;
+                };
+                width: number | null;
+                height: number | null;
+                committed_at: string | null;
+            } | null;
+            sort_order: number;
+            is_visible: boolean;
+            /** Format: date-time */
+            updated_at: string | null;
         };
-        /** UpdateProfileRequest */
-        UpdateProfileRequest: {
-            name?: string;
-            current_password?: string;
-            password?: string;
-            password_confirmation?: string;
+        CategoryResource: {
+            id: number;
+            name: string;
+            name_2nd: string | null;
+            slug: string;
+            sort_order: number;
+            /** Format: date-time */
+            updated_at: string | null;
         };
-        /** UpdateRoleRequest */
-        UpdateRoleRequest: {
-            name?: string;
-            permissions?: ""[];
+        PostResource: {
+            id: number;
+            category_id: number | null;
+            category: components["schemas"]["CategoryResource"] & (Record<string, never> | null);
+            title: string;
+            title_2nd: string | null;
+            slug: string;
+            excerpt: string | null;
+            excerpt_2nd: string | null;
+            body: string | null;
+            body_2nd: string | null;
+            seo_title: string | null;
+            seo_title_2nd: string | null;
+            seo_description: string | null;
+            seo_description_2nd: string | null;
+            image: {
+                url: string;
+                webp: {
+                    [key: string]: string;
+                };
+                width: number | null;
+                height: number | null;
+                committed_at: string | null;
+            } | null;
+            is_published: boolean;
+            /** @enum {string} */
+            status: "published" | "draft";
+            /** Format: date-time */
+            published_at: string | null;
+            /** Format: date-time */
+            updated_at: string | null;
         };
-        /** UpdateSectionPanelRequest */
-        UpdateSectionPanelRequest: {
-            title?: string;
-            content?: string | null;
-            title_2nd?: string | null;
-            content_2nd?: string | null;
+        Captcha: {
+            id: string;
+            question: string;
         };
-        /** UpdateSectionRequest */
-        UpdateSectionRequest: {
-            title?: string;
-            content?: string | null;
-            title_2nd?: string | null;
-            content_2nd?: string | null;
-            sort_order?: number;
-            is_visible?: boolean;
-        };
-        /** UpdateServiceRequest */
-        UpdateServiceRequest: {
-            title?: string;
-            description?: string | null;
-            title_2nd?: string | null;
-            description_2nd?: string | null;
-            sort_order?: number;
-            is_visible?: boolean;
-        };
-        /** UpdateSettingRequest */
-        UpdateSettingRequest: {
-            site_name?: string;
-            tagline?: string | null;
-            address?: string | null;
-            site_name_2nd?: string | null;
-            tagline_2nd?: string | null;
-            address_2nd?: string | null;
-            currency?: string | null;
-            currency_symbol?: string | null;
-            phone?: string | null;
-            /** Format: email */
-            email?: string | null;
-            hours?: {
-                closed: boolean;
-                open?: string | null;
-                close?: string | null;
-            }[];
-            social_links?: {
-                /** Format: uri */
-                facebook?: string | null;
-                /** Format: uri */
-                instagram?: string | null;
-                /** Format: uri */
-                x?: string | null;
-                /** Format: uri */
-                linkedin?: string | null;
-                /** Format: uri */
-                youtube?: string | null;
-                /** Format: uri */
-                tiktok?: string | null;
-                /** Format: uri */
-                whatsapp?: string | null;
-            };
-        };
-        /** UpdateTeamMemberRequest */
-        UpdateTeamMemberRequest: {
-            role?: string;
-            bio?: string | null;
-            role_2nd?: string | null;
-            bio_2nd?: string | null;
-            name?: string;
-            sort_order?: number;
-            is_visible?: boolean;
-        };
-        /** UpdateTestimonialRequest */
-        UpdateTestimonialRequest: {
-            author_role?: string | null;
-            quote?: string;
-            author_role_2nd?: string | null;
-            quote_2nd?: string | null;
-            author_name?: string;
-            sort_order?: number;
-            is_visible?: boolean;
-        };
-        /** UpdateUserRequest */
-        UpdateUserRequest: {
-            name?: string;
-            /** Format: email */
-            email?: string;
-            password?: string | null;
-            roles?: string[];
-        };
-        /** UserResource */
-        UserResource: {
+        ContactMessageResource: {
             id: number;
             name: string;
             email: string;
-            /** @description The superadmin role is not assignable here, so it is left out of the editable list. */
-            roles: unknown[];
-            is_superadmin: boolean;
+            phone: string | null;
+            subject: string | null;
+            message: string;
+            /** Format: date-time */
+            read_at: string | null;
             /** Format: date-time */
             created_at: string | null;
         };
     };
-    responses: {
-        /** @description Not found */
-        ModelNotFoundException: {
-            headers: {
-                [name: string]: unknown;
-            };
-            content: {
-                "application/json": {
-                    /** @description Error overview. */
-                    message: string;
-                };
-            };
-        };
-        /** @description Validation error */
-        ValidationException: {
-            headers: {
-                [name: string]: unknown;
-            };
-            content: {
-                "application/json": {
-                    /** @description Errors overview. */
-                    message: string;
-                    /** @description A detailed description of each field that failed validation. */
-                    errors: {
-                        [key: string]: string[];
-                    };
-                };
-            };
-        };
-        /** @description Unauthenticated */
-        AuthenticationException: {
-            headers: {
-                [name: string]: unknown;
-            };
-            content: {
-                "application/json": {
-                    /** @description Error overview. */
-                    message: string;
-                };
-            };
-        };
-        /** @description Authorization error */
-        AuthorizationException: {
-            headers: {
-                [name: string]: unknown;
-            };
-            content: {
-                "application/json": {
-                    /** @description Error overview. */
-                    message: string;
-                };
-            };
-        };
-    };
+    responses: never;
     parameters: never;
     requestBodies: never;
     headers: never;
@@ -1945,7 +1481,7 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    "category.publicIndex": {
+    "get.health": {
         parameters: {
             query?: never;
             header?: never;
@@ -1954,20 +1490,23 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description Array of `CategoryResource` */
+            /** @description OK */
             200: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
                     "application/json": {
-                        data: components["schemas"]["CategoryResource"][];
+                        /** @enum {string} */
+                        status: "ok" | "degraded";
+                        /** @enum {string} */
+                        database: "ok" | "fail";
                     };
                 };
             };
         };
     };
-    "categories.index": {
+    "get.meta.locales": {
         parameters: {
             query?: never;
             header?: never;
@@ -1976,726 +1515,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description Array of `CategoryResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["CategoryResource"][];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-        };
-    };
-    "categories.store": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["StoreCategoryRequest"];
-            };
-        };
-        responses: {
-            /** @description `CategoryResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["CategoryResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            422: components["responses"]["ValidationException"];
-        };
-    };
-    "categories.show": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The category ID */
-                category: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description `CategoryResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["CategoryResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-        };
-    };
-    "categories.update": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The category ID */
-                category: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": components["schemas"]["UpdateCategoryRequest"];
-            };
-        };
-        responses: {
-            /** @description `CategoryResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["CategoryResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-            422: components["responses"]["ValidationException"];
-        };
-    };
-    "categories.destroy": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The category ID */
-                category: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description No content */
-            204: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-        };
-    };
-    "contact.captcha": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: {
-                            id: string;
-                            question: string;
-                        };
-                    };
-                };
-            };
-        };
-    };
-    "contact.store": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["StoreContactMessageRequest"];
-            };
-        };
-        responses: {
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: {
-                            received: boolean;
-                        };
-                    };
-                };
-            };
-            422: components["responses"]["ValidationException"];
-        };
-    };
-    "contact-messages.index": {
-        parameters: {
-            query?: {
-                unread?: boolean;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Paginated set of `ContactMessageResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["ContactMessageResource"][];
-                        links: {
-                            first: string | null;
-                            last: string | null;
-                            prev: string | null;
-                            next: string | null;
-                        };
-                        meta: {
-                            current_page: number;
-                            from: number | null;
-                            last_page: number;
-                            /** @description Generated paginator links. */
-                            links: {
-                                url: string | null;
-                                label: string;
-                                active: boolean;
-                            }[];
-                            /** @description Base path for paginator generated URLs. */
-                            path: string | null;
-                            /** @description Number of items shown per page. */
-                            per_page: number;
-                            /** @description Number of the last item in the slice. */
-                            to: number | null;
-                            /** @description Total number of items being paginated. */
-                            total: number;
-                        };
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-        };
-    };
-    "contact-messages.show": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The contact message ID */
-                contactMessage: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description `ContactMessageResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["ContactMessageResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-        };
-    };
-    "contactMessage.markRead": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The contact message ID */
-                contactMessage: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description `ContactMessageResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["ContactMessageResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-        };
-    };
-    "v1.dashboard": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: string;
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-        };
-    };
-    "faq.publicIndex": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Array of `FaqResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["FaqResource"][];
-                    };
-                };
-            };
-        };
-    };
-    "faqs.index": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Array of `FaqResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["FaqResource"][];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-        };
-    };
-    "faqs.store": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["StoreFaqRequest"];
-            };
-        };
-        responses: {
-            /** @description `FaqResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["FaqResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            422: components["responses"]["ValidationException"];
-        };
-    };
-    "faqs.show": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The faq ID */
-                faq: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description `FaqResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["FaqResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-        };
-    };
-    "faqs.update": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The faq ID */
-                faq: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": components["schemas"]["UpdateFaqRequest"];
-            };
-        };
-        responses: {
-            /** @description `FaqResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["FaqResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-            422: components["responses"]["ValidationException"];
-        };
-    };
-    "faqs.destroy": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The faq ID */
-                faq: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description No content */
-            204: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-        };
-    };
-    "galleryItem.publicIndex": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Array of `GalleryItemResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["GalleryItemResource"][];
-                    };
-                };
-            };
-        };
-    };
-    "gallery.index": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Array of `GalleryItemResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["GalleryItemResource"][];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-        };
-    };
-    "gallery.store": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": components["schemas"]["StoreGalleryItemRequest"];
-            };
-        };
-        responses: {
-            /** @description `GalleryItemResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["GalleryItemResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            422: components["responses"]["ValidationException"];
-        };
-    };
-    "gallery.show": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The gallery item ID */
-                galleryItem: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description `GalleryItemResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["GalleryItemResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-        };
-    };
-    "gallery.update": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The gallery item ID */
-                galleryItem: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": components["schemas"]["UpdateGalleryItemRequest"];
-            };
-        };
-        responses: {
-            /** @description `GalleryItemResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["GalleryItemResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-            422: components["responses"]["ValidationException"];
-        };
-    };
-    "gallery.destroy": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The gallery item ID */
-                galleryItem: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description No content */
-            204: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-        };
-    };
-    "galleryItemImage.store": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The gallery item ID */
-                galleryItem: number;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "multipart/form-data": components["schemas"]["StoreGalleryItemImageRequest"];
-            };
-        };
-        responses: {
-            /** @description `GalleryItemResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["GalleryItemResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-            422: components["responses"]["ValidationException"];
-        };
-    };
-    "galleryItemImage.destroy": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The gallery item ID */
-                galleryItem: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description `GalleryItemResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["GalleryItemResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-        };
-    };
-    "v1.health": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": string;
-                };
-            };
-        };
-    };
-    "v1.locales": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
+            /** @description OK */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -2705,14 +1525,88 @@ export interface operations {
                         data: {
                             default: string;
                             fallback: string;
-                            supported: string;
+                            supported: string[];
                         };
                     };
                 };
             };
         };
     };
-    "v1.logout": {
+    "post.auth.login": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    email: string;
+                    password: string;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        access_token: string;
+                        /** @enum {string} */
+                        token_type: "Bearer";
+                        expires_in: number;
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "post.auth.refresh": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        access_token: string;
+                        /** @enum {string} */
+                        token_type: "Bearer";
+                        expires_in: number;
+                    };
+                };
+            };
+        };
+    };
+    "post.logout": {
         parameters: {
             query?: never;
             header?: never;
@@ -2728,10 +1622,9 @@ export interface operations {
                 };
                 content?: never;
             };
-            401: components["responses"]["AuthenticationException"];
         };
     };
-    "v1.me": {
+    "get.me": {
         parameters: {
             query?: never;
             header?: never;
@@ -2740,70 +1633,102 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
+            /** @description OK */
             200: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
                     "application/json": {
-                        data: {
-                            id: number;
-                            name: string;
-                            email: string;
-                            is_superadmin: boolean;
-                            roles: {
-                                relations: [
-                                    "roles"
-                                ];
-                            }[];
-                            permissions: unknown[];
+                        data: components["schemas"]["MeResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
                         };
                     };
                 };
             };
-            401: components["responses"]["AuthenticationException"];
         };
     };
-    "profile.update": {
+    "patch.me": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        requestBody?: {
+        requestBody: {
             content: {
-                "application/json": components["schemas"]["UpdateProfileRequest"];
+                "application/json": {
+                    name?: string;
+                    current_password?: string;
+                    password?: string;
+                    password_confirmation?: string;
+                };
             };
         };
         responses: {
+            /** @description OK */
             200: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
                     "application/json": {
-                        data: {
-                            id: number;
-                            name: string;
-                            email: string;
-                            is_superadmin: boolean;
-                            roles: {
-                                relations: [
-                                    "roles"
-                                ];
-                            }[];
-                            permissions: unknown[];
+                        data: components["schemas"]["MeResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
                         };
                     };
                 };
             };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            422: components["responses"]["ValidationException"];
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
         };
     };
-    "v1.meMenus": {
+    "get.me.menus": {
         parameters: {
             query?: never;
             header?: never;
@@ -2812,6 +1737,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
+            /** @description OK */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -2819,142 +1745,41 @@ export interface operations {
                 content: {
                     "application/json": {
                         data: {
-                            id: string;
+                            id: number;
                             title: string;
-                            icon: string;
-                            path: string;
-                            permission_name: string;
+                            icon: string | null;
+                            path: string | null;
+                            permission_name: string | null;
                             children: {
-                                id: number;
-                                title: string;
-                                icon: string | null;
-                                path: string | null;
-                                permission_name: string | null;
-                                children: {
-                                    [key: string]: unknown;
-                                }[];
+                                [key: string]: unknown;
                             }[];
                         }[];
                     };
                 };
             };
-            401: components["responses"]["AuthenticationException"];
-        };
-    };
-    "menu.reorder": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["ReorderMenusRequest"];
-            };
-        };
-        responses: {
-            200: {
+            /** @description Unauthenticated */
+            401: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
                     "application/json": {
-                        data: {
-                            reordered: number;
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
                         };
                     };
                 };
             };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            422: components["responses"]["ValidationException"];
         };
     };
-    "menu.index": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Array of `MenuResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["MenuResource"][];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-        };
-    };
-    "menu.update": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The menu ID */
-                menu: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": components["schemas"]["UpdateMenuRequest"];
-            };
-        };
-        responses: {
-            /** @description `MenuResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["MenuResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-            422: components["responses"]["ValidationException"];
-        };
-    };
-    "v1.permission": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: unknown[];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-        };
-    };
-    "post.publicIndex": {
+    "get.users": {
         parameters: {
             query?: {
-                category?: string;
+                page?: number;
             };
             header?: never;
             path?: never;
@@ -2962,1882 +1787,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description Paginated set of `PostResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: (components["schemas"]["PostResource"] & Record<string, never>)[];
-                        links: {
-                            first: string | null;
-                            last: string | null;
-                            prev: string | null;
-                            next: string | null;
-                        };
-                        meta: {
-                            current_page: number;
-                            from: number | null;
-                            last_page: number;
-                            /** @description Generated paginator links. */
-                            links: {
-                                url: string | null;
-                                label: string;
-                                active: boolean;
-                            }[];
-                            /** @description Base path for paginator generated URLs. */
-                            path: string | null;
-                            /** @description Number of items shown per page. */
-                            per_page: number;
-                            /** @description Number of the last item in the slice. */
-                            to: number | null;
-                            /** @description Total number of items being paginated. */
-                            total: number;
-                        };
-                    };
-                };
-            };
-        };
-    };
-    "post.publicShow": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                slug: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description `PostResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["PostResource"] & Record<string, never>;
-                    };
-                };
-            };
-        };
-    };
-    "posts.index": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Paginated set of `PostResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: (components["schemas"]["PostResource"] & Record<string, never>)[];
-                        links: {
-                            first: string | null;
-                            last: string | null;
-                            prev: string | null;
-                            next: string | null;
-                        };
-                        meta: {
-                            current_page: number;
-                            from: number | null;
-                            last_page: number;
-                            /** @description Generated paginator links. */
-                            links: {
-                                url: string | null;
-                                label: string;
-                                active: boolean;
-                            }[];
-                            /** @description Base path for paginator generated URLs. */
-                            path: string | null;
-                            /** @description Number of items shown per page. */
-                            per_page: number;
-                            /** @description Number of the last item in the slice. */
-                            to: number | null;
-                            /** @description Total number of items being paginated. */
-                            total: number;
-                        };
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-        };
-    };
-    "posts.store": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["StorePostRequest"];
-            };
-        };
-        responses: {
-            /** @description `PostResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["PostResource"] & Record<string, never>;
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            422: components["responses"]["ValidationException"];
-        };
-    };
-    "posts.show": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The post ID */
-                post: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description `PostResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["PostResource"] & Record<string, never>;
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-        };
-    };
-    "posts.update": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The post ID */
-                post: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": components["schemas"]["UpdatePostRequest"];
-            };
-        };
-        responses: {
-            /** @description `PostResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["PostResource"] & Record<string, never>;
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-            422: components["responses"]["ValidationException"];
-        };
-    };
-    "posts.destroy": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The post ID */
-                post: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description No content */
-            204: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-        };
-    };
-    "postImage.store": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The post ID */
-                post: number;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "multipart/form-data": components["schemas"]["StorePostImageRequest"];
-            };
-        };
-        responses: {
-            /** @description `PostResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["PostResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-            422: components["responses"]["ValidationException"];
-        };
-    };
-    "postImage.destroy": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The post ID */
-                post: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description `PostResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["PostResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-        };
-    };
-    "pricing.publicIndex": {
-        parameters: {
-            query?: {
-                service_id?: number;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Array of `PricingResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: (components["schemas"]["PricingResource"] & Record<string, never>)[];
-                    };
-                };
-            };
-        };
-    };
-    "pricing.index": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Array of `PricingResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: (components["schemas"]["PricingResource"] & Record<string, never>)[];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-        };
-    };
-    "pricing.store": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["StorePricingRequest"];
-            };
-        };
-        responses: {
-            /** @description `PricingResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["PricingResource"] & Record<string, never>;
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            422: components["responses"]["ValidationException"];
-        };
-    };
-    "pricing.show": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The pricing ID */
-                pricing: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description `PricingResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["PricingResource"] & Record<string, never>;
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-        };
-    };
-    "pricing.update": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The pricing ID */
-                pricing: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": components["schemas"]["UpdatePricingRequest"];
-            };
-        };
-        responses: {
-            /** @description `PricingResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["PricingResource"] & Record<string, never>;
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-            422: components["responses"]["ValidationException"];
-        };
-    };
-    "pricing.destroy": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The pricing ID */
-                pricing: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description No content */
-            204: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-        };
-    };
-    "roles.index": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Array of `RoleResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["RoleResource"][];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-        };
-    };
-    "roles.store": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["StoreRoleRequest"];
-            };
-        };
-        responses: {
-            /** @description `RoleResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["RoleResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            422: components["responses"]["ValidationException"];
-        };
-    };
-    "roles.show": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The role ID */
-                role: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description `RoleResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["RoleResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-        };
-    };
-    "roles.update": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The role ID */
-                role: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": components["schemas"]["UpdateRoleRequest"];
-            };
-        };
-        responses: {
-            /** @description `RoleResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["RoleResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-            422: components["responses"]["ValidationException"];
-        };
-    };
-    "roles.destroy": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The role ID */
-                role: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description No content */
-            204: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-        };
-    };
-    "section.publicIndex": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Array of `SectionResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["SectionResource"][];
-                    };
-                };
-            };
-        };
-    };
-    "section.reorder": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["ReorderSectionsRequest"];
-            };
-        };
-        responses: {
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: {
-                            reordered: number;
-                        };
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            422: components["responses"]["ValidationException"];
-        };
-    };
-    "sections.index": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Array of `SectionResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["SectionResource"][];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-        };
-    };
-    "sections.show": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The section ID */
-                section: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description `SectionResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["SectionResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-        };
-    };
-    "sections.update": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The section ID */
-                section: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": components["schemas"]["UpdateSectionRequest"];
-            };
-        };
-        responses: {
-            /** @description `SectionResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["SectionResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-            422: components["responses"]["ValidationException"];
-        };
-    };
-    "sectionImage.store": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The section ID */
-                section: number;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "multipart/form-data": components["schemas"]["StoreSectionImageRequest"];
-            };
-        };
-        responses: {
-            /** @description `SectionResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["SectionResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-            422: components["responses"]["ValidationException"];
-        };
-    };
-    "sectionImage.destroy": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The section ID */
-                section: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description `SectionResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["SectionResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-        };
-    };
-    "v1.sectionPanel.show_21": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description `SectionResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["SectionResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-        };
-    };
-    "v1.sectionPanel.update_22": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": components["schemas"]["UpdateSectionPanelRequest"];
-            };
-        };
-        responses: {
-            /** @description `SectionResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["SectionResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            422: components["responses"]["ValidationException"];
-        };
-    };
-    "v1.sectionPanel.storeImage_23": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "multipart/form-data": components["schemas"]["StoreSectionPanelImageRequest"];
-            };
-        };
-        responses: {
-            /** @description `SectionResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["SectionResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            422: components["responses"]["ValidationException"];
-        };
-    };
-    "v1.sectionPanel.destroyImage_24": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description `SectionResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["SectionResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-        };
-    };
-    "v1.sectionPanel.show_25": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description `SectionResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["SectionResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-        };
-    };
-    "v1.sectionPanel.update_26": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": components["schemas"]["UpdateSectionPanelRequest"];
-            };
-        };
-        responses: {
-            /** @description `SectionResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["SectionResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            422: components["responses"]["ValidationException"];
-        };
-    };
-    "v1.sectionPanel.storeImage_27": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "multipart/form-data": components["schemas"]["StoreSectionPanelImageRequest"];
-            };
-        };
-        responses: {
-            /** @description `SectionResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["SectionResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            422: components["responses"]["ValidationException"];
-        };
-    };
-    "v1.sectionPanel.destroyImage_28": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description `SectionResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["SectionResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-        };
-    };
-    "service.publicIndex": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Array of `ServiceResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["ServiceResource"][];
-                    };
-                };
-            };
-        };
-    };
-    "service.publicShow": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The service ID */
-                service: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description `ServiceResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["ServiceResource"];
-                    };
-                };
-            };
-            404: components["responses"]["ModelNotFoundException"];
-        };
-    };
-    "services.index": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Array of `ServiceResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["ServiceResource"][];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-        };
-    };
-    "services.store": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["StoreServiceRequest"];
-            };
-        };
-        responses: {
-            /** @description `ServiceResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["ServiceResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            422: components["responses"]["ValidationException"];
-        };
-    };
-    "services.show": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The service ID */
-                service: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description `ServiceResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["ServiceResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-        };
-    };
-    "services.update": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The service ID */
-                service: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": components["schemas"]["UpdateServiceRequest"];
-            };
-        };
-        responses: {
-            /** @description `ServiceResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["ServiceResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-            422: components["responses"]["ValidationException"];
-        };
-    };
-    "services.destroy": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The service ID */
-                service: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description No content */
-            204: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-        };
-    };
-    "serviceImage.store": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The service ID */
-                service: number;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "multipart/form-data": components["schemas"]["StoreServiceImageRequest"];
-            };
-        };
-        responses: {
-            /** @description `ServiceResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["ServiceResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-            422: components["responses"]["ValidationException"];
-        };
-    };
-    "serviceImage.destroy": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The service ID */
-                service: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description `ServiceResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["ServiceResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-        };
-    };
-    "setting.publicShow": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description `SettingResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["SettingResource"];
-                    };
-                };
-            };
-        };
-    };
-    "settings.show": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description `SettingResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["SettingResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-        };
-    };
-    "settings.update": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": components["schemas"]["UpdateSettingRequest"];
-            };
-        };
-        responses: {
-            /** @description `SettingResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["SettingResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            422: components["responses"]["ValidationException"];
-        };
-    };
-    "settingImage.storeLogo": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "multipart/form-data": components["schemas"]["StoreSettingImageRequest"];
-            };
-        };
-        responses: {
-            /** @description `SettingResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["SettingResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            422: components["responses"]["ValidationException"];
-        };
-    };
-    "settingImage.destroyLogo": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description `SettingResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["SettingResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-        };
-    };
-    "settingImage.storeFavicon": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "multipart/form-data": components["schemas"]["StoreSettingImageRequest"];
-            };
-        };
-        responses: {
-            /** @description `SettingResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["SettingResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            422: components["responses"]["ValidationException"];
-        };
-    };
-    "settingImage.destroyFavicon": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description `SettingResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["SettingResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-        };
-    };
-    "teamMember.publicIndex": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Array of `TeamMemberResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["TeamMemberResource"][];
-                    };
-                };
-            };
-        };
-    };
-    "team.index": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Array of `TeamMemberResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["TeamMemberResource"][];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-        };
-    };
-    "team.store": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["StoreTeamMemberRequest"];
-            };
-        };
-        responses: {
-            /** @description `TeamMemberResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["TeamMemberResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            422: components["responses"]["ValidationException"];
-        };
-    };
-    "team.show": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The team member ID */
-                teamMember: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description `TeamMemberResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["TeamMemberResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-        };
-    };
-    "team.update": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The team member ID */
-                teamMember: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": components["schemas"]["UpdateTeamMemberRequest"];
-            };
-        };
-        responses: {
-            /** @description `TeamMemberResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["TeamMemberResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-            422: components["responses"]["ValidationException"];
-        };
-    };
-    "team.destroy": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The team member ID */
-                teamMember: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description No content */
-            204: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-        };
-    };
-    "teamMemberImage.store": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The team member ID */
-                teamMember: number;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "multipart/form-data": components["schemas"]["StoreTeamMemberImageRequest"];
-            };
-        };
-        responses: {
-            /** @description `TeamMemberResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["TeamMemberResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-            422: components["responses"]["ValidationException"];
-        };
-    };
-    "teamMemberImage.destroy": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The team member ID */
-                teamMember: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description `TeamMemberResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["TeamMemberResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-        };
-    };
-    "testimonial.publicIndex": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Array of `TestimonialResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["TestimonialResource"][];
-                    };
-                };
-            };
-        };
-    };
-    "testimonials.index": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Array of `TestimonialResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["TestimonialResource"][];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-        };
-    };
-    "testimonials.store": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["StoreTestimonialRequest"];
-            };
-        };
-        responses: {
-            /** @description `TestimonialResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["TestimonialResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            422: components["responses"]["ValidationException"];
-        };
-    };
-    "testimonials.show": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The testimonial ID */
-                testimonial: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description `TestimonialResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["TestimonialResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-        };
-    };
-    "testimonials.update": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The testimonial ID */
-                testimonial: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": components["schemas"]["UpdateTestimonialRequest"];
-            };
-        };
-        responses: {
-            /** @description `TestimonialResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["TestimonialResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-            422: components["responses"]["ValidationException"];
-        };
-    };
-    "testimonials.destroy": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The testimonial ID */
-                testimonial: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description No content */
-            204: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-        };
-    };
-    "testimonialImage.store": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The testimonial ID */
-                testimonial: number;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "multipart/form-data": components["schemas"]["StoreTestimonialImageRequest"];
-            };
-        };
-        responses: {
-            /** @description `TestimonialResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["TestimonialResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-            422: components["responses"]["ValidationException"];
-        };
-    };
-    "testimonialImage.destroy": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description The testimonial ID */
-                testimonial: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description `TestimonialResource` */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: components["schemas"]["TestimonialResource"];
-                    };
-                };
-            };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-        };
-    };
-    "users.index": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Paginated set of `UserResource` */
+            /** @description OK */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -4855,29 +1805,50 @@ export interface operations {
                             current_page: number;
                             from: number | null;
                             last_page: number;
-                            /** @description Generated paginator links. */
-                            links: {
-                                url: string | null;
-                                label: string;
-                                active: boolean;
-                            }[];
-                            /** @description Base path for paginator generated URLs. */
-                            path: string | null;
-                            /** @description Number of items shown per page. */
                             per_page: number;
-                            /** @description Number of the last item in the slice. */
                             to: number | null;
-                            /** @description Total number of items being paginated. */
                             total: number;
                         };
                     };
                 };
             };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
         };
     };
-    "users.store": {
+    "post.users": {
         parameters: {
             query?: never;
             header?: never;
@@ -4886,12 +1857,17 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["StoreUserRequest"];
+                "application/json": {
+                    name: string;
+                    email: string;
+                    password: string;
+                    roles?: string[];
+                };
             };
         };
         responses: {
-            /** @description `UserResource` */
-            200: {
+            /** @description OK */
+            201: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -4901,24 +1877,71 @@ export interface operations {
                     };
                 };
             };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            422: components["responses"]["ValidationException"];
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
         };
     };
-    "users.show": {
+    "get.users.id": {
         parameters: {
             query?: never;
             header?: never;
             path: {
-                /** @description The user ID */
-                user: number;
+                id: number;
             };
             cookie?: never;
         };
         requestBody?: never;
         responses: {
-            /** @description `UserResource` */
+            /** @description OK */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -4929,28 +1952,80 @@ export interface operations {
                     };
                 };
             };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
         };
     };
-    "users.update": {
+    "put.users.id": {
         parameters: {
             query?: never;
             header?: never;
             path: {
-                /** @description The user ID */
-                user: number;
+                id: number;
             };
             cookie?: never;
         };
-        requestBody?: {
+        requestBody: {
             content: {
-                "application/json": components["schemas"]["UpdateUserRequest"];
+                "application/json": {
+                    name?: string;
+                    email?: string;
+                    password?: string | null;
+                    roles?: string[];
+                };
             };
         };
         responses: {
-            /** @description `UserResource` */
+            /** @description OK */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -4961,19 +2036,82 @@ export interface operations {
                     };
                 };
             };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
-            422: components["responses"]["ValidationException"];
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
         };
     };
-    "users.destroy": {
+    "delete.users.id": {
         parameters: {
             query?: never;
             header?: never;
             path: {
-                /** @description The user ID */
-                user: number;
+                id: number;
             };
             cookie?: never;
         };
@@ -4986,9 +2124,8362 @@ export interface operations {
                 };
                 content?: never;
             };
-            401: components["responses"]["AuthenticationException"];
-            403: components["responses"]["AuthorizationException"];
-            404: components["responses"]["ModelNotFoundException"];
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "patch.users.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name?: string;
+                    email?: string;
+                    password?: string | null;
+                    roles?: string[];
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["UserResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "get.roles": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["RoleResource"][];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "post.roles": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name: string;
+                    permissions?: string[];
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["RoleResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "get.roles.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["RoleResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "put.roles.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name?: string;
+                    permissions?: string[];
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["RoleResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "delete.roles.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "patch.roles.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name?: string;
+                    permissions?: string[];
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["RoleResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "get.permissions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: string[];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "get.menus": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["MenuResource"][];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "put.menus.reorder": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    ids: number[];
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            reordered: number;
+                        };
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "patch.menus.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    title?: string;
+                    icon?: string | null;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["MenuResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "get.public.settings": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["SettingResource"];
+                    };
+                };
+            };
+        };
+    };
+    "get.settings": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["SettingResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "put.settings": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    site_name?: string;
+                    site_name_2nd?: string | null;
+                    tagline?: string | null;
+                    tagline_2nd?: string | null;
+                    address?: string | null;
+                    address_2nd?: string | null;
+                    currency?: string | null;
+                    currency_symbol?: string | null;
+                    phone?: string | null;
+                    email?: string | null;
+                    hours?: {
+                        mon?: {
+                            open?: string | null;
+                            close?: string | null;
+                            closed: boolean;
+                        };
+                        tue?: {
+                            open?: string | null;
+                            close?: string | null;
+                            closed: boolean;
+                        };
+                        wed?: {
+                            open?: string | null;
+                            close?: string | null;
+                            closed: boolean;
+                        };
+                        thu?: {
+                            open?: string | null;
+                            close?: string | null;
+                            closed: boolean;
+                        };
+                        fri?: {
+                            open?: string | null;
+                            close?: string | null;
+                            closed: boolean;
+                        };
+                        sat?: {
+                            open?: string | null;
+                            close?: string | null;
+                            closed: boolean;
+                        };
+                        sun?: {
+                            open?: string | null;
+                            close?: string | null;
+                            closed: boolean;
+                        };
+                    } | null;
+                    social_links?: {
+                        /** Format: uri */
+                        facebook?: string | null;
+                        /** Format: uri */
+                        instagram?: string | null;
+                        /** Format: uri */
+                        x?: string | null;
+                        /** Format: uri */
+                        linkedin?: string | null;
+                        /** Format: uri */
+                        youtube?: string | null;
+                        /** Format: uri */
+                        tiktok?: string | null;
+                        /** Format: uri */
+                        whatsapp?: string | null;
+                    } | null;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["SettingResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "patch.settings": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    site_name?: string;
+                    site_name_2nd?: string | null;
+                    tagline?: string | null;
+                    tagline_2nd?: string | null;
+                    address?: string | null;
+                    address_2nd?: string | null;
+                    currency?: string | null;
+                    currency_symbol?: string | null;
+                    phone?: string | null;
+                    email?: string | null;
+                    hours?: {
+                        mon?: {
+                            open?: string | null;
+                            close?: string | null;
+                            closed: boolean;
+                        };
+                        tue?: {
+                            open?: string | null;
+                            close?: string | null;
+                            closed: boolean;
+                        };
+                        wed?: {
+                            open?: string | null;
+                            close?: string | null;
+                            closed: boolean;
+                        };
+                        thu?: {
+                            open?: string | null;
+                            close?: string | null;
+                            closed: boolean;
+                        };
+                        fri?: {
+                            open?: string | null;
+                            close?: string | null;
+                            closed: boolean;
+                        };
+                        sat?: {
+                            open?: string | null;
+                            close?: string | null;
+                            closed: boolean;
+                        };
+                        sun?: {
+                            open?: string | null;
+                            close?: string | null;
+                            closed: boolean;
+                        };
+                    } | null;
+                    social_links?: {
+                        /** Format: uri */
+                        facebook?: string | null;
+                        /** Format: uri */
+                        instagram?: string | null;
+                        /** Format: uri */
+                        x?: string | null;
+                        /** Format: uri */
+                        linkedin?: string | null;
+                        /** Format: uri */
+                        youtube?: string | null;
+                        /** Format: uri */
+                        tiktok?: string | null;
+                        /** Format: uri */
+                        whatsapp?: string | null;
+                    } | null;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["SettingResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "post.settings.logo": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": {
+                    variants: string[];
+                    width: number;
+                    height: number;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["SettingResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "delete.settings.logo": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["SettingResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "post.settings.favicon": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": {
+                    /** Format: binary */
+                    image: string;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["SettingResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "delete.settings.favicon": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["SettingResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "get.public.sections": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["SectionResource"][];
+                    };
+                };
+            };
+        };
+    };
+    "get.sections": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["SectionResource"][];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "put.sections.reorder": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    ids: number[];
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            reordered: number;
+                        };
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "get.sections.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["SectionResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "put.sections.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    title?: string;
+                    title_2nd?: string | null;
+                    content?: string | null;
+                    content_2nd?: string | null;
+                    sort_order?: number;
+                    is_visible?: boolean;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["SectionResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "patch.sections.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    title?: string;
+                    title_2nd?: string | null;
+                    content?: string | null;
+                    content_2nd?: string | null;
+                    sort_order?: number;
+                    is_visible?: boolean;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["SectionResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "post.sections.id.image": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": {
+                    variants: string[];
+                    width: number;
+                    height: number;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["SectionResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "delete.sections.id.image": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["SectionResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "get.hero": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["SectionResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "patch.hero": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    title?: string;
+                    title_2nd?: string | null;
+                    content?: string | null;
+                    content_2nd?: string | null;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["SectionResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "post.hero.image": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": {
+                    variants: string[];
+                    width: number;
+                    height: number;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["SectionResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "delete.hero.image": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["SectionResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "get.about": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["SectionResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "patch.about": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    title?: string;
+                    title_2nd?: string | null;
+                    content?: string | null;
+                    content_2nd?: string | null;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["SectionResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "post.about.image": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": {
+                    variants: string[];
+                    width: number;
+                    height: number;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["SectionResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "delete.about.image": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["SectionResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "get.public.faqs": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["FaqResource"][];
+                    };
+                };
+            };
+        };
+    };
+    "get.faqs": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["FaqResource"][];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "post.faqs": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    question: string;
+                    question_2nd?: string | null;
+                    answer: string;
+                    answer_2nd?: string | null;
+                    sort_order?: number;
+                    is_visible?: boolean;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["FaqResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "get.faqs.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["FaqResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "put.faqs.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    question?: string;
+                    question_2nd?: string | null;
+                    answer?: string;
+                    answer_2nd?: string | null;
+                    sort_order?: number;
+                    is_visible?: boolean;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["FaqResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "delete.faqs.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "patch.faqs.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    question?: string;
+                    question_2nd?: string | null;
+                    answer?: string;
+                    answer_2nd?: string | null;
+                    sort_order?: number;
+                    is_visible?: boolean;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["FaqResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "get.public.services": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["ServiceResource"][];
+                    };
+                };
+            };
+        };
+    };
+    "get.public.services.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["ServiceResource"];
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "get.services": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["ServiceResource"][];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "post.services": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    title: string;
+                    title_2nd?: string | null;
+                    description?: string | null;
+                    description_2nd?: string | null;
+                    sort_order?: number;
+                    is_visible?: boolean;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["ServiceResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "get.services.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["ServiceResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "put.services.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    title?: string;
+                    title_2nd?: string | null;
+                    description?: string | null;
+                    description_2nd?: string | null;
+                    sort_order?: number;
+                    is_visible?: boolean;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["ServiceResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "delete.services.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "patch.services.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    title?: string;
+                    title_2nd?: string | null;
+                    description?: string | null;
+                    description_2nd?: string | null;
+                    sort_order?: number;
+                    is_visible?: boolean;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["ServiceResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "post.services.id.image": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": {
+                    variants: string[];
+                    width: number;
+                    height: number;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["ServiceResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "delete.services.id.image": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["ServiceResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "get.public.pricing": {
+        parameters: {
+            query?: {
+                service_id?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["PricingResource"][];
+                    };
+                };
+            };
+        };
+    };
+    "get.pricing": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["PricingResource"][];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "post.pricing": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    service_id: number;
+                    name: string;
+                    name_2nd?: string | null;
+                    unit?: string | null;
+                    unit_2nd?: string | null;
+                    description?: string | null;
+                    description_2nd?: string | null;
+                    features?: string | null;
+                    features_2nd?: string | null;
+                    price: number | string;
+                    is_featured?: boolean;
+                    sort_order?: number;
+                    is_visible?: boolean;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["PricingResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "get.pricing.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["PricingResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "put.pricing.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    service_id?: number;
+                    name?: string;
+                    name_2nd?: string | null;
+                    unit?: string | null;
+                    unit_2nd?: string | null;
+                    description?: string | null;
+                    description_2nd?: string | null;
+                    features?: string | null;
+                    features_2nd?: string | null;
+                    price?: number | string;
+                    is_featured?: boolean;
+                    sort_order?: number;
+                    is_visible?: boolean;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["PricingResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "delete.pricing.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "patch.pricing.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    service_id?: number;
+                    name?: string;
+                    name_2nd?: string | null;
+                    unit?: string | null;
+                    unit_2nd?: string | null;
+                    description?: string | null;
+                    description_2nd?: string | null;
+                    features?: string | null;
+                    features_2nd?: string | null;
+                    price?: number | string;
+                    is_featured?: boolean;
+                    sort_order?: number;
+                    is_visible?: boolean;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["PricingResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "get.public.testimonials": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["TestimonialResource"][];
+                    };
+                };
+            };
+        };
+    };
+    "get.testimonials": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["TestimonialResource"][];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "post.testimonials": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    author_name: string;
+                    author_role?: string | null;
+                    author_role_2nd?: string | null;
+                    quote: string;
+                    quote_2nd?: string | null;
+                    sort_order?: number;
+                    is_visible?: boolean;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["TestimonialResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "get.testimonials.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["TestimonialResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "put.testimonials.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    author_name?: string;
+                    author_role?: string | null;
+                    author_role_2nd?: string | null;
+                    quote?: string;
+                    quote_2nd?: string | null;
+                    sort_order?: number;
+                    is_visible?: boolean;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["TestimonialResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "delete.testimonials.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "patch.testimonials.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    author_name?: string;
+                    author_role?: string | null;
+                    author_role_2nd?: string | null;
+                    quote?: string;
+                    quote_2nd?: string | null;
+                    sort_order?: number;
+                    is_visible?: boolean;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["TestimonialResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "post.testimonials.id.image": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": {
+                    variants: string[];
+                    width: number;
+                    height: number;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["TestimonialResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "delete.testimonials.id.image": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["TestimonialResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "get.public.team": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["TeamMemberResource"][];
+                    };
+                };
+            };
+        };
+    };
+    "get.team": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["TeamMemberResource"][];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "post.team": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name: string;
+                    role: string;
+                    role_2nd?: string | null;
+                    bio?: string | null;
+                    bio_2nd?: string | null;
+                    sort_order?: number;
+                    is_visible?: boolean;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["TeamMemberResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "get.team.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["TeamMemberResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "put.team.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name?: string;
+                    role?: string;
+                    role_2nd?: string | null;
+                    bio?: string | null;
+                    bio_2nd?: string | null;
+                    sort_order?: number;
+                    is_visible?: boolean;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["TeamMemberResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "delete.team.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "patch.team.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name?: string;
+                    role?: string;
+                    role_2nd?: string | null;
+                    bio?: string | null;
+                    bio_2nd?: string | null;
+                    sort_order?: number;
+                    is_visible?: boolean;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["TeamMemberResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "post.team.id.image": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": {
+                    variants: string[];
+                    width: number;
+                    height: number;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["TeamMemberResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "delete.team.id.image": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["TeamMemberResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "get.public.gallery": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["GalleryItemResource"][];
+                    };
+                };
+            };
+        };
+    };
+    "get.gallery": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["GalleryItemResource"][];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "post.gallery": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    title?: string | null;
+                    title_2nd?: string | null;
+                    caption?: string | null;
+                    caption_2nd?: string | null;
+                    sort_order?: number;
+                    is_visible?: boolean;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["GalleryItemResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "get.gallery.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["GalleryItemResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "put.gallery.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    title?: string | null;
+                    title_2nd?: string | null;
+                    caption?: string | null;
+                    caption_2nd?: string | null;
+                    sort_order?: number;
+                    is_visible?: boolean;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["GalleryItemResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "delete.gallery.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "patch.gallery.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    title?: string | null;
+                    title_2nd?: string | null;
+                    caption?: string | null;
+                    caption_2nd?: string | null;
+                    sort_order?: number;
+                    is_visible?: boolean;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["GalleryItemResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "post.gallery.id.image": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": {
+                    variants: string[];
+                    width: number;
+                    height: number;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["GalleryItemResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "delete.gallery.id.image": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["GalleryItemResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "get.public.categories": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["CategoryResource"][];
+                    };
+                };
+            };
+        };
+    };
+    "get.categories": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["CategoryResource"][];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "post.categories": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name: string;
+                    name_2nd?: string | null;
+                    slug: string;
+                    sort_order?: number;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["CategoryResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "get.categories.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["CategoryResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "put.categories.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name?: string;
+                    name_2nd?: string | null;
+                    slug?: string;
+                    sort_order?: number;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["CategoryResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "delete.categories.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "patch.categories.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name?: string;
+                    name_2nd?: string | null;
+                    slug?: string;
+                    sort_order?: number;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["CategoryResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "get.public.posts": {
+        parameters: {
+            query?: {
+                page?: number;
+                category?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["PostResource"][];
+                        links: {
+                            first: string | null;
+                            last: string | null;
+                            prev: string | null;
+                            next: string | null;
+                        };
+                        meta: {
+                            current_page: number;
+                            from: number | null;
+                            last_page: number;
+                            per_page: number;
+                            to: number | null;
+                            total: number;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "get.public.posts.slug": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["PostResource"];
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "get.posts": {
+        parameters: {
+            query?: {
+                page?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["PostResource"][];
+                        links: {
+                            first: string | null;
+                            last: string | null;
+                            prev: string | null;
+                            next: string | null;
+                        };
+                        meta: {
+                            current_page: number;
+                            from: number | null;
+                            last_page: number;
+                            per_page: number;
+                            to: number | null;
+                            total: number;
+                        };
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "post.posts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    title: string;
+                    title_2nd?: string | null;
+                    excerpt?: string | null;
+                    excerpt_2nd?: string | null;
+                    seo_title?: string | null;
+                    seo_title_2nd?: string | null;
+                    seo_description?: string | null;
+                    seo_description_2nd?: string | null;
+                    slug?: string;
+                    body?: string | null;
+                    body_2nd?: string | null;
+                    category_id?: number | null;
+                    is_published?: boolean;
+                    /** @enum {string} */
+                    status?: "draft" | "published";
+                    published_at?: string | null;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["PostResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "get.posts.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["PostResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "put.posts.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    title?: string;
+                    title_2nd?: string | null;
+                    excerpt?: string | null;
+                    excerpt_2nd?: string | null;
+                    seo_title?: string | null;
+                    seo_title_2nd?: string | null;
+                    seo_description?: string | null;
+                    seo_description_2nd?: string | null;
+                    slug?: string;
+                    body?: string | null;
+                    body_2nd?: string | null;
+                    category_id?: number | null;
+                    is_published?: boolean;
+                    /** @enum {string} */
+                    status?: "draft" | "published";
+                    published_at?: string | null;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["PostResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "delete.posts.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "patch.posts.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    title?: string;
+                    title_2nd?: string | null;
+                    excerpt?: string | null;
+                    excerpt_2nd?: string | null;
+                    seo_title?: string | null;
+                    seo_title_2nd?: string | null;
+                    seo_description?: string | null;
+                    seo_description_2nd?: string | null;
+                    slug?: string;
+                    body?: string | null;
+                    body_2nd?: string | null;
+                    category_id?: number | null;
+                    is_published?: boolean;
+                    /** @enum {string} */
+                    status?: "draft" | "published";
+                    published_at?: string | null;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["PostResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "post.posts.id.image": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": {
+                    variants: string[];
+                    width: number;
+                    height: number;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["PostResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "delete.posts.id.image": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["PostResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "get.public.captcha": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["Captcha"];
+                    };
+                };
+            };
+        };
+    };
+    "post.contact": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name: string;
+                    email: string;
+                    phone?: string | null;
+                    subject?: string | null;
+                    message: string;
+                    captcha_id: string;
+                    captcha_answer: number | string;
+                    website?: string;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            /** @enum {boolean} */
+                            received: true;
+                        };
+                    };
+                };
+            };
+            /** @description Validation failed */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "get.contact-messages": {
+        parameters: {
+            query?: {
+                page?: number;
+                unread?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["ContactMessageResource"][];
+                        links: {
+                            first: string | null;
+                            last: string | null;
+                            prev: string | null;
+                            next: string | null;
+                        };
+                        meta: {
+                            current_page: number;
+                            from: number | null;
+                            last_page: number;
+                            per_page: number;
+                            to: number | null;
+                            total: number;
+                        };
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "get.contact-messages.id": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["ContactMessageResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "post.contact-messages.id.read": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: components["schemas"]["ContactMessageResource"];
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "get.dashboard": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            [key: string]: number;
+                        };
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "get.site.status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            dirty: boolean;
+                            /** Format: date-time */
+                            last_dispatched_at: string | null;
+                        };
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "post.site.publish": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            /** @enum {boolean} */
+                            dispatched: true;
+                            /** Format: date-time */
+                            last_dispatched_at: string | null;
+                        };
+                    };
+                };
+            };
+            /** @description Unauthenticated */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            code: string;
+                            message: string;
+                            details?: {
+                                [key: string]: string[];
+                            };
+                        };
+                    };
+                };
+            };
         };
     };
 }

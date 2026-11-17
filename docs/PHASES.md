@@ -10,7 +10,7 @@ Tick a phase only when it is finished and committed.
 | [x] | M2 | auth and RBAC | users, roles, menus, JWT + refresh cookie, seeds, route audit; hashing provisional (ADR 016) |
 | [x] | M3 | settings, sections, media | |
 | [x] | M4 | content modules | |
-| [ ] | M5 | blog, contact, publish pipeline | |
+| [x] | M5 | blog, contact, publish pipeline | |
 | [ ] | M6 | admin | |
 | [ ] | M7 | portal static export | |
 | [ ] | M8 | Cloudflare delivery | |

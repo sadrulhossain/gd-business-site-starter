@@ -13,6 +13,10 @@ import { pricingRoutes } from '../modules/pricing/routes.ts';
 import { testimonialRoutes } from '../modules/testimonials/routes.ts';
 import { teamRoutes } from '../modules/team/routes.ts';
 import { galleryRoutes } from '../modules/gallery/routes.ts';
+import { categoryRoutes, postRoutes } from '../modules/blog/routes.ts';
+import { contactRoutes } from '../modules/contact/routes.ts';
+import { dashboardRoutes } from '../modules/dashboard/routes.ts';
+import { siteRoutes } from '../modules/site/routes.ts';
 import { roleRoutes } from '../modules/roles/routes.ts';
 import { userRoutes } from '../modules/users/routes.ts';
 
@@ -48,6 +52,11 @@ export function v1(env: Env): { router: Router; api: Api } {
   testimonialRoutes(api, env);
   teamRoutes(api, env);
   galleryRoutes(api, env);
+  categoryRoutes(api);
+  postRoutes(api, env);
+  contactRoutes(api, env);
+  dashboardRoutes(api);
+  siteRoutes(api, env);
 
   return { router: api.finish(), api };
 }

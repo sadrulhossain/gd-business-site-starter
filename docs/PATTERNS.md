@@ -64,6 +64,16 @@ Vitest + Supertest on the compose Mongo; `useDb()` drops and re-indexes `<MONGOD
 - Legacy lists are not paginated and have no reorder routes, so these modules do not add either. Delete returns 204, create 201, price-like decimals are stored as numbers and returned as "120.00".
 - Cascades are explicit: deleting a service deletes its pricings in `afterDelete` (legacy FK ON DELETE CASCADE).
 
+### Blog, contact, publish (M5)
+- Rich text goes through `cleanHtml()` (src/support/sanitize.ts, the ADR 013 library, legacy allow-list) in the zod schema (`.transform`), so every write path is sanitised; blank becomes null. The hostile-payload corpus in test/sanitize.test.ts is permanent: add a payload for every bypass found.
+- Slugs: optional on create (`slugify(title)` plus -2, -3 for a free one), frozen once `is_published`. Database checks that the form request did in Laravel (unique slug, category exists) run next to the zod parse so one 422 lists every field.
+- Public one-time tokens (captcha): one atomic `findOneAndDelete` that also checks `expires_at` in the query; a TTL index only tidies up. Compare answers with `timingSafeEqual`.
+- Anything that must not fail the request (notifications) runs through `defer()`; adapters throw errors with a fixed message and the status code, never the URL or key.
+- Throttles use `hit()` before parsing, so invalid submissions count too.
+- Time-dependent logic takes `now: Date` as a parameter (publishTick, dailyTick) so tests inject the clock. Mongoose plugins and `markDirty` still use the real clock.
+- Operators in filters must be built with the helpers in db.ts (`after`, `before`, `upTo`, `between`, `inList`, `notEq`); spreading two trusted objects loses the trust, use one helper call.
+- The contract: `make openapi` regenerates packages/api-types from the zod schemas and the route registry (src/openapi). A new route needs: its body schema in src/openapi/spec.ts (`bodies`), a response schema in src/openapi/responses.ts when it is a new resource, and any deliberate difference from legacy in docs/CONTRACT-DIFFS.md. test/openapi.test.ts fails when the committed file is stale.
+
 ### New content module checklist (M3)
 1. Schema in models.ts with the plugin and `getModels` entry; 2. zod schema with `bilingual()`; 3. routes via `Api` (public ones with `localizePublic`); 4. entry in access/modules.ts (permissions, menu, admin grant); 5. seed with `$setOnInsert` only; 6. media owner added to `countMediaFiles` (src/media/service.ts, list of models with an image); 7. routeAudit public list; 8. tests (auth, validation, ?lang, markDirty).
 

@@ -3,6 +3,7 @@ import { env as bindings } from 'cloudflare:workers';
 import { createApp } from './app.ts';
 import type { Env } from './env.ts';
 import { requestContext } from './runtime.ts';
+import { runScheduled } from './scheduled.ts';
 
 // Express listens on a virtual port; httpServerHandler routes Worker fetches to it (nodejs_compat).
 const app = createApp(bindings as unknown as Env);
@@ -14,6 +15,8 @@ export default {
   // ctx is kept per request so deferred work (old media removal) can use ctx.waitUntil.
   fetch: (request: Request<unknown, IncomingRequestCfProperties>, env: Env, ctx: ExecutionContext) =>
     requestContext.run(ctx, () => handler.fetch(request, env, ctx)),
-  // Cron triggers arrive in M5 (publish pipeline) and M9 (backup); intentionally empty now.
-  async scheduled(): Promise<void> {},
+  // Cron: publish pipeline every 15 minutes, keep-alive and cleanup daily (M5). Backup is added in M9.
+  async scheduled(controller: ScheduledController, env: Env, ctx: ExecutionContext): Promise<void> {
+    ctx.waitUntil(runScheduled(controller.cron, env));
+  },
 } satisfies ExportedHandler<Env>;

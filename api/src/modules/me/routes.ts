@@ -13,7 +13,7 @@ export const meResource = (a: Auth) => ({
   permissions: [...a.permissions].sort(),
 });
 
-const updateProfileSchema = z.strictObject({
+export const updateProfileSchema = z.strictObject({
   name: z.string().trim().min(1).max(120).optional(),
   current_password: z.string().max(MAX_LENGTH).optional(),
   password: z.string().min(MIN_LENGTH, `The password must be at least ${MIN_LENGTH} characters.`).max(MAX_LENGTH).optional(),

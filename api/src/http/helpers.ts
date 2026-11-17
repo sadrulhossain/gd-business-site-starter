@@ -19,10 +19,10 @@ export interface Page<T> {
 }
 
 /** Laravel-shaped pagination ({data, links, meta}) so the admin list screens keep working. */
-export async function paginate<D, T>(model: Model<D>, base: string, page: number, perPage: number, map: (rows: D[]) => Promise<T[]> | T[], sort: Record<string, 1 | -1> = { _id: 1 }): Promise<Page<T>> {
-  const total = await model.countDocuments({});
+export async function paginate<D, T>(model: Model<D>, base: string, page: number, perPage: number, map: (rows: D[]) => Promise<T[]> | T[], sort: Record<string, 1 | -1> = { _id: 1 }, filter: Record<string, unknown> = {}): Promise<Page<T>> {
+  const total = await model.countDocuments(filter as never);
   const lastPage = Math.max(1, Math.ceil(total / perPage));
-  const rows = (await model.find({}).sort(sort).skip((page - 1) * perPage).limit(perPage).lean()) as D[];
+  const rows = (await model.find(filter as never).sort(sort).skip((page - 1) * perPage).limit(perPage).lean()) as D[];
   const data = await map(rows);
   const url = (p: number) => `${base}?page=${p}`;
   return {

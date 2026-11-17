@@ -31,9 +31,9 @@ export const DEFAULT_SECTIONS: [string, string, boolean][] = [
 ];
 
 const copy = bilingual({ title: { max: 150, required: true }, content: { max: 10000 } });
-const updateSchema = z.strictObject({ ...copy, sort_order: z.number().int().min(0).max(65535).optional(), is_visible: z.boolean().optional() });
-const panelSchema = z.strictObject(copy);
-const reorderSchema = z.strictObject({ ids: z.array(z.number().int().positive()).min(1).max(500) });
+export const updateSectionSchema = z.strictObject({ ...copy, sort_order: z.number().int().min(0).max(65535).optional(), is_visible: z.boolean().optional() });
+export const sectionPanelSchema = z.strictObject(copy);
+export const reorderSectionsSchema = z.strictObject({ ids: z.array(z.number().int().positive()).min(1).max(500) });
 
 /** Hero and About panels: the section row is created on first use if the seed has not run. */
 export async function panel(m: Models, key: string): Promise<SectionDoc> {
@@ -59,7 +59,7 @@ export function sectionRoutes(api: Api, env: Env): void {
 
   // Registered before /sections/:id so "reorder" is never read as an id.
   api.put('/sections/reorder', { permission: 'sections.update' }, async (req, res) => {
-    const { ids } = parse(reorderSchema, req.body);
+    const { ids } = parse(reorderSectionsSchema, req.body);
     if (new Set(ids).size !== ids.length) throw validationError({ ids: ['Entries must be distinct.'] });
     const { Section } = res.locals.models();
     const known = new Set((await Section.find({ _id: inList(ids) }, { _id: 1 }).lean()).map((s) => s._id));
@@ -77,7 +77,7 @@ export function sectionRoutes(api: Api, env: Env): void {
 
   const update: Parameters<Api['patch']>[2] = async (req, res) => {
     const id = idParam(req);
-    const body = parse(updateSchema, req.body);
+    const body = parse(updateSectionSchema, req.body);
     const s = await res.locals.models().Section.findOneAndUpdate({ _id: id }, { $set: body }, { returnDocument: 'after' }).lean();
     if (!s) throw notFoundError();
     res.json({ data: sectionResource(env, s) });
@@ -111,7 +111,7 @@ export function sectionRoutes(api: Api, env: Env): void {
     });
 
     api.patch(`/${key}`, { permission: `${key}.update` }, async (req, res) => {
-      const body = parse(panelSchema, req.body);
+      const body = parse(sectionPanelSchema, req.body);
       const m = res.locals.models();
       await panel(m, key);
       res.json({ data: sectionResource(env, (await m.Section.findOneAndUpdate({ key }, { $set: body }, { returnDocument: 'after' }).lean())!) });

@@ -51,7 +51,7 @@ export const settingResource = (env: Env, s: SettingDoc) => ({
 const hhmm = z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/, 'Use the HH:MM format.');
 const day = z.strictObject({ open: hhmm.nullable().optional(), close: hhmm.nullable().optional(), closed: z.boolean() });
 
-const updateSchema = z.strictObject({
+export const updateSettingSchema = z.strictObject({
   ...bilingual({ site_name: { max: 120, required: true }, tagline: { max: 255 }, address: { max: 500 } }),
   currency: optionalText(10),
   currency_symbol: optionalText(10),
@@ -86,7 +86,7 @@ export function settingRoutes(api: Api, env: Env): void {
   });
 
   const update: Parameters<Api['patch']>[2] = async (req, res) => {
-    const body = parse(updateSchema, req.body);
+    const body = parse(updateSettingSchema, req.body);
     const m = res.locals.models();
     await currentSetting(m);
     const fresh = await m.Setting.findOneAndUpdate({ _id: 1 }, { $set: body }, { returnDocument: 'after' }).lean();

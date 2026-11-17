@@ -9,7 +9,8 @@
     "test": "vitest run",
     "spike:deploy": "wrangler deploy -c spikes/wrangler.jsonc",
     "deploy:dry": "wrangler deploy --dry-run --outdir .wrangler/dry",
-    "seed": "node src/seed/run.ts"
+    "seed": "node src/seed/run.ts",
+    "openapi": "node src/openapi/generate.ts"
   },
   "dependencies": {
     "bcryptjs": "3.0.3",

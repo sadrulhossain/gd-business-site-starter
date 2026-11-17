@@ -36,6 +36,10 @@ export const modules: ModuleDef[] = [
   { key: 'testimonials', actions: ['view', 'create', 'update', 'delete'], menu: { title: 'Testimonials', path: '/testimonials', icon: 'message-square', sort: 30, group: CONTENT } },
   { key: 'team', actions: ['view', 'create', 'update', 'delete'], menu: { title: 'Team', path: '/team', icon: 'users', sort: 40, group: CONTENT } },
   { key: 'gallery', actions: ['view', 'create', 'update', 'delete'], menu: { title: 'Gallery', path: '/gallery', icon: 'image', sort: 50, group: CONTENT } },
+  { key: 'posts', actions: ['view', 'create', 'update', 'delete'], menu: { title: 'Posts', path: '/posts', icon: 'file-text', sort: 70, group: CONTENT } },
+  { key: 'categories', actions: ['view', 'create', 'update', 'delete'], menu: { title: 'Categories', path: '/categories', icon: 'tag', sort: 80, group: CONTENT } },
+  { key: 'contact', actions: ['view', 'update'], menu: { title: 'Messages', path: '/messages', icon: 'mail', sort: 30, group: { title: 'Inbox', sort: 30 } } },
+  { key: 'site', actions: ['view', 'publish'] },
 ];
 
 export const permissionNames = (): string[] => modules.flatMap((m) => m.actions.map((a) => `${m.key}.${a}`)).sort();
@@ -43,7 +47,8 @@ export const permissionNames = (): string[] => modules.flatMap((m) => m.actions.
 /** Permissions given to a role on first seed (never re-applied, so edits stick). */
 export const roleGrants: Record<string, string[]> = {
   admin: ['dashboard.view', 'settings.view', 'settings.update', 'hero.view', 'hero.update', 'about.view', 'about.update', 'sections.view', 'sections.update',
-    ...['faqs', 'services', 'pricing', 'testimonials', 'team', 'gallery'].flatMap((k) => ['view', 'create', 'update', 'delete'].map((a) => `${k}.${a}`)),
+    'contact.view', 'contact.update', 'site.view', 'site.publish',
+    ...['faqs', 'services', 'pricing', 'testimonials', 'team', 'gallery', 'posts', 'categories'].flatMap((k) => ['view', 'create', 'update', 'delete'].map((a) => `${k}.${a}`)),
   ],
 };
 

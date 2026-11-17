@@ -7,7 +7,7 @@ define quiet
 mkdir -p .cache; $(1) >$(LOG) 2>&1 || { tail -n 20 $(LOG); exit 1; }
 endef
 
-.PHONY: up down ports versions security t check env web seed seed-core
+.PHONY: up down ports versions security t check env web seed seed-core openapi
 
 env:
 	@[ -f .env ] || { cp .env.example .env; echo "created .env from .env.example"; }
@@ -37,6 +37,9 @@ security:
 	@$(call quiet,$(COMPOSE) exec -T node sh -c 'cd /app && pnpm audit --prod --audit-level=high')
 
 # targeted tests: make t FILTER=SomeTest
+openapi:
+	@$(COMPOSE) exec -T node sh -c 'cd /app/api && pnpm run openapi && cd /app && pnpm --filter @gd/api-types generate && pnpm --filter @gd/api-client typecheck && node scripts/openapi-parity.mjs' 2>&1 | tail -n 8
+
 seed:
 	@$(COMPOSE) exec -T node sh -c 'cd /app/api && pnpm run seed -- --demo' 2>&1 | tail -n 5
 
@@ -55,5 +58,6 @@ check:
 	@$(call quiet,$(COMPOSE) exec -T node sh -c 'cd /app && pnpm -r --if-present typecheck')
 	@$(call quiet,$(COMPOSE) exec -T node sh -c 'cd /app && pnpm -r --if-present test')
 	@$(MAKE) --no-print-directory versions
+	@$(call quiet,$(COMPOSE) exec -T node sh -c 'cd /app && node scripts/openapi-parity.mjs')
 	@$(MAKE) --no-print-directory security
 	@echo "check: ok"

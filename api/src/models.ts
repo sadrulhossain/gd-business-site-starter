@@ -52,7 +52,20 @@ export interface PricingDoc extends Ordered {
 export interface TestimonialDoc extends Ordered { _id: number; author_name: string; author_role: string | null; author_role_2nd: string | null; quote: string; quote_2nd: string | null; image: MediaImage | null }
 export interface TeamMemberDoc extends Ordered { _id: number; name: string; role: string; role_2nd: string | null; bio: string | null; bio_2nd: string | null; image: MediaImage | null }
 export interface GalleryItemDoc extends Ordered { _id: number; title: string | null; title_2nd: string | null; caption: string | null; caption_2nd: string | null; image: MediaImage | null }
-export interface SiteStateDoc { _id: string; dirty_at: Date | null; tags: string[] }
+export interface CategoryDoc { _id: number; name: string; name_2nd: string | null; slug: string; sort_order: number; created_at: Date; updated_at: Date }
+export interface PostDoc {
+  _id: number; category_id: number | null;
+  title: string; title_2nd: string | null; slug: string;
+  excerpt: string | null; excerpt_2nd: string | null; body: string | null; body_2nd: string | null;
+  seo_title: string | null; seo_title_2nd: string | null; seo_description: string | null; seo_description_2nd: string | null;
+  image: MediaImage | null; is_published: boolean; published_at: Date | null; created_at: Date; updated_at: Date;
+}
+export interface ContactMessageDoc { _id: number; name: string; email: string; phone: string | null; subject: string | null; message: string; read_at: Date | null; created_at: Date; updated_at: Date }
+export interface CaptchaDoc { _id: string; answer: number; expires_at: Date }
+export interface SiteStateDoc {
+  _id: string; dirty_at: Date | null; tags: string[];
+  last_dispatched_at?: Date | null; last_run_at?: Date | null; last_ping_at?: Date | null;
+}
 export interface RateLimitDoc { _id: string; count: number; expires_at: Date }
 
 const userSchema = new Schema<UserDoc>(
@@ -167,7 +180,41 @@ const testimonialSchema = content<TestimonialDoc>('Testimonial', 'testimonials',
 const teamMemberSchema = content<TeamMemberDoc>('TeamMember', 'team_members', { name: { type: String, required: true }, role: { type: String, required: true }, role_2nd: text(), bio: text(), bio_2nd: text(), ...img });
 const galleryItemSchema = content<GalleryItemDoc>('GalleryItem', 'gallery_items', { title: text(), title_2nd: text(), caption: text(), caption_2nd: text(), ...img });
 
-const siteStateSchema = new Schema<SiteStateDoc>({ _id: String, dirty_at: { type: Date, default: null }, tags: { type: [String], default: [] } }, { versionKey: false, collection: 'site_state' });
+const categorySchema = new Schema<CategoryDoc>(
+  {
+    ...idKey, name: { type: String, required: true }, name_2nd: text(), slug: { type: String, required: true, unique: true }, sort_order: { type: Number, default: 0 },
+  },
+  { ...ts, collection: 'categories' },
+);
+categorySchema.plugin(markDirtyPlugin, { tags: ['categories'] });
+
+const postSchema = new Schema<PostDoc>(
+  {
+    ...idKey, category_id: { type: Number, default: null },
+    title: { type: String, required: true }, title_2nd: text(), slug: { type: String, required: true, unique: true },
+    excerpt: text(), excerpt_2nd: text(), body: text(), body_2nd: text(),
+    seo_title: text(), seo_title_2nd: text(), seo_description: text(), seo_description_2nd: text(),
+    ...img, is_published: { type: Boolean, default: false }, published_at: { type: Date, default: null },
+  },
+  { ...ts, collection: 'posts' },
+);
+postSchema.index({ is_published: 1, published_at: 1 });
+postSchema.index({ category_id: 1 });
+postSchema.plugin(markDirtyPlugin, { tags: ['posts'] });
+
+const contactMessageSchema = new Schema<ContactMessageDoc>(
+  {
+    ...idKey, name: { type: String, required: true }, email: { type: String, required: true }, phone: text(), subject: text(),
+    message: { type: String, required: true }, read_at: { type: Date, default: null },
+  },
+  { ...ts, collection: 'contact_messages' },
+);
+contactMessageSchema.index({ read_at: 1 });
+
+// TTL index deletes late (about a minute), so verification also checks expires_at in the query.
+const captchaSchema = new Schema<CaptchaDoc>({ _id: String, answer: { type: Number, required: true }, expires_at: { type: Date, required: true, index: { expireAfterSeconds: 0 } } }, { versionKey: false, collection: 'captchas' });
+
+const siteStateSchema = new Schema<SiteStateDoc>({ _id: String, dirty_at: { type: Date, default: null }, tags: { type: [String], default: [] }, last_dispatched_at: { type: Date, default: null }, last_run_at: { type: Date, default: null }, last_ping_at: { type: Date, default: null } }, { versionKey: false, collection: 'site_state' });
 
 const counterSchema = new Schema<{ _id: string; seq: number }>({ _id: String, seq: { type: Number, default: 0 } }, { versionKey: false, collection: 'counters' });
 
@@ -186,6 +233,10 @@ export function getModels(conn: Connection) {
     RateLimit: conn.models.RateLimit ?? conn.model<RateLimitDoc>('RateLimit', rateLimitSchema),
     Setting: conn.models.Setting ?? conn.model<SettingDoc>('Setting', settingSchema),
     Section: conn.models.Section ?? conn.model<SectionDoc>('Section', sectionSchema),
+    Category: conn.models.Category ?? conn.model<CategoryDoc>('Category', categorySchema),
+    Post: conn.models.Post ?? conn.model<PostDoc>('Post', postSchema),
+    ContactMessage: conn.models.ContactMessage ?? conn.model<ContactMessageDoc>('ContactMessage', contactMessageSchema),
+    Captcha: conn.models.Captcha ?? conn.model<CaptchaDoc>('Captcha', captchaSchema),
     Faq: conn.models.Faq ?? conn.model<FaqDoc>('Faq', faqSchema),
     Service: conn.models.Service ?? conn.model<ServiceDoc>('Service', serviceSchema),
     Pricing: conn.models.Pricing ?? conn.model<PricingDoc>('Pricing', pricingSchema),
@@ -202,6 +253,10 @@ export function getModels(conn: Connection) {
     RateLimit: mongoose.Model<RateLimitDoc>;
     Setting: mongoose.Model<SettingDoc>;
     Section: mongoose.Model<SectionDoc>;
+    Category: mongoose.Model<CategoryDoc>;
+    Post: mongoose.Model<PostDoc>;
+    ContactMessage: mongoose.Model<ContactMessageDoc>;
+    Captcha: mongoose.Model<CaptchaDoc>;
     Faq: mongoose.Model<FaqDoc>;
     Service: mongoose.Model<ServiceDoc>;
     Pricing: mongoose.Model<PricingDoc>;

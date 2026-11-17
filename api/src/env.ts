@@ -17,6 +17,18 @@ export interface Env {
   MEDIA_GIT_BRANCH?: string;
   GITHUB_REPO?: string;
   GITHUB_REPO_TOKEN?: string;
+  CAPTCHA_TTL_SECONDS?: string;
+  CONTACT_PER_MINUTE?: string;
+  CONTACT_NOTIFY_TO?: string;
+  MAIL_PROVIDER?: string;
+  MAIL_API_URL?: string;
+  MAIL_API_KEY?: string;
+  MAIL_FROM_ADDRESS?: string;
+  NOTIFY_WEBHOOK_URL?: string;
+  GITHUB_WORKFLOW_FILE?: string;
+  GITHUB_REF?: string;
+  PUBLISH_DEBOUNCE_MINUTES?: string;
+  PUBLISH_QUIET_MINUTES?: string;
   LOCALE_DEFAULT?: string;
   LOCALE_FALLBACK?: string;
   LOCALE_SUPPORTED?: string;
@@ -41,6 +53,13 @@ export const uploadsMaxBytes = (env: Env): number => num(env.UPLOADS_MAX_MB, 5) 
 export const mediaMaxFiles = (env: Env): number => Math.floor(num(env.MEDIA_MAX_FILES, 6000));
 export const mediaBasePath = (env: Env): string => (env.MEDIA_BASE_PATH || '/media').replace(/\/+$/, '');
 export const mediaBranch = (env: Env): string => env.MEDIA_GIT_BRANCH || 'main';
+
+export const captchaTtlSeconds = (env: Env): number => num(env.CAPTCHA_TTL_SECONDS, 600);
+export const contactPerMinute = (env: Env): number => Math.floor(num(env.CONTACT_PER_MINUTE, 5));
+export const publishDebounceMinutes = (env: Env): number => num(env.PUBLISH_DEBOUNCE_MINUTES, 5);
+export const publishQuietMinutes = (env: Env): number => num(env.PUBLISH_QUIET_MINUTES, 2);
+export type MailProvider = 'none' | 'webhook' | 'http';
+export const mailProvider = (env: Env): MailProvider => (env.MAIL_PROVIDER === 'webhook' || env.MAIL_PROVIDER === 'http' ? env.MAIL_PROVIDER : 'none');
 
 export interface Locales {
   default: string;

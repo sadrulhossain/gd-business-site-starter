@@ -28,4 +28,7 @@ export async function ping(conn: mongoose.Connection): Promise<void> {
 /** Filter helpers that survive sanitizeFilter. Only pass values that were validated. */
 export const inList = <T>(values: T[]) => mongoose.trusted({ $in: values });
 export const before = (d: Date) => mongoose.trusted({ $lt: d });
+export const after = (d: Date) => mongoose.trusted({ $gt: d });
+export const between = (gt: Date, lte: Date) => mongoose.trusted({ $gt: gt, $lte: lte });
+export const upTo = (d: Date) => mongoose.trusted({ $lte: d });
 export const notEq = <T>(value: T) => mongoose.trusted({ $ne: value });

@@ -3,6 +3,7 @@
   "main": "src/worker.ts",
   "compatibility_date": "2026-11-17",
   "compatibility_flags": ["nodejs_compat"],
+  "triggers": { "crons": ["*/15 * * * *", "17 3 * * *"] },
   "observability": { "enabled": true },
   "vars": {
     "APP_ENV": "production",
@@ -15,6 +16,10 @@
     "UPLOADS_MAX_MB": "5",
     "MEDIA_MAX_FILES": "6000",
     "MEDIA_BASE_PATH": "/media",
-    "MEDIA_GIT_BRANCH": "main"
+    "MEDIA_GIT_BRANCH": "main",
+    "MAIL_PROVIDER": "none",
+    "GITHUB_WORKFLOW_FILE": "deploy.yml",
+    "GITHUB_REF": "main",
+    "PUBLISH_DEBOUNCE_MINUTES": "5"
   }
 }

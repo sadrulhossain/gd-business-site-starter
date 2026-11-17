@@ -14,7 +14,7 @@ Log of architecture decisions. Format: `## NNN — Title` / Date / Decision / Wh
 ## 004 — Tests use the compose services
 2026-11-12. Pest runs inside the php container against the real Postgres/Redis from the container env (phpunit.xml forces cache/session to array, queue to sync). Health tests therefore need the stack up.
 
-## 005 — Login flow: Authorization Code + PKCE (Passport 13)
+## 005 — Login flow: Authorization Code + PKCE (Passport 13) (superseded by 012)
 2026-11-12. The admin SPA signs in with OAuth2 Authorization Code + PKCE (S256), no client secret.
 - Client: public, fixed id `OAUTH_ADMIN_CLIENT_ID`, seeded by `OauthClientSeeder`; redirect `OAUTH_ADMIN_REDIRECT_URI`.
 - First-party client skips consent (`App\Models\OAuthClient::skipsAuthorization`). Password grant stays off.
@@ -53,14 +53,14 @@ fetch: Scramble documents updates as PUT while the API takes PATCH, so `patch` r
 openapi` after migrating the dev DB (Scramble reads column types from it; without migrations every field degrades to `string`).
 The node container mounts the repo at /app with named volumes over every node_modules; `make web` installs, regenerates types,
 typechecks and builds both apps with NODE_ENV=production (Next prerender breaks under NODE_ENV=development).
-## 010 - MariaDB, no Redis
+## 010 - MariaDB, no Redis (superseded by 012)
 2026-11-12. PostgreSQL is replaced by MariaDB 11.8.9 (LTS) using Laravel's `mariadb` driver and the `pdo_mysql` extension. Redis and phpredis are
 removed: cache, sessions and queue use the `database` drivers (tables from the stock cache/jobs/sessions migrations). Consequences: queue
 latency is polling-based (`queue:work --sleep=3`), cache locks and the rate limiter live in the `cache`/`cache_locks` tables, and the health
 check reports `database` and `cache` (the `redis` key is gone). The test database is `<MARIADB_DATABASE>_testing`, created by
 `scripts/ensure-test-db.sh`. Revisit if queue throughput or cache load outgrows the database; Valkey/Redis can come back behind the same Laravel drivers.
 
-## 011 - Admin SPA: same-origin proxy, silent SSO, memory-only tokens
+## 011 - Admin SPA: same-origin proxy, silent SSO, memory-only tokens (superseded by 012)
 2026-11-13. The admin origin (nginx) proxies `/api/*` and `/oauth/token` to the API, so the SPA is same-origin with both and needs no CORS;
 only the browser pages (`/oauth/authorize`, `/login`, `/logout`) live on the `api.*` origin. Passport's guard is `web` (a session login page,
 `LoginController`, `throttle:login`); authorize with a non-first-party client is refused (403). Tokens live only in the Zustand store (never
@@ -71,3 +71,17 @@ Sign-out: `POST /v1/logout` revokes the access and refresh tokens, then the brow
 returns to `/signed-out`. Modules are config (`web/admin/src/modules.ts` -> `CrudPage`). Gaps: the sidebar has no icons; menu rows whose screen is
 not built yet (posts, messages, settings) land on the 404 page. Browser tests run in the `e2e` compose service (official Playwright image,
 profile `e2e`), not in the node container: Alpine's Chromium would not install reliably here.
+
+## 012 - MERN on Cloudflare free tier
+2026-11-17. Decisions: D1 branch `mern-cloudflare`; Laravel code moves to `legacy-api/` as read-only reference until M10. D2 Express 5 on a Worker
+(`nodejs_compat`); Hono only if the CPU spike forces it. D3 static portal (Next export), rebuilt on a debounce; no server rendering. D4 email+password
+login, 15-minute JWT in memory, rotating refresh token in a host-only httpOnly cookie; OAuth/PKCE is removed. D5 GitHub Actions builds the portal and
+admin and deploys ONE Worker with wrangler; no Cloudflare build minutes. D6 keep the REST contract, `x` / `x_2nd` bilingual fields and numeric ids
+(atomic `counters` collection). D7 WebP variants are produced in the admin browser; the raw original is never stored. D8 one Worker, one origin: portal
+at `/`, admin at `/admin/`, API at `/api/*`, images at `/media/*`; free workers.dev address, custom domain optional later by configuration only.
+D9 uploaded images live in `media/` at the repository root; the API commits them through the GitHub API and the deploy publishes them as static assets.
+No R2, no object store.
+Operating rules: no server rendering; `run_worker_first` is only the path list `/api/*`, `/admin/*` and `!/admin/assets/*` (never true); portal and admin
+builds run on GitHub Actions; at most 3 of the 5 free cron triggers; weekly mongodump, encrypted before upload, kept as a GitHub Actions artifact
+(artifacts of a public repository are readable by anyone); Atlas touched daily; `media/` is capped by file size (5 MB upload) and file count
+(6,000 files; Cloudflare allows 20,000 per version).

@@ -1,3 +1,7 @@
+> Conversion to MERN on Cloudflare (free tier) is in progress.
+> The Laravel version is tag `laravel-v1.0.0`.
+> Phases: `docs/PHASES.md`.
+
 # gd-business-site-boilerplate
 
 A small-business website you can run on one VPS: a public portal (Next.js) in two languages, an admin app (React) to edit everything,

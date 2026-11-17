@@ -7,6 +7,12 @@ import { meRoutes } from '../modules/me/routes.ts';
 import { menuRoutes } from '../modules/menus/routes.ts';
 import { sectionRoutes } from '../modules/sections/routes.ts';
 import { settingRoutes } from '../modules/settings/routes.ts';
+import { faqRoutes } from '../modules/faqs/routes.ts';
+import { serviceRoutes } from '../modules/services/routes.ts';
+import { pricingRoutes } from '../modules/pricing/routes.ts';
+import { testimonialRoutes } from '../modules/testimonials/routes.ts';
+import { teamRoutes } from '../modules/team/routes.ts';
+import { galleryRoutes } from '../modules/gallery/routes.ts';
 import { roleRoutes } from '../modules/roles/routes.ts';
 import { userRoutes } from '../modules/users/routes.ts';
 
@@ -36,6 +42,12 @@ export function v1(env: Env): { router: Router; api: Api } {
   menuRoutes(api);
   settingRoutes(api, env);
   sectionRoutes(api, env);
+  faqRoutes(api, env);
+  serviceRoutes(api, env);
+  pricingRoutes(api, env);
+  testimonialRoutes(api, env);
+  teamRoutes(api, env);
+  galleryRoutes(api, env);
 
   return { router: api.finish(), api };
 }

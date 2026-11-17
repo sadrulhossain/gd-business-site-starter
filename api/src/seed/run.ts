@@ -1,6 +1,7 @@
-// pnpm --filter @gd/api seed   (reads MONGODB_URI, MONGODB_DB and SUPERADMIN_* from the shell; docs/ENV.md)
+// pnpm --filter @gd/api seed [--demo]   (reads MONGODB_URI, MONGODB_DB and SUPERADMIN_* from the shell; docs/ENV.md)
 import { openConnection } from '../db.ts';
 import { getModels } from '../models.ts';
+import { seedDemo } from './demo.ts';
 import { seedAccess } from './seed.ts';
 
 const uri = process.env.MONGODB_URI;
@@ -15,6 +16,10 @@ try {
     superadmin: { name: process.env.SUPERADMIN_NAME, email: process.env.SUPERADMIN_EMAIL, password: process.env.SUPERADMIN_PASSWORD },
   });
   console.log(`seed: ok (superadmin ${r.superadmin})`);
+  if (process.argv.includes('--demo')) {
+    await seedDemo(getModels(conn));
+    console.log('seed: demo content loaded');
+  }
   if (r.superadmin === 'skipped') console.log('seed: set SUPERADMIN_EMAIL and SUPERADMIN_PASSWORD to create the superadmin');
 } finally {
   await conn.close();

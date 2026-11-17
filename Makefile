@@ -7,7 +7,7 @@ define quiet
 mkdir -p .cache; $(1) >$(LOG) 2>&1 || { tail -n 20 $(LOG); exit 1; }
 endef
 
-.PHONY: up down ports versions security t check env web
+.PHONY: up down ports versions security t check env web seed seed-core
 
 env:
 	@[ -f .env ] || { cp .env.example .env; echo "created .env from .env.example"; }
@@ -37,6 +37,12 @@ security:
 	@$(call quiet,$(COMPOSE) exec -T node sh -c 'cd /app && pnpm audit --prod --audit-level=high')
 
 # targeted tests: make t FILTER=SomeTest
+seed:
+	@$(COMPOSE) exec -T node sh -c 'cd /app/api && pnpm run seed -- --demo' 2>&1 | tail -n 5
+
+seed-core:
+	@$(COMPOSE) exec -T node sh -c 'cd /app/api && pnpm run seed' 2>&1 | tail -n 5
+
 t:
 	@[ -n "$(FILTER)" ] || { echo "usage: make t FILTER=<name>"; exit 2; }
 	@$(COMPOSE) exec -T node sh -c 'cd /app/api && pnpm exec vitest run -t "$(FILTER)"' 2>&1 | tail -n 15

@@ -9,7 +9,7 @@ Tick a phase only when it is finished and committed.
 | [x] | M1 | Worker foundation and spikes | Worker foundation done; spikes a, e, g, h skipped by decision (docs/SPIKES.md) |
 | [x] | M2 | auth and RBAC | users, roles, menus, JWT + refresh cookie, seeds, route audit; hashing provisional (ADR 016) |
 | [x] | M3 | settings, sections, media | |
-| [ ] | M4 | content modules | |
+| [x] | M4 | content modules | |
 | [ ] | M5 | blog, contact, publish pipeline | |
 | [ ] | M6 | admin | |
 | [ ] | M7 | portal static export | |

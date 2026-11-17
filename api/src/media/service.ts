@@ -89,7 +89,9 @@ async function countMediaFiles(m: Models): Promise<number> {
   const count = (img: MediaImage | null | undefined) => (img ? imageFiles(img).length : 0);
   let n = 0;
   for (const s of await m.Setting.find({}, { logo: 1, favicon: 1 }).lean()) n += count(s.logo) + count(s.favicon);
-  for (const s of await m.Section.find({ image: notEq(null) }, { image: 1 }).lean()) n += count(s.image);
+  for (const model of [m.Section, m.Service, m.Testimonial, m.TeamMember, m.GalleryItem] as { find(f: object, p: object): { lean(): Promise<{ image?: MediaImage | null }[]> } }[]) {
+    for (const row of await model.find({ image: notEq(null) }, { image: 1 }).lean()) n += count(row.image);
+  }
   return n;
 }
 

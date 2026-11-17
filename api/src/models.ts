@@ -40,6 +40,18 @@ export interface SectionDoc {
   sort_order: number; is_visible: boolean;
   created_at: Date; updated_at: Date;
 }
+interface Ordered { sort_order: number; is_visible: boolean; created_at: Date; updated_at: Date }
+export interface FaqDoc extends Ordered { _id: number; question: string; question_2nd: string | null; answer: string; answer_2nd: string | null }
+export interface ServiceDoc extends Ordered { _id: number; title: string; title_2nd: string | null; description: string | null; description_2nd: string | null; image: MediaImage | null }
+export interface PricingDoc extends Ordered {
+  _id: number; service_id: number;
+  name: string; name_2nd: string | null; price: number;
+  unit: string | null; unit_2nd: string | null; description: string | null; description_2nd: string | null;
+  features: string | null; features_2nd: string | null; is_featured: boolean;
+}
+export interface TestimonialDoc extends Ordered { _id: number; author_name: string; author_role: string | null; author_role_2nd: string | null; quote: string; quote_2nd: string | null; image: MediaImage | null }
+export interface TeamMemberDoc extends Ordered { _id: number; name: string; role: string; role_2nd: string | null; bio: string | null; bio_2nd: string | null; image: MediaImage | null }
+export interface GalleryItemDoc extends Ordered { _id: number; title: string | null; title_2nd: string | null; caption: string | null; caption_2nd: string | null; image: MediaImage | null }
 export interface SiteStateDoc { _id: string; dirty_at: Date | null; tags: string[] }
 export interface RateLimitDoc { _id: string; count: number; expires_at: Date }
 
@@ -134,6 +146,27 @@ const sectionSchema = new Schema<SectionDoc>(
 );
 sectionSchema.plugin(markDirtyPlugin, { tags: ['sections'] });
 
+// Content modules (M4): same shape as legacy tables, tag = legacy table name.
+const common = { sort_order: { type: Number, default: 0 }, is_visible: { type: Boolean, default: true } };
+const img = { image: { type: imageSchema, default: null } };
+const idKey = { _id: { type: Number, required: true } };
+const content = <T>(name: string, collection: string, fields: Record<string, unknown>, indexes: Record<string, 1>[] = []) => {
+  const schema = new Schema<T>({ ...idKey, ...fields, ...common } as never, { ...ts, collection });
+  schema.index({ is_visible: 1, sort_order: 1 });
+  for (const i of indexes) schema.index(i);
+  schema.plugin(markDirtyPlugin, { tags: [collection] });
+  return schema;
+};
+const faqSchema = content<FaqDoc>('Faq', 'faqs', { question: { type: String, required: true }, question_2nd: text(), answer: { type: String, required: true }, answer_2nd: text() });
+const serviceSchema = content<ServiceDoc>('Service', 'services', { title: { type: String, required: true }, title_2nd: text(), description: text(), description_2nd: text(), ...img });
+const pricingSchema = content<PricingDoc>('Pricing', 'pricings', {
+  service_id: { type: Number, required: true }, name: { type: String, required: true }, name_2nd: text(), price: { type: Number, required: true },
+  unit: text(), unit_2nd: text(), description: text(), description_2nd: text(), features: text(), features_2nd: text(), is_featured: { type: Boolean, default: false },
+}, [{ service_id: 1 }]);
+const testimonialSchema = content<TestimonialDoc>('Testimonial', 'testimonials', { author_name: { type: String, required: true }, author_role: text(), author_role_2nd: text(), quote: { type: String, required: true }, quote_2nd: text(), ...img });
+const teamMemberSchema = content<TeamMemberDoc>('TeamMember', 'team_members', { name: { type: String, required: true }, role: { type: String, required: true }, role_2nd: text(), bio: text(), bio_2nd: text(), ...img });
+const galleryItemSchema = content<GalleryItemDoc>('GalleryItem', 'gallery_items', { title: text(), title_2nd: text(), caption: text(), caption_2nd: text(), ...img });
+
 const siteStateSchema = new Schema<SiteStateDoc>({ _id: String, dirty_at: { type: Date, default: null }, tags: { type: [String], default: [] } }, { versionKey: false, collection: 'site_state' });
 
 const counterSchema = new Schema<{ _id: string; seq: number }>({ _id: String, seq: { type: Number, default: 0 } }, { versionKey: false, collection: 'counters' });
@@ -153,6 +186,12 @@ export function getModels(conn: Connection) {
     RateLimit: conn.models.RateLimit ?? conn.model<RateLimitDoc>('RateLimit', rateLimitSchema),
     Setting: conn.models.Setting ?? conn.model<SettingDoc>('Setting', settingSchema),
     Section: conn.models.Section ?? conn.model<SectionDoc>('Section', sectionSchema),
+    Faq: conn.models.Faq ?? conn.model<FaqDoc>('Faq', faqSchema),
+    Service: conn.models.Service ?? conn.model<ServiceDoc>('Service', serviceSchema),
+    Pricing: conn.models.Pricing ?? conn.model<PricingDoc>('Pricing', pricingSchema),
+    Testimonial: conn.models.Testimonial ?? conn.model<TestimonialDoc>('Testimonial', testimonialSchema),
+    TeamMember: conn.models.TeamMember ?? conn.model<TeamMemberDoc>('TeamMember', teamMemberSchema),
+    GalleryItem: conn.models.GalleryItem ?? conn.model<GalleryItemDoc>('GalleryItem', galleryItemSchema),
     SiteState: conn.models.SiteState ?? conn.model<SiteStateDoc>('SiteState', siteStateSchema),
   } as {
     User: mongoose.Model<UserDoc>;
@@ -163,6 +202,12 @@ export function getModels(conn: Connection) {
     RateLimit: mongoose.Model<RateLimitDoc>;
     Setting: mongoose.Model<SettingDoc>;
     Section: mongoose.Model<SectionDoc>;
+    Faq: mongoose.Model<FaqDoc>;
+    Service: mongoose.Model<ServiceDoc>;
+    Pricing: mongoose.Model<PricingDoc>;
+    Testimonial: mongoose.Model<TestimonialDoc>;
+    TeamMember: mongoose.Model<TeamMemberDoc>;
+    GalleryItem: mongoose.Model<GalleryItemDoc>;
     SiteState: mongoose.Model<SiteStateDoc>;
   };
 }

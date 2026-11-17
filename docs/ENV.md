@@ -65,3 +65,8 @@ Names only; Phase M1 onward defines them.
 - Seed only (local shell): SUPERADMIN_NAME, SUPERADMIN_EMAIL, SUPERADMIN_PASSWORD.
 - Build time: VITE_API_URL (admin; empty in production = same origin), NEXT_PUBLIC_API_URL (portal; empty in production), BUILD_API_URL (absolute address of the live Worker, used only while building), SITE_URL, LOCALE_* (portal).
 - GitHub Actions secrets: CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID, BACKUP_MONGODB_URI, BACKUP_PASSPHRASE. GitHub Actions variable: SITE_ORIGIN.
+
+### Auth and seed (Phase M2)
+- Worker secrets (`wrangler secret put`): `JWT_ACCESS_SECRET` and `REFRESH_TOKEN_PEPPER`, each at least 32 random characters. Dev-only values are in `.env.example`.
+- Worker vars: `COOKIE_NAME` (default `__Host-rt`; use `rt` on plain-http development), `ACCESS_TOKEN_TTL_SECONDS` (default 900), `REFRESH_TOKEN_TTL_DAYS` (default 30), `SITE_ORIGIN` (the only origin besides `CORS_ALLOWED_ORIGINS` that may call `/auth/refresh` and `/logout`).
+- Seed (local shell): `MONGODB_URI=... SUPERADMIN_EMAIL=... SUPERADMIN_PASSWORD=... pnpm --filter @gd/api seed`. It creates indexes, the `superadmin` and `admin` roles, and the menus; it creates the superadmin only when email and password are set and never resets an existing password. Re-running never overwrites edits.

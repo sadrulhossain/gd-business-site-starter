@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import { afterAll, beforeAll, expect, it } from 'vitest';
-import { client, testEnv } from './helpers.js';
+import { client, testEnv } from './helpers.ts';
 
 // The testing database is dropped per file; never the dev database.
 beforeAll(async () => {

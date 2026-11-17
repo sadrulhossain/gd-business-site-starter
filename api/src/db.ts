@@ -1,5 +1,9 @@
 import mongoose from 'mongoose';
-import type { Env } from './env.js';
+import type { Env } from './env.ts';
+
+// Operators inside filter values are neutralised; our own $in/$lt filters opt in with mongoose.trusted().
+mongoose.set('sanitizeFilter', true);
+mongoose.set('strictQuery', true);
 
 /**
  * Workers cannot share I/O objects across requests, so each request that needs the
@@ -20,3 +24,8 @@ export async function ping(conn: mongoose.Connection): Promise<void> {
   await conn.asPromise();
   await conn.db!.admin().ping();
 }
+
+/** Filter helpers that survive sanitizeFilter. Only pass values that were validated. */
+export const inList = <T>(values: T[]) => mongoose.trusted({ $in: values });
+export const before = (d: Date) => mongoose.trusted({ $lt: d });
+export const notEq = <T>(value: T) => mongoose.trusted({ $ne: value });

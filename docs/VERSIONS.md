@@ -58,3 +58,21 @@ Dependencies not listed here must not be added (CLAUDE.md rule 2).
 - Phase 8 (pre-work): PostgreSQL 18.6 replaced by MariaDB 11.8.9 (LTS, Laravel `mariadb` driver, PHP `pdo_mysql` bundled with PHP); Redis 8.10.3 and phpredis 6.3.0 removed.
 - Phase 8: new exact JS pins in web/admin: react-router 7.18.5, @tanstack/react-query 5.107.1, zustand 5.1.0, vitest 5.1.0, jsdom 31.0.0, @testing-library/react 16.3.3, @testing-library/dom 10.4.2, @playwright/test 1.65.0; `pnpm audit` clean 2026-11-13. Floors equal pins. Browser tests use the image `mcr.microsoft.com/playwright:v1.65.0-noble` (compose service `e2e`, profile `e2e`), matching @playwright/test.
 - Phase 15: floors re-checked against advisories on 2026-11-13 and enforced by `node scripts/check-floors.mjs` (`make security`). Added `@axe-core/playwright` 4.14.0 (pnpm audit clean). A pnpm `overrides` entry forces postcss 8.5.32 because Next 16.4.6 pins 8.5.23 (below the floor). Full results: docs/SECURITY.md.
+
+## MERN and Cloudflare additions
+Checked 2026-11-17. Advisories: GitHub advisory database queried per pin (affects=name@version), 0 results each.
+
+| Component | Pin | Floor | Source | Date | Docker Hub |
+|-----------|-----|-------|--------|------|------------|
+| express | 5.3.0 | 5.3.0 | https://www.npmjs.com/package/express/v/5.3.0 | 2026-11-17 | n/a (npm) |
+| mongoose | 9.12.2 | 9.12.2 | https://www.npmjs.com/package/mongoose/v/9.12.2 | 2026-11-17 | n/a (npm) |
+| mongodb driver (via mongoose `~7.8`) | 7.8.0 (highest 7.8.x) | 7.8.0 | https://www.npmjs.com/package/mongodb/v/7.8.0 | 2026-11-17 | n/a (npm; 7.9.0 is current but outside mongoose's range) |
+| zod | 4.6.7 | 4.6.7 | https://www.npmjs.com/package/zod/v/4.6.7 | 2026-11-17 | n/a (npm) |
+| jose | 6.2.17 | 6.2.17 | https://www.npmjs.com/package/jose/v/6.2.17 | 2026-11-17 | n/a (npm) |
+| wrangler | 4.164.0 | 4.164.0 | https://www.npmjs.com/package/wrangler/v/4.164.0 | 2026-11-17 | n/a (npm) |
+| @cloudflare/workers-types | 5.20261117.1 | 5.20261117.1 | https://www.npmjs.com/package/@cloudflare/workers-types/v/5.20261117.1 | 2026-11-17 | n/a (npm) |
+| supertest | 7.3.2 | 7.3.2 | https://www.npmjs.com/package/supertest/v/7.3.2 | 2026-11-17 | n/a (npm) |
+| MongoDB server (dev) | 8.0.38 | 8.0.38 | https://hub.docker.com/_/mongo/tags?name=8.0.38 | 2026-11-17 | `mongo:8.0.38` exists; Atlas M0 server version not verified, check in M1 |
+| Node image (Debian) | 24.22.3-trixie-slim | 24.22.3 | https://hub.docker.com/_/node/tags?name=24.22.3-trixie-slim | 2026-11-17 | `node:24.22.3-trixie-slim` exists (`24.22.3-bookworm-slim` also exists) |
+
+Decided in Phase M1 (no pins yet): password hashing, HTML sanitiser, OpenAPI generator, email provider.

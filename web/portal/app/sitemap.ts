@@ -1,22 +1,26 @@
 import type { MetadataRoute } from 'next'
-import { getList, getPosts, getSections, type Service } from '../lib/api'
+import { getAllPosts, getAllServices, getSections } from '../lib/api'
+import { blogRoutes, blogPath } from '../lib/blog-page'
 import { defaultLocale, localePath, locales } from '../lib/i18n'
 import { SECTION_PAGES } from '../lib/section-page'
 import { absolute } from '../lib/seo'
 
+export const dynamic = 'force-static'
+
 /**
- * Every public page in every locale, each with its hreflang alternates. Pages that come from a section are listed only
- * while that section is visible. Built from the same cached, tagged fetches as the pages, so an admin edit refreshes it.
+ * Every page the export generates, in every locale, each with its hreflang alternates, at its final URL (with the
+ * trailing slash). Pages that come from a section are listed only while that section is visible.
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const sections = await getSections(defaultLocale)
-  const services = sections.some((s) => s.key === 'services') ? await getList<Service>(defaultLocale, 'services') : []
-  const posts = await allPosts()
+  const services = sections.some((s) => s.key === 'services') ? await getAllServices(defaultLocale) : []
+  const posts = await getAllPosts(defaultLocale)
+  const lists = (await blogRoutes()).filter((r) => r.locale === defaultLocale)
 
   const paths: { path: string; modified?: string }[] = [
     { path: '/' },
     ...sections.flatMap((s) => (SECTION_PAGES[s.key] ? [{ path: SECTION_PAGES[s.key]! }] : [])),
-    { path: '/blog' },
+    ...lists.map(({ category, page }) => ({ path: blogPath({ category, page }) })),
     { path: '/contact' },
     { path: '/privacy' },
     { path: '/terms' },
@@ -31,11 +35,4 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       alternates: { languages: Object.fromEntries(locales.map((code) => [code, absolute(localePath(code, path))])) },
     })),
   )
-}
-
-async function allPosts() {
-  const first = await getPosts(defaultLocale)
-  const rest = await Promise.all(Array.from({ length: Math.max(0, first.lastPage - 1) }, (_, i) => getPosts(defaultLocale, { page: i + 2 })))
-
-  return [first, ...rest].flatMap((page) => page.posts)
 }

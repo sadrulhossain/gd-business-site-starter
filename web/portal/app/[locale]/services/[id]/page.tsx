@@ -3,8 +3,8 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { Picture } from '../../../../components/Media'
 import { PricingPlans } from '../../../../components/PricingPlans'
-import { getPricing, getSections, getService, getSettings } from '../../../../lib/api'
-import { getMessages, isLocale, localePath } from '../../../../lib/i18n'
+import { getAllServices, getPricing, getSections, getService, getSettings } from '../../../../lib/api'
+import { defaultLocale, getMessages, isLocale, localePath, locales, orSentinel, SENTINEL } from '../../../../lib/i18n'
 import { pageMetadata } from '../../../../lib/seo'
 
 type Props = { params: Promise<{ locale: string; id: string }> }
@@ -18,9 +18,13 @@ async function load(locale: string, id: string) {
   return service
 }
 
-// Rendered on first request, then cached (ISR) until the content tag is revalidated.
-export function generateStaticParams() {
-  return []
+export const dynamicParams = false
+
+/** Every visible service in every locale. A hidden services section hides the pages too (see load). */
+export async function generateStaticParams() {
+  const services = await getAllServices(defaultLocale)
+
+  return locales.flatMap((locale) => orSentinel(services.map((s) => ({ locale, id: String(s.id) })), { locale, id: SENTINEL }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

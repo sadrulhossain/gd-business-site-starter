@@ -12,7 +12,7 @@ Tick a phase only when it is finished and committed.
 | [x] | M4 | content modules | |
 | [x] | M5 | blog, contact, publish pipeline | |
 | [x] | M6 | admin | |
-| [ ] | M7 | portal static export | |
+| [x] | M7 | portal static export | |
 | [ ] | M8 | Cloudflare delivery | |
 | [ ] | M9 | hardening and QA | |
 | [ ] | M10 | release | |

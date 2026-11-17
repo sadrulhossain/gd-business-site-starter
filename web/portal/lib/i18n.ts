@@ -38,14 +38,19 @@ export function getMessages(locale: string): Messages {
 
 /** Replaces {site}, {email} ... in a message. */
 export function fill(text: string, values: Record<string, string | null | undefined>): string {
-  return text.replace(/{(w+)}/g, (_, key: string) => values[key] ?? '')
+  return text.replace(/{(\w+)}/g, (_, key: string) => values[key] ?? '')
 }
 
-/** Browser-facing path of `path` ("/", "/blog") in `locale`. `fallback` is the unprefixed locale (the server's default). */
+/**
+ * Final (browser-facing) URL path of `path` ("/", "/blog") in `locale`, with the trailing slash the export uses
+ * (trailingSlash: true), so canonical, hreflang, sitemap and links are the URLs the site really serves.
+ * `unprefixed` is the locale served from the root.
+ */
 export function localePath(locale: string, path = '/', unprefixed = defaultLocale): string {
-  if (locale === unprefixed) return path
+  const clean = path.replace(/^\/+|\/+$/g, '')
+  const tail = clean ? `${clean}/` : ''
 
-  return path === '/' ? `/${locale}` : `/${locale}${path}`
+  return locale === unprefixed ? `/${tail}` : `/${locale}/${tail}`
 }
 
 /**
@@ -71,4 +76,15 @@ export function localeName(locale: string): string {
   } catch {
     return locale.toUpperCase()
   }
+}
+
+/**
+ * `output: export` fails when generateStaticParams returns nothing, and a young site has no posts, no categories or only
+ * one page of posts. A route then gets this placeholder: it renders a 404 and scripts/finalize-export.mjs deletes its folder.
+ */
+export const SENTINEL = '_none'
+export const SENTINEL_PAGE = '0'
+
+export function orSentinel<T extends Record<string, string>>(params: T[], placeholder: T): T[] {
+  return params.length ? params : [placeholder]
 }

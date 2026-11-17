@@ -80,6 +80,13 @@ Vitest + Supertest on the compose Mongo; `useDb()` drops and re-indexes `<MONGOD
 - Images: `lib/upload.ts` `uploadImage()` builds WebP variants in the browser (480/960/1600, never upscaled, 36 MP cap read from the file header before decoding) and sends only those with `width` and `height`; the favicon goes as the plain file. `ImagePanel` shows the local blob until the published file loads.
 - Base path: Vite `base` and router `basename` are `/admin`; use `import.meta.env.BASE_URL` for public assets. Admin CSP rules live in `web/admin/public/_headers.admin` for M8 to merge.
 
+### Portal static export (M7)
+- No server features: no route handlers, no middleware, no `revalidate`, no `searchParams`, no `headers()`. Every read goes through `lib/api.ts` (build time only, `BUILD_API_URL`, 3 attempts).
+- URLs: always `localePath(locale, path)` (final URL with trailing slash); blog lists with `blogPath()`. Never build a URL by hand.
+- A new dynamic route needs `generateStaticParams` for every locale, `dynamicParams = false`, and `orSentinel()` so an empty list does not fail the export.
+- Client code may read only `NEXT_PUBLIC_API_URL`. Anything else from the environment belongs in server components at build time.
+- Images: `Picture` builds `srcset` from the record's `webp` map; do not guess file names.
+
 ### New content module checklist (M3)
 1. Schema in models.ts with the plugin and `getModels` entry; 2. zod schema with `bilingual()`; 3. routes via `Api` (public ones with `localizePublic`); 4. entry in access/modules.ts (permissions, menu, admin grant); 5. seed with `$setOnInsert` only; 6. media owner added to `countMediaFiles` (src/media/service.ts, list of models with an image); 7. routeAudit public list; 8. tests (auth, validation, ?lang, markDirty).
 

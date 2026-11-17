@@ -1,5 +1,7 @@
 import { menuPermission, modules, permissionNames, roleGrants, SUPERADMIN_ROLE } from '../access/modules.ts';
 import { hashPassword } from '../auth/password.ts';
+import { DEFAULT_SECTIONS } from '../modules/sections/routes.ts';
+import { settingDefaults } from '../modules/settings/routes.ts';
 import { ensureIndexes, nextId, type Models } from '../models.ts';
 
 export interface SeedOptions {
@@ -49,6 +51,14 @@ export async function seedAccess(m: Models, opts: SeedOptions = {}): Promise<{ s
         sort: mod.menu.sort,
       });
     }
+  }
+
+  // Content: the settings singleton and the default sections, create-if-missing.
+  await m.Setting.updateOne({ _id: 1 }, { $setOnInsert: settingDefaults() }, { upsert: true, setDefaultsOnInsert: true });
+  let order = 0;
+  for (const [key, title, visible] of DEFAULT_SECTIONS) {
+    order += 10;
+    if (!(await m.Section.exists({ key }))) await m.Section.create({ _id: await nextId(m, 'sections'), key, title, sort_order: order, is_visible: visible });
   }
 
   // Superadmin user: only when email and password are given; never resets an existing user's password.

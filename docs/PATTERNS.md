@@ -45,6 +45,22 @@ Vitest + Supertest on the compose Mongo; `useDb()` drops and re-indexes `<MONGOD
 
 ---
 
+### Bilingual fields (M3)
+- `bilingual({title:{max:150,required:true}})` (src/support/bilingual.ts) returns `title` and `title_2nd`; the twin is always optional and nullable with the same max. Spread it into `z.strictObject`. On update a required field may be omitted but not emptied.
+- Public routes add `localizePublic(env)`: no `?lang` returns both languages, `?lang=<supported>` collapses `x_2nd` into `x` (empty twin falls back to the first language) and always strips `_2nd` keys, an unsupported value is a 422 on `lang`.
+
+### Media (M3, ADR 017)
+- No storage binding. The browser makes the WebP variants (480/960/1600, quality 82, never upscaled) and posts them in ONE multipart request (`variants` x1-3, `width`, `height`); the favicon posts one `image` (.ico or .png, 100 KB).
+- Server side (src/media): declared size checked before reading, type by magic bytes, pixel cap 36,000,000, paths generated server-side as `media/<dir>/<random32>/<width>.webp`, one GitHub commit per upload (retry 3 times when the branch moved), image stored on the owner as `{path,width,height,variants,committed_at}`.
+- Replace or delete: save the document first, then `removeImage()` queues the old files in a second commit through `defer()` (ctx.waitUntil, best effort). Reads never call GitHub; public URL = MEDIA_BASE_PATH + path.
+- MEDIA_MAX_FILES is counted from stored documents in `countMediaFiles`: add each new media-owning model there.
+
+### Content change tracking (M3)
+- `schema.plugin(markDirtyPlugin, {tags:['faqs']})` records `{dirty_at, tags}` in `site_state` after every create, update, delete and bulk write of the model. Call `markDirty(db, tags)` for changes made outside a model. M5 turns it into a rebuild.
+
+### New content module checklist (M3)
+1. Schema in models.ts with the plugin and `getModels` entry; 2. zod schema with `bilingual()`; 3. routes via `Api` (public ones with `localizePublic`); 4. entry in access/modules.ts (permissions, menu, admin grant); 5. seed with `$setOnInsert` only; 6. media owner added to `countMediaFiles`; 7. routeAudit public list; 8. tests (auth, validation, ?lang, markDirty).
+
 ## Legacy (Laravel)
 
 Kept until M10. Reference module: Sections (`Section*` under `legacy-api/app`); singleton reference: Settings.

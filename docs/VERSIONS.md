@@ -92,3 +92,4 @@ Adopted by M1 spikes (2026-11-17, 0 advisories each):
 | @asteasolutions/zod-to-openapi | 9.1.0 | 9.1.0 | https://www.npmjs.com/package/@asteasolutions/zod-to-openapi/v/9.1.0 | 2026-11-17 | n/a (npm) |
 
 Rejected in spike b (not installed): xss 1.0.17, dompurify 3.4.18, linkedom 0.18.15.
+- Phase M7: web/portal gets `vitest` 5.1.0 (same pin as web/admin) as a dev dependency for the finalize-script and build-API tests. No other new package.

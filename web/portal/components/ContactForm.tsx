@@ -10,11 +10,14 @@ interface Captcha {
   question: string
 }
 
+/** Same origin in production (NEXT_PUBLIC_API_URL empty). It is the only variable this component reads, and it is public. */
+const apiBase = `${(process.env.NEXT_PUBLIC_API_URL ?? '').replace(/\/+$/, '')}/api`
+
 const empty = { name: '', email: '', phone: '', subject: '', message: '', captcha_answer: '', website: '' }
 const control = 'w-full rounded-md border border-line bg-surface px-4 py-3 shadow-sm focus:outline-2 focus:outline-brand-500'
 
 /**
- * Contact form. The captcha comes from the API through /api/contact/captcha, one challenge per attempt (a new one is
+ * Contact form. The captcha comes straight from the API (GET /api/v1/public/captcha, same origin, no cookies), one challenge per attempt (a new one is
  * fetched after every submit). `website` is the honeypot: hidden from people and assistive tech, bots fill it and the API refuses it.
  */
 export function ContactForm({ messages }: { messages: Messages['contactPage'] }) {
@@ -27,7 +30,7 @@ export function ContactForm({ messages }: { messages: Messages['contactPage'] })
   const loadCaptcha = useCallback(async () => {
     setCaptcha(null)
     try {
-      const response = await fetch('/api/contact/captcha', { cache: 'no-store' })
+      const response = await fetch(`${apiBase}/v1/public/captcha`, { cache: 'no-store', credentials: 'omit' })
       setCaptcha(((await response.json()) as { data: Captcha }).data)
     } catch {
       setCaptcha(null)
@@ -50,8 +53,9 @@ export function ContactForm({ messages }: { messages: Messages['contactPage'] })
     setNotice('')
 
     try {
-      const response = await fetch('/api/contact', {
+      const response = await fetch(`${apiBase}/v1/contact`, {
         method: 'POST',
+        credentials: 'omit',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
           name: values.name,

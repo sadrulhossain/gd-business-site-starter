@@ -2,46 +2,57 @@ import { ApiError, createClient } from '@gd/api-client'
 import { defaultLocale } from './i18n'
 
 /**
- * Server-side API access with classic Next caching: every public read is cached for REVALIDATE seconds and tagged with
- * the table name the API's webhook sends (/api/revalidate), so an edit in the admin refreshes just that content.
+ * Build-time API access. The portal is a static export: every public read happens once, during `next build`, against
+ * BUILD_API_URL (the absolute address of the live Worker, including /api). Nothing here runs in the browser, and
+ * BUILD_API_URL is never read by client code, so it cannot reach the bundle.
+ *
+ * A broken API must never publish an empty site: each request is retried (3 attempts, backoff) and then the build fails
+ * with a message that names the URL and the reason.
  */
-export const REVALIDATE = 3600
+export const ATTEMPTS = 3
+export const BACKOFF_MS = 500
 
-/** "/v1/public/team" -> "team_members", the tag ContentObserver sends (the model's table name). */
-const TAGS: Record<string, string> = {
-  settings: 'settings',
-  sections: 'sections',
-  faqs: 'faqs',
-  pricing: 'pricings',
-  services: 'services',
-  testimonials: 'testimonials',
-  team: 'team_members',
-  gallery: 'gallery_items',
-  categories: 'categories',
-  posts: 'posts',
+export function buildApiUrl(): string {
+  const url = process.env.BUILD_API_URL
+  if (!url) throw new Error('BUILD_API_URL is not set. Point it at the live API, e.g. https://example.com/api (see web/portal/README.md).')
+
+  return url.replace(/\/+$/, '')
 }
 
-export function tagFor(url: string): string[] {
-  const resource = new URL(url).pathname.split('/public/')[1]?.split('/')[0]
-  const tag = resource ? TAGS[resource] : undefined
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 
-  return tag ? [tag] : []
+/** fetch with up to ATTEMPTS tries. 4xx answers are final (a 404 is a normal "no such page"); network errors and 5xx are retried. */
+export async function fetchWithRetry(input: RequestInfo | URL, init?: RequestInit, { attempts = ATTEMPTS, backoff = BACKOFF_MS, doFetch = fetch }: { attempts?: number; backoff?: number; doFetch?: typeof fetch } = {}): Promise<Response> {
+  let reason = ''
+  for (let attempt = 1; attempt <= attempts; attempt++) {
+    try {
+      const response = await doFetch(input, init)
+      if (response.status < 500) return response
+      reason = `HTTP ${response.status}`
+    } catch (error) {
+      reason = error instanceof Error ? error.message : String(error)
+    }
+    if (attempt < attempts) await sleep(backoff * 2 ** (attempt - 1))
+  }
+
+  throw new Error(`Build stopped: the API request ${String(input)} failed after ${attempts} attempts (${reason}). Nothing was published; fix the API and build again.`)
 }
-
-const baseUrl = () => process.env.API_INTERNAL_URL ?? 'http://api.localhost/api'
 
 /** One client per locale: `?lang=` makes the API return a single language per field (the second falls back to the first). */
 export function apiFor(locale: string) {
   return createClient({
-    baseUrl: baseUrl(),
+    baseUrl: buildApiUrl(),
     lang: locale === defaultLocale ? undefined : locale,
-    fetch: (input, init) => fetch(input, { ...init, next: { revalidate: REVALIDATE, tags: tagFor(String(input)) } }),
+    fetch: (input, init) => fetchWithRetry(input, init),
   })
 }
 
 export interface Media {
   url: string
+  /** Width => URL of each generated WebP variant (M3 contract). Empty when only the original exists. */
   webp: Record<string, string>
+  width?: number | null
+  height?: number | null
 }
 
 export interface Settings {
@@ -140,7 +151,7 @@ export interface Post {
   title: string
   slug: string
   excerpt: string | null
-  /** Sanitised HTML (the API's HtmlSanitizer), safe to render as is. */
+  /** Sanitised HTML (the API sanitises on every write), safe to render as is. */
   body: string | null
   image: Media | null
   category: Category | null
@@ -200,3 +211,14 @@ export async function getPricing(locale: string, serviceId?: number | string): P
 export async function getList<T>(locale: string, resource: 'services' | 'testimonials' | 'team' | 'gallery' | 'faqs'): Promise<T[]> {
   return ((await apiFor(locale).request('GET', `/v1/public/${resource}`)) as Listing<T>).data
 }
+
+/** Every published post (all pages of the API list), newest first. Only the build uses this: the sitemap and the post pages. */
+export async function getAllPosts(locale: string): Promise<Post[]> {
+  const first = await getPosts(locale)
+  const rest = await Promise.all(Array.from({ length: first.lastPage - 1 }, (_, i) => getPosts(locale, { page: i + 2 })))
+
+  return [first, ...rest].flatMap((page) => page.posts)
+}
+
+/** Every visible service (the API list is not paginated). */
+export const getAllServices = (locale: string) => getList<Service>(locale, 'services')

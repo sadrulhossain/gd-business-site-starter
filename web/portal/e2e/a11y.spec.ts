@@ -1,12 +1,12 @@
 import AxeBuilder from '@axe-core/playwright'
 import { expect, test } from '@playwright/test'
 
-// WCAG 2.1 A/AA scan of every public page in both languages, against the running stack (no screenshots).
-const paths = ['/', '/about', '/services', '/pricing', '/blog', '/contact', '/privacy', '/terms', '/missing-page']
+// WCAG 2.1 A/AA scan of every public page in both languages, against the static export (no screenshots).
+const paths = ['/', '/about/', '/services/', '/pricing/', '/blog/', '/contact/', '/privacy/', '/terms/', '/missing-page/']
 
 for (const prefix of ['', '/bn']) {
   for (const path of paths) {
-    const url = `${prefix}${path === '/' && prefix ? '' : path}` || '/'
+    const url = `${prefix}${path}` || '/'
 
     test(`axe: ${url}`, async ({ page }) => {
       await page.goto(url)

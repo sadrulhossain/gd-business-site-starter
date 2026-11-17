@@ -3,8 +3,9 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { JsonLd } from '../../../../components/JsonLd'
 import { Picture } from '../../../../components/Media'
-import { getPost, getSettings } from '../../../../lib/api'
-import { getMessages, isLocale, localePath } from '../../../../lib/i18n'
+import { getAllPosts, getPost, getSettings } from '../../../../lib/api'
+import { blogPath } from '../../../../lib/blog-page'
+import { defaultLocale, getMessages, isLocale, localePath, locales, orSentinel, SENTINEL } from '../../../../lib/i18n'
 import { articleJsonLd, pageMetadata } from '../../../../lib/seo'
 
 type Props = { params: Promise<{ locale: string; slug: string }> }
@@ -17,9 +18,13 @@ async function load(locale: string, slug: string) {
   return post
 }
 
-// Rendered on first request, then cached (ISR) until the content tag is revalidated.
-export function generateStaticParams() {
-  return []
+export const dynamicParams = false
+
+/** Every published post, in every locale (all pages of the API list, not only the first). */
+export async function generateStaticParams() {
+  const posts = await getAllPosts(defaultLocale)
+
+  return locales.flatMap((locale) => orSentinel(posts.map((post) => ({ locale, slug: post.slug })), { locale, slug: SENTINEL }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -54,7 +59,7 @@ export default async function PostPage({ params }: Props) {
       <h1 className="mt-4 font-display text-3xl leading-tight font-extrabold tracking-tight text-balance sm:text-4xl">{post.title}</h1>
       <p className="mt-3 text-ink-muted">
         {post.category && (
-          <Link href={`${localePath(locale, '/blog')}?category=${post.category.slug}`} className="text-brand-700 hover:underline">
+          <Link href={localePath(locale, blogPath({ category: post.category.slug }))} className="text-brand-700 hover:underline">
             {post.category.name}
           </Link>
         )}

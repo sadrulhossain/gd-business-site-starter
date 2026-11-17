@@ -61,6 +61,7 @@ Set by compose, not by you: `APP_ENV=production`, `APP_DEBUG=false`, `SESSION_SE
 ## MERN and Cloudflare variables (planned)
 Names only; Phase M1 onward defines them.
 - Worker secrets: MONGODB_URI, JWT_ACCESS_SECRET, REFRESH_TOKEN_PEPPER, MAIL_API_KEY (only for MAIL_PROVIDER=http), NOTIFY_WEBHOOK_URL (only for MAIL_PROVIDER=webhook), GITHUB_REPO_TOKEN (fine-grained, this repository only: Contents write, Actions write).
+- M3 media: GITHUB_REPO (owner/name), GITHUB_REPO_TOKEN, MEDIA_GIT_BRANCH (default main), MEDIA_BASE_PATH (default /media), UPLOADS_MAX_MB (default 5), MEDIA_MAX_FILES (default 6000). Without a token uploads return 503.
 - Worker vars: MONGODB_DB, APP_ENV, APP_DEBUG, COOKIE_NAME, ACCESS_TOKEN_TTL_SECONDS, REFRESH_TOKEN_TTL_DAYS, SITE_ORIGIN (public origin of the single Worker), CORS_ALLOWED_ORIGINS (empty in production; local development origins only), MEDIA_BASE_PATH (/media), UPLOADS_MAX_MB, MEDIA_MAX_FILES, LOCALE_DEFAULT, LOCALE_FALLBACK, LOCALE_SUPPORTED, MAIL_PROVIDER (none, webhook or http; default none), MAIL_FROM_ADDRESS, CONTACT_NOTIFY_TO, GITHUB_REPO, GITHUB_WORKFLOW_FILE, GITHUB_REF, MEDIA_GIT_BRANCH, PUBLISH_DEBOUNCE_MINUTES; no storage binding.
 - Seed only (local shell): SUPERADMIN_NAME, SUPERADMIN_EMAIL, SUPERADMIN_PASSWORD.
 - Build time: VITE_API_URL (admin; empty in production = same origin), NEXT_PUBLIC_API_URL (portal; empty in production), BUILD_API_URL (absolute address of the live Worker, used only while building), SITE_URL, LOCALE_* (portal).

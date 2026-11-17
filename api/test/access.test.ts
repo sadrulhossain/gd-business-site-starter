@@ -1,5 +1,5 @@
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest';
-import { SUPERADMIN_ROLE } from '../src/access/modules.ts';
+import { SUPERADMIN_ROLE, roleGrants } from '../src/access/modules.ts';
 import { verifyPassword } from '../src/auth/password.ts';
 import { signAccessToken } from '../src/auth/tokens.ts';
 import { inList } from '../src/db.ts';
@@ -348,7 +348,7 @@ describe('seeding', () => {
     expect((await seedAccess(m, opts)).superadmin).toBe('created');
     expect((await seedAccess(m, opts)).superadmin).toBe('exists');
     expect((await m.Role.find({}).lean()).map((r) => r.name).sort()).toEqual(['admin', 'superadmin']);
-    expect((await m.Role.findOne({ name: 'admin' }).lean())!.permissions).toEqual(['dashboard.view']);
+    expect((await m.Role.findOne({ name: 'admin' }).lean())!.permissions).toEqual(roleGrants.admin);
     expect(await m.Menu.countDocuments({ path: inList(['/users', '/roles', '/menus', '/']) })).toBe(4);
     expect(await m.Menu.countDocuments({ title: 'Access' })).toBe(1);
     const root = (await m.User.findOne({ email: 'root@example.test' }).lean())!;

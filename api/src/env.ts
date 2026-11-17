@@ -11,6 +11,12 @@ export interface Env {
   COOKIE_NAME?: string;
   ACCESS_TOKEN_TTL_SECONDS?: string;
   REFRESH_TOKEN_TTL_DAYS?: string;
+  UPLOADS_MAX_MB?: string;
+  MEDIA_MAX_FILES?: string;
+  MEDIA_BASE_PATH?: string;
+  MEDIA_GIT_BRANCH?: string;
+  GITHUB_REPO?: string;
+  GITHUB_REPO_TOKEN?: string;
   LOCALE_DEFAULT?: string;
   LOCALE_FALLBACK?: string;
   LOCALE_SUPPORTED?: string;
@@ -30,6 +36,11 @@ export const trustedOrigins = (env: Env): string[] => [...(env.SITE_ORIGIN ? [en
 export const cookieName = (env: Env): string => env.COOKIE_NAME || '__Host-rt';
 export const accessTtlSeconds = (env: Env): number => num(env.ACCESS_TOKEN_TTL_SECONDS, 900);
 export const refreshTtlDays = (env: Env): number => num(env.REFRESH_TOKEN_TTL_DAYS, 30);
+
+export const uploadsMaxBytes = (env: Env): number => num(env.UPLOADS_MAX_MB, 5) * 1024 * 1024;
+export const mediaMaxFiles = (env: Env): number => Math.floor(num(env.MEDIA_MAX_FILES, 6000));
+export const mediaBasePath = (env: Env): string => (env.MEDIA_BASE_PATH || '/media').replace(/\/+$/, '');
+export const mediaBranch = (env: Env): string => env.MEDIA_GIT_BRANCH || 'main';
 
 export interface Locales {
   default: string;

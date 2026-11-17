@@ -1,5 +1,7 @@
 # Spikes (Phase M1)
 
+**Status (2026-11-18):** spikes a, e, g and h were skipped by decision so M1 and M2 could be ticked. They are known gaps, not results: password hashing is provisional PBKDF2 (ADR 016, unverified against the 10 ms free-plan CPU limit), and Atlas latency, GitHub media commits and single-origin routing are untested on a deployed Worker. Run them before M8 (Cloudflare delivery) and certainly before M9.
+
 Spike code lives in `api/spikes/` and is deleted once its result is recorded here. Claude Code had no Cloudflare login, so
 the deployed spikes (a, e, g, h) are written and waiting for you to run them. Run order and commands are below the table.
 

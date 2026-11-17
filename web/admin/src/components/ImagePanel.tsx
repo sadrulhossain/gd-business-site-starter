@@ -1,8 +1,7 @@
 import { useMutation } from '@tanstack/react-query'
-import { useRef, useState } from 'react'
-import { ApiError } from '@gd/api-client'
+import { useEffect, useRef, useState } from 'react'
 import { api } from '../api'
-import { checkImage, uploadFile } from '../lib/upload'
+import { checkImage, uploadImage, uploadMessage } from '../lib/upload'
 import { toast } from './Toast'
 import { Icon } from './Icon'
 import { IconButton } from './IconButton'
@@ -16,6 +15,9 @@ export function ImagePanel({ endpoint, image, onChange, label = 'Image', hint, p
   const input = useRef<HTMLInputElement>(null)
   const [current, setCurrent] = useState(image ?? null)
   const [progress, setProgress] = useState<number | null>(null)
+  // The saved file goes live with the next deploy: show the local copy until the published URL loads.
+  const [local, setLocal] = useState<string | null>(null)
+  useEffect(() => () => { if (local) URL.revokeObjectURL(local) }, [local])
 
   const upload = async (file: File) => {
     const problem = checkImage(file, allowIco)
@@ -23,13 +25,19 @@ export function ImagePanel({ endpoint, image, onChange, label = 'Image', hint, p
 
     setProgress(0)
     try {
-      const { data } = (await uploadFile(endpoint, file, setProgress)) as { data: Record<string, ImageInfo | null> }
+      const { data } = (await uploadImage(endpoint, file, setProgress, { plain: allowIco, onPreview: (blob) => setLocal(URL.createObjectURL(blob)) })) as { data: Record<string, ImageInfo | null> }
       const saved = data[responseKey] ?? null
       setCurrent(saved)
+      if (saved) {
+        const probe = new Image()
+        probe.onload = () => setLocal(null)
+        probe.src = saved.url
+      }
       onChange(saved)
       toast.success('Image saved')
     } catch (error) {
-      toast.error(error instanceof ApiError && error.status === 422 ? (Object.values(error.details ?? {})[0]?.[0] ?? error.message) : 'Could not upload the image')
+      setLocal(null)
+      toast.error(uploadMessage(error))
     } finally {
       setProgress(null)
       if (input.current) input.current.value = ''
@@ -40,6 +48,7 @@ export function ImagePanel({ endpoint, image, onChange, label = 'Image', hint, p
     mutationFn: () => api.request('DELETE', endpoint),
     onSuccess: () => {
       setCurrent(null)
+      setLocal(null)
       onChange(null)
     },
     onError: () => toast.error('Could not remove the image'),
@@ -48,7 +57,7 @@ export function ImagePanel({ endpoint, image, onChange, label = 'Image', hint, p
   return (
     <div className="space-y-2">
       <span className="block text-sm text-ink-muted">{label}</span>
-      {current && <img src={current.url} alt="" className={`${previewClass} rounded-md border border-line bg-surface-muted object-contain p-1`} />}
+      {current && <img src={local ?? current.url} alt="" className={`${previewClass} rounded-md border border-line bg-surface-muted object-contain p-1`} />}
       <div className="flex items-center gap-3">
         <label className={`btn btn-secondary cursor-pointer focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-primary-500 ${progress !== null ? 'pointer-events-none opacity-60' : ''}`}>
           <Icon name="upload" className="size-[18px]" />

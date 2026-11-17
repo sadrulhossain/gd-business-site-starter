@@ -3,8 +3,9 @@ import StarterKit from '@tiptap/starter-kit'
 import { useEffect } from 'react'
 
 /**
- * Rich-text editor (TipTap). Value in and out is HTML. The extension set is limited to what the API's HtmlSanitizer
- * allows (headings 2-3, lists, quote, code, links, rules), so what you see is what is stored; the API sanitises regardless.
+ * Rich-text editor (TipTap). Value in and out is HTML. The extension set is limited to what the API's allow-list keeps
+ * (headings, lists, quote, code, links, rules), but the editor does no purification: the API sanitises on every write and
+ * is the only authority, so the stored HTML can differ from what was typed.
  */
 export function RichText({ id, label, value, onChange }: { id: string; label: string; value: string; onChange: (html: string) => void }) {
   const editor = useEditor({

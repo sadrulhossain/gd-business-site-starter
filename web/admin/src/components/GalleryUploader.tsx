@@ -1,9 +1,8 @@
 import { useQueryClient } from '@tanstack/react-query'
 import { useRef, useState } from 'react'
-import { ApiError } from '@gd/api-client'
 import { api } from '../api'
 import { useAuth } from '../auth/store'
-import { checkImage, runPool, uploadFile } from '../lib/upload'
+import { checkImage, runPool, uploadImage, uploadMessage } from '../lib/upload'
 import { Icon } from './Icon'
 
 type Status = 'queued' | 'uploading' | 'done' | 'error'
@@ -46,12 +45,11 @@ export function GalleryUploader({ endpoint }: { endpoint: string }) {
       let created: number | null = null
       try {
         created = ((await api.request('POST', endpoint, { body: {} })) as { data: { id: number } }).data.id
-        await uploadFile(`${endpoint}/${created}/image`, file, (progress) => patch(id, { progress }))
+        await uploadImage(`${endpoint}/${created}/image`, file, (progress) => patch(id, { progress }))
         patch(id, { status: 'done', progress: 1 })
       } catch (error) {
         if (created !== null) await api.request('DELETE', `${endpoint}/${created}`).catch(() => undefined)
-        const message = error instanceof ApiError && error.status === 422 ? (Object.values(error.details ?? {})[0]?.[0] ?? error.message) : 'Upload failed'
-        patch(id, { status: 'error', error: message })
+        patch(id, { status: 'error', error: uploadMessage(error) })
       }
     })
 

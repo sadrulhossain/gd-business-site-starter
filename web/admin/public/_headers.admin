@@ -1,0 +1,10 @@
+# Admin rules for the combined _headers that M8 writes (path-scoped, merged under /admin/*).
+# Not named _headers on purpose: the Worker serves one combined file, and only M8 produces it.
+/admin/*
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; style-src-attr 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: same-origin
+/admin/index.html
+  Cache-Control: no-cache
+/admin/assets/*
+  Cache-Control: public, max-age=31536000, immutable

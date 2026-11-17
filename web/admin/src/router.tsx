@@ -6,7 +6,7 @@ import { GalleryUploader } from './components/GalleryUploader'
 import { AppShell } from './layout/AppShell'
 import { messages } from './messagesConfig'
 import { modules } from './modules'
-import { Callback, SignedOut } from './pages/auth'
+import { Login } from './pages/auth'
 import { Dashboard } from './pages/Dashboard'
 import { NotFound } from './pages/errors'
 import { MessagesPage } from './pages/Messages'
@@ -29,9 +29,8 @@ function GalleryPage({ config }: { config: CrudConfig }) {
 const pages: Record<string, ComponentType<{ config: CrudConfig }>> = { gallery: GalleryPage }
 
 export const router = createBrowserRouter([
-  // Public: the OAuth redirect target, the post-logout page and the theme showcase.
-  { path: '/auth/callback', element: <Callback /> },
-  { path: '/signed-out', element: <SignedOut /> },
+  // Public: the login page and the theme showcase.
+  { path: '/login', element: <Login /> },
   { path: '/showcase', element: <Showcase /> },
 
   // Everything else needs a session; each page also needs its permission (403 otherwise).
@@ -99,4 +98,4 @@ export const router = createBrowserRouter([
       { path: '*', element: <NotFound /> },
     ],
   },
-])
+], { basename: '/admin' })

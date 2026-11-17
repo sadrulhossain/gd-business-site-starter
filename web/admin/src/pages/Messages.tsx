@@ -30,6 +30,7 @@ export function MessagesPage({ config }: { config: InboxConfig }) {
       setOpen(data)
       void queryClient.invalidateQueries({ queryKey: ['crud', config.endpoint] })
       void queryClient.invalidateQueries({ queryKey: ['dashboard'] })
+      void queryClient.invalidateQueries({ queryKey: ['unread'] })
     },
     onError: () => toast.error('Could not mark the message as read'),
   })

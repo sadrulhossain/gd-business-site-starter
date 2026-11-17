@@ -1,49 +1,34 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { config } from '../lib/config'
-import { navigate } from '../lib/navigate'
-import { completeLogin, getValidToken, refreshTokens, startLogin } from './oauth'
+import { ApiError } from '@gd/api-client'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { api } from '../api'
+import { getValidToken, login, loginMessage, refreshTokens, restoreSession } from './session'
 import { useAuth } from './store'
 
-vi.mock('../lib/navigate', () => ({ navigate: vi.fn() }))
-
 const me = { id: 1, name: 'A', email: 'a@example.test', is_superadmin: false, roles: [], permissions: ['faqs.view'] }
-const tokens = { access_token: 'access-1', refresh_token: 'refresh-1', expires_in: 3600 }
+const tokens = { access_token: 'access-1', expires_in: 3600 }
 
-const json = (body: unknown, status = 200) =>
-  new Response(JSON.stringify(body), { status, headers: { 'Content-Type': 'application/json' } })
-
-const sentBody = (fetchMock: { mock: { calls: unknown[][] } }) =>
-  new URLSearchParams((fetchMock.mock.calls[0][1] as RequestInit).body as URLSearchParams)
+const json = (body: unknown, status = 200) => new Response(JSON.stringify(body), { status, headers: { 'Content-Type': 'application/json' } })
+const calls = (fetchMock: { mock: { calls: unknown[][] } }, path: string) => fetchMock.mock.calls.filter((c) => String(c[0]).endsWith(path))
+const init = (call: unknown[]) => call[1] as RequestInit & { headers: Record<string, string> }
 
 beforeEach(() => {
-  useAuth.getState().clear()
+  useAuth.setState({ status: 'anonymous', accessToken: null, expiresAt: null, user: null, restored: false })
   sessionStorage.clear()
   localStorage.clear()
 })
+afterEach(() => vi.unstubAllGlobals())
 
 describe('auth store', () => {
   it('starts anonymous and becomes authenticated only once the user is loaded', () => {
     expect(useAuth.getState().status).toBe('anonymous')
-
     useAuth.getState().setSession(tokens)
     expect(useAuth.getState().status).toBe('loading')
-
     useAuth.getState().setUser(me as never)
     expect(useAuth.getState().status).toBe('authenticated')
   })
 
-  it('keeps tokens in memory only', () => {
-    useAuth.getState().setSession(tokens)
-    useAuth.getState().setUser(me as never)
-
-    const stored = JSON.stringify({ ...localStorage }) + JSON.stringify({ ...sessionStorage })
-    expect(stored).not.toContain('access-1')
-    expect(stored).not.toContain('refresh-1')
-  })
-
   it('answers can() from the loaded permissions', () => {
     expect(useAuth.getState().can('faqs.view')).toBe(false)
-
     useAuth.getState().setUser(me as never)
     expect(useAuth.getState().can('faqs.view')).toBe(true)
     expect(useAuth.getState().can('faqs.delete')).toBe(false)
@@ -53,129 +38,122 @@ describe('auth store', () => {
     useAuth.getState().setSession(tokens)
     useAuth.getState().setUser(me as never)
     useAuth.getState().clear()
+    expect(useAuth.getState()).toMatchObject({ status: 'anonymous', accessToken: null, user: null, restored: true })
+  })
+})
 
-    expect(useAuth.getState()).toMatchObject({ status: 'anonymous', accessToken: null, refreshToken: null, user: null })
+describe('login', () => {
+  it('posts the credentials with the cookie header, keeps the token in memory only and loads the account', async () => {
+    const fetchMock = vi.fn(async (url: string) => (url.endsWith('/v1/auth/login') ? json({ ...tokens, token_type: 'Bearer' }) : json({ data: me })))
+    vi.stubGlobal('fetch', fetchMock)
+
+    await login('a@example.test', 'secret')
+
+    const [login0] = calls(fetchMock, '/v1/auth/login')
+    expect(init(login0!)).toMatchObject({ method: 'POST', credentials: 'include', headers: { 'X-Requested-With': 'gd-admin' } })
+    expect(JSON.parse(init(login0!).body as string)).toEqual({ email: 'a@example.test', password: 'secret' })
+    expect(String(login0![0])).toBe('/api/v1/auth/login')
+    expect(init(calls(fetchMock, '/v1/me')[0]!).headers.Authorization).toBe('Bearer access-1')
+    expect(useAuth.getState()).toMatchObject({ status: 'authenticated', accessToken: 'access-1' })
+
+    const stored = JSON.stringify({ ...localStorage }) + JSON.stringify({ ...sessionStorage })
+    expect(stored).not.toContain('access-1')
   })
 
-  it('keeps the old refresh token when a refresh answer omits one', () => {
-    useAuth.getState().setSession(tokens)
-    useAuth.getState().setSession({ access_token: 'access-2', expires_in: 3600 })
+  it('a failed login leaves the user anonymous and surfaces the 422 and 429 messages', async () => {
+    vi.stubGlobal('fetch', vi.fn(async () => json({ error: { code: 'unprocessable', message: 'Invalid', details: { email: ['The email field is required.'] } } }, 422)))
+    const error = await login('', '').catch((e: unknown) => e)
 
-    expect(useAuth.getState()).toMatchObject({ accessToken: 'access-2', refreshToken: 'refresh-1' })
+    expect(error).toBeInstanceOf(ApiError)
+    expect(useAuth.getState().status).toBe('anonymous')
+    expect(loginMessage(error)).toBe('The email field is required.')
+    expect(loginMessage(new ApiError(429, 'too_many_requests', 'Too many login attempts. Try again in 42 seconds.'))).toBe('Too many login attempts. Try again in 42 seconds.')
+    expect(loginMessage(new TypeError('network'))).toMatch(/Could not sign in/)
   })
 })
 
 describe('token refresh', () => {
-  it('exchanges the refresh token and stores the new tokens', async () => {
-    useAuth.getState().setSession(tokens)
-    const fetchMock = vi
-      .spyOn(globalThis, 'fetch')
-      .mockResolvedValue(json({ access_token: 'access-2', refresh_token: 'refresh-2', expires_in: 3600 }))
+  it('sends the cookie and the CSRF header, then stores the new token', async () => {
+    const fetchMock = vi.fn(async () => json({ ...tokens, token_type: 'Bearer' }))
+    vi.stubGlobal('fetch', fetchMock)
 
-    expect(await refreshTokens()).toBe(true)
+    await expect(refreshTokens()).resolves.toBe(true)
 
-    expect(useAuth.getState()).toMatchObject({ accessToken: 'access-2', refreshToken: 'refresh-2' })
-    const body = sentBody(fetchMock)
-    expect(body.get('grant_type')).toBe('refresh_token')
-    expect(body.get('refresh_token')).toBe('refresh-1')
-    expect(body.has('client_secret')).toBe(false)
+    expect(init(fetchMock.mock.calls[0]!)).toMatchObject({ method: 'POST', credentials: 'include', headers: { 'X-Requested-With': 'gd-admin' } })
+    expect(useAuth.getState().accessToken).toBe('access-1')
   })
 
   it('shares one request between concurrent callers', async () => {
-    useAuth.getState().setSession(tokens)
-    const fetchMock = vi
-      .spyOn(globalThis, 'fetch')
-      .mockResolvedValue(json({ access_token: 'access-2', refresh_token: 'refresh-2', expires_in: 3600 }))
+    const fetchMock = vi.fn(async () => json(tokens))
+    vi.stubGlobal('fetch', fetchMock)
 
-    const results = await Promise.all([refreshTokens(), refreshTokens(), refreshTokens()])
-
-    expect(results).toEqual([true, true, true])
-    expect(fetchMock).toHaveBeenCalledTimes(1)
+    await Promise.all([refreshTokens(), refreshTokens(), refreshTokens()])
+    expect(fetchMock).toHaveBeenCalledOnce()
   })
 
-  it('clears the session when the server refuses the refresh token', async () => {
-    useAuth.getState().setSession(tokens)
-    vi.spyOn(globalThis, 'fetch').mockResolvedValue(json({ error: 'invalid_grant' }, 400))
+  it('parallel 401s cause exactly one refresh, and every request is retried with the new token', async () => {
+    useAuth.getState().setSession({ access_token: 'old', expires_in: 3600 })
+    const seen: string[] = []
+    const fetchMock = vi.fn(async (url: string, options: RequestInit & { headers: Record<string, string> }) => {
+      if (url.endsWith('/v1/auth/refresh')) {
+        await new Promise((r) => setTimeout(r, 10))
+        return json({ access_token: 'new', expires_in: 3600 })
+      }
+      seen.push(`${url} ${options.headers.Authorization}`)
+      return options.headers.Authorization === 'Bearer new' ? json({ data: [] }) : json({ error: { code: 'unauthenticated', message: 'Unauthenticated' } }, 401)
+    })
+    vi.stubGlobal('fetch', fetchMock)
 
-    expect(await refreshTokens()).toBe(false)
-    expect(useAuth.getState().status).toBe('anonymous')
+    await Promise.all([api.request('GET', '/v1/faqs'), api.request('GET', '/v1/services'), api.request('GET', '/v1/team')])
+
+    expect(calls(fetchMock, '/v1/auth/refresh')).toHaveLength(1)
+    expect(seen.filter((s) => s.endsWith('Bearer new'))).toHaveLength(3)
+    expect(init(fetchMock.mock.calls[0]!).credentials).toBe('include')
+  })
+
+  it('an expired refresh clears the session (the guard then sends the user to /login)', async () => {
+    useAuth.getState().setSession(tokens)
+    useAuth.getState().setUser(me as never)
+    vi.stubGlobal('fetch', vi.fn(async () => json({ error: { code: 'unauthenticated', message: 'Unauthenticated' } }, 401)))
+
+    await expect(api.request('GET', '/v1/faqs')).rejects.toMatchObject({ status: 401 })
+    expect(useAuth.getState()).toMatchObject({ status: 'anonymous', accessToken: null, user: null })
   })
 
   it('keeps the session on a network error', async () => {
     useAuth.getState().setSession(tokens)
-    vi.spyOn(globalThis, 'fetch').mockRejectedValue(new TypeError('offline'))
+    vi.stubGlobal('fetch', vi.fn(async () => Promise.reject(new TypeError('offline'))))
 
-    expect(await refreshTokens()).toBe(false)
+    await expect(refreshTokens()).resolves.toBe(false)
     expect(useAuth.getState().accessToken).toBe('access-1')
   })
 
-  it('does nothing without a refresh token', async () => {
-    const fetchMock = vi.spyOn(globalThis, 'fetch')
+  it('leaves a fresh token alone and renews one that expires within 60 seconds', async () => {
+    const fetchMock = vi.fn(async () => json({ access_token: 'access-2', expires_in: 3600 }))
+    vi.stubGlobal('fetch', fetchMock)
 
-    expect(await refreshTokens()).toBe(false)
-    expect(fetchMock).not.toHaveBeenCalled()
-  })
-
-  it('leaves a fresh token alone and renews one that expires within 30 seconds', async () => {
-    const fetchMock = vi
-      .spyOn(globalThis, 'fetch')
-      .mockResolvedValue(json({ access_token: 'access-2', refresh_token: 'refresh-2', expires_in: 3600 }))
-
-    useAuth.getState().setSession(tokens)
-    expect(await getValidToken()).toBe('access-1')
+    useAuth.getState().setSession({ access_token: 'access-1', expires_in: 3600 })
+    await expect(getValidToken()).resolves.toBe('access-1')
     expect(fetchMock).not.toHaveBeenCalled()
 
-    useAuth.getState().setSession({ ...tokens, expires_in: 10 })
-    expect(await getValidToken()).toBe('access-2')
-    expect(fetchMock).toHaveBeenCalledTimes(1)
+    useAuth.getState().setSession({ access_token: 'access-1', expires_in: 59 })
+    await expect(getValidToken()).resolves.toBe('access-2')
+    expect(fetchMock).toHaveBeenCalledOnce()
   })
 })
 
-describe('sign-in', () => {
-  it('startLogin leaves for the authorize URL with an S256 challenge and stores only verifier and state', async () => {
-    await startLogin('/faqs')
+describe('restoreSession (page load)', () => {
+  it('refreshes silently, loads the account and marks the attempt done', async () => {
+    vi.stubGlobal('fetch', vi.fn(async (url: string) => (url.endsWith('/v1/auth/refresh') ? json(tokens) : json({ data: me }))))
 
-    const url = new URL(vi.mocked(navigate).mock.calls[0][0])
-    expect(url.pathname).toBe('/oauth/authorize')
-    expect(url.searchParams.get('response_type')).toBe('code')
-    expect(url.searchParams.get('code_challenge_method')).toBe('S256')
-    expect(url.searchParams.get('code_challenge')).toMatch(/^[A-Za-z0-9_-]{43}$/)
-    expect(url.searchParams.get('client_id')).toBe(config.clientId)
-    expect(url.searchParams.get('redirect_uri')).toBe(`${location.origin}/auth/callback`)
-
-    const saved = JSON.parse(sessionStorage.getItem('admin.pkce') ?? '{}')
-    expect(saved.returnTo).toBe('/faqs')
-    expect(saved.state).toBe(url.searchParams.get('state'))
-    expect(saved.verifier).not.toBe(url.searchParams.get('code_challenge'))
+    await restoreSession()
+    expect(useAuth.getState()).toMatchObject({ status: 'authenticated', restored: true })
   })
 
-  it('completeLogin exchanges the code with the verifier and resolves to the return path', async () => {
-    sessionStorage.setItem('admin.pkce', JSON.stringify({ verifier: 'v', state: 's', returnTo: '/faqs' }))
-    const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue(json(tokens))
+  it('without a valid refresh cookie ends anonymous but restored', async () => {
+    vi.stubGlobal('fetch', vi.fn(async () => json({ error: { code: 'unauthenticated', message: 'No' } }, 401)))
 
-    expect(await completeLogin('?code=abc&state=s')).toBe('/faqs')
-
-    const body = sentBody(fetchMock)
-    expect(body.get('grant_type')).toBe('authorization_code')
-    expect(body.get('code_verifier')).toBe('v')
-    expect(body.get('code')).toBe('abc')
-    expect(useAuth.getState().accessToken).toBe('access-1')
-    expect(sessionStorage.getItem('admin.pkce')).toBeNull()
-  })
-
-  it('completeLogin rejects a state mismatch without calling the token endpoint', async () => {
-    sessionStorage.setItem('admin.pkce', JSON.stringify({ verifier: 'v', state: 's', returnTo: '/' }))
-    const fetchMock = vi.spyOn(globalThis, 'fetch')
-
-    await expect(completeLogin('?code=abc&state=other')).rejects.toThrow()
-    expect(fetchMock).not.toHaveBeenCalled()
-    expect(useAuth.getState().status).toBe('anonymous')
-  })
-
-  it('completeLogin rejects when no sign-in was started or the server returned an error', async () => {
-    await expect(completeLogin('?code=abc&state=s')).rejects.toThrow('No sign-in in progress')
-
-    sessionStorage.setItem('admin.pkce', JSON.stringify({ verifier: 'v', state: 's', returnTo: '/' }))
-    await expect(completeLogin('?error=access_denied')).rejects.toThrow()
+    await restoreSession()
+    expect(useAuth.getState()).toMatchObject({ status: 'anonymous', restored: true })
   })
 })

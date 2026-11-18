@@ -93,3 +93,21 @@ Adopted by M1 spikes (2026-11-17, 0 advisories each):
 
 Rejected in spike b (not installed): xss 1.0.17, dompurify 3.4.18, linkedom 0.18.15.
 - Phase M7: web/portal gets `vitest` 5.1.0 (same pin as web/admin) as a dev dependency for the finalize-script and build-API tests. No other new package.
+
+## Recorded in Phase M9 (2026-11-18)
+These packages were already installed (pinned in package.json since Phases 8 to M7) but had no table row, so `scripts/check-floors.mjs` could not check them. Each pin was confirmed to exist on the npm registry on 2026-11-18, `pnpm audit` (all dependencies, not only production) reports no known vulnerabilities, and the floor equals the pin.
+
+| Component | Pin | Floor | Source | Date | Docker Hub |
+|-----------|-----|-------|--------|------|------------|
+| @types/express | 5.0.6 | 5.0.6 | https://www.npmjs.com/package/@types/express/v/5.0.6 | 2026-11-18 | n/a (npm) |
+| @types/supertest | 7.2.1 | 7.2.1 | https://www.npmjs.com/package/@types/supertest/v/7.2.1 | 2026-11-18 | n/a (npm) |
+| vitest | 5.1.0 | 5.1.0 | https://www.npmjs.com/package/vitest/v/5.1.0 | 2026-11-18 | n/a (npm) |
+| @tanstack/react-query | 5.107.1 | 5.107.1 | https://www.npmjs.com/package/@tanstack/react-query/v/5.107.1 | 2026-11-18 | n/a (npm) |
+| react-router | 7.18.5 | 7.18.5 | https://www.npmjs.com/package/react-router/v/7.18.5 | 2026-11-18 | n/a (npm) |
+| zustand | 5.1.0 | 5.1.0 | https://www.npmjs.com/package/zustand/v/5.1.0 | 2026-11-18 | n/a (npm) |
+| @playwright/test | 1.65.0 | 1.65.0 | https://www.npmjs.com/package/@playwright/test/v/1.65.0 | 2026-11-18 | n/a (npm) |
+| @testing-library/dom | 10.4.2 | 10.4.2 | https://www.npmjs.com/package/@testing-library/dom/v/10.4.2 | 2026-11-18 | n/a (npm) |
+| @testing-library/react | 16.3.3 | 16.3.3 | https://www.npmjs.com/package/@testing-library/react/v/16.3.3 | 2026-11-18 | n/a (npm) |
+| jsdom | 31.0.0 | 31.0.0 | https://www.npmjs.com/package/jsdom/v/31.0.0 | 2026-11-18 | n/a (npm) |
+
+`bcryptjs` and `hash-wasm` moved to devDependencies: only the unrun spike code (api/spikes) imports them; the Worker does not.

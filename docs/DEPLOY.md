@@ -81,6 +81,8 @@ You do these by hand because they need your logins and tokens. Nothing in this r
 
 ### Part D: verify the four untested assumptions
 
+Also run `MEASURE_EMAIL=... MEASURE_PASSWORD=... node scripts/measure-api.mjs https://<your-site>` once (about 5 minutes, about 300 requests to your own site) and read the Worker's CPU time p50 and p99 in the Cloudflare dashboard (Workers, your Worker, Metrics). It prints the wall times and confirms the 429 and `Retry-After` of the rate limits, which here are Mongo counters (10 logins and 5 contact posts a minute per address), not a Cloudflare rule. Put the numbers in `docs/LIMITS.md`.
+
 Do all four before you consider the site live.
 
 - [ ] **a. Password hashing fits the free CPU limit** (ADR 016, PBKDF2 at 100,000 iterations, 10 ms CPU per request on the Free plan). In one terminal run `cd api && pnpm exec wrangler tail gd-business-site-starter -c ../wrangler.jsonc --format json`; in the admin, sign out and in 10 times. **Pass:** every `/api/v1/auth/login` shows `outcome: ok`. **Fail:** `exceededCpu` or Cloudflare error 1102 on login. Fallbacks, in order: Workers Paid plan (about 5 USD a month, 30 s CPU, no code change); or an algorithm change in `api/src/auth/password.ts` (hashes are self-describing, so no migration), which needs a new decision record. Do not lower the iteration count without recording it.

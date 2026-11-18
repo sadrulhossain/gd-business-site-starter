@@ -53,13 +53,13 @@ export default async function PostPage({ params }: Props) {
   return (
     <article className="mx-auto max-w-3xl px-4 py-10 sm:py-14">
       <JsonLd data={articleJsonLd(post, settings, locale)} />
-      <Link href={localePath(locale, '/blog')} className="text-brand-700 hover:underline">
+      <Link href={localePath(locale, '/blog')} className="text-brand-700 underline underline-offset-2 hover:no-underline">
         <span aria-hidden="true">←</span> {t.back}
       </Link>
       <h1 className="mt-4 font-display text-3xl leading-tight font-extrabold tracking-tight text-balance sm:text-4xl">{post.title}</h1>
       <p className="mt-3 text-ink-muted">
         {post.category && (
-          <Link href={localePath(locale, blogPath({ category: post.category.slug }))} className="text-brand-700 hover:underline">
+          <Link href={localePath(locale, blogPath({ category: post.category.slug }))} className="text-brand-700 underline underline-offset-2 hover:no-underline">
             {post.category.name}
           </Link>
         )}

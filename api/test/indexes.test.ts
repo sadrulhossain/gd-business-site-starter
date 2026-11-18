@@ -43,8 +43,8 @@ const stages = (plan: unknown): string[] => {
   walk(plan as Record<string, unknown>);
   return out;
 };
-const planOf = async (q: { explain: (v: string) => Promise<Record<string, unknown>> }) => {
-  const e = await q.explain('queryPlanner');
+const planOf = async (q: { explain: (v: string) => PromiseLike<unknown> }) => {
+  const e = (await q.explain('queryPlanner')) as Record<string, unknown>;
   return stages((e.queryPlanner as { winningPlan: unknown }).winningPlan);
 };
 

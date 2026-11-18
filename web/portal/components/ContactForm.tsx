@@ -80,6 +80,8 @@ export function ContactForm({ messages }: { messages: Messages['contactPage'] })
       setErrors(Object.fromEntries(Object.entries(details).map(([field, list]) => [field, list[0] ?? ''])))
       setNotice(response.status === 429 ? messages.errorThrottle : details.captcha_answer || details.captcha_id ? messages.errorCaptcha : response.status === 422 ? messages.errorFields : messages.errorGeneric)
       setStatus('error')
+      // Keyboard and screen-reader users land on the first field that needs fixing (the alert above announces why).
+      requestAnimationFrame(() => document.querySelector<HTMLElement>('form [aria-invalid="true"]')?.focus())
     } catch {
       setNotice(messages.errorGeneric)
       setStatus('error')

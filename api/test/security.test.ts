@@ -190,7 +190,7 @@ describe('errors and logs', () => {
     };
     walk('src');
     const calls = files
-      .filter((f) => !/[\\/](seed[\\/]run|openapi[\\/]generate)\.ts$/.test(f))
+      .filter((f) => !/[\\/](seed[\\/](?:run|indexes)|openapi[\\/]generate)\.ts$/.test(f))
       .flatMap((f) => readFileSync(f, 'utf8').split('\n').filter((l) => /console\.\w+\(/.test(l)).map((l) => `${f.split(/[\\/]/).slice(-1)[0]}: ${l.trim()}`));
     expect(calls).toHaveLength(2);
     expect(calls.join('\n')).not.toMatch(/token|secret|password|pepper|uri|authorization|cookie/i);
@@ -201,7 +201,7 @@ describe('cookies and CORS', () => {
   it('sets the refresh cookie host-only, HttpOnly, Secure, SameSite=Lax', async () => {
     const { user } = await actingAs(m, 'editor');
     const res = await api.post('/api/v1/auth/login').set(ip(70)).send({ email: user.email, password: PASSWORD }).expect(200);
-    const cookie = (res.headers['set-cookie'] as string[]).find((c) => c.startsWith('rt='))!;
+    const cookie = (res.headers['set-cookie'] as unknown as string[]).find((c) => c.startsWith('rt='))!;
     expect(cookie).toMatch(/; HttpOnly/);
     expect(cookie).toMatch(/; Secure/);
     expect(cookie).toMatch(/; SameSite=Lax/);

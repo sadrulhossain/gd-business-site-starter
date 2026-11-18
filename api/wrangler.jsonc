@@ -8,7 +8,7 @@
   "vars": {
     "APP_ENV": "production",
     "APP_DEBUG": "false",
-    "MONGODB_DB": "gdsite",
+    "MONGODB_DB": "gd-business-site-starter",
     "CORS_ALLOWED_ORIGINS": "",
     "LOCALE_DEFAULT": "en",
     "LOCALE_FALLBACK": "en",

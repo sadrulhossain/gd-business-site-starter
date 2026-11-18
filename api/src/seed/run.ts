@@ -10,7 +10,7 @@ if (!uri) {
   process.exit(1);
 }
 
-const conn = openConnection({ MONGODB_URI: uri, MONGODB_DB: process.env.MONGODB_DB || 'gdsite' });
+const conn = openConnection({ MONGODB_URI: uri, MONGODB_DB: process.env.MONGODB_DB || 'gd-business-site-starter' });
 try {
   const r = await seedAccess(getModels(conn), {
     superadmin: { name: process.env.SUPERADMIN_NAME, email: process.env.SUPERADMIN_EMAIL, password: process.env.SUPERADMIN_PASSWORD },

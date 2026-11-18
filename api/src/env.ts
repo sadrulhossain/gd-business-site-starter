@@ -1,5 +1,7 @@
 /** Worker bindings: plain vars and secrets, all strings (docs/ENV.md). */
 export interface Env {
+  /** Static assets binding (wrangler.jsonc at the repository root); absent in development and tests. */
+  ASSETS?: Fetcher;
   MONGODB_URI: string;
   MONGODB_DB: string;
   APP_ENV?: string;

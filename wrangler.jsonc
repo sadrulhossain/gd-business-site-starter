@@ -1,0 +1,34 @@
+{
+  "name": "gd-business-site-starter",
+  "main": "api/src/worker.ts",
+  "compatibility_date": "2026-11-17",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "observability": { "enabled": true },
+  "assets": {
+    "directory": "./dist/site",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    "run_worker_first": ["/api/*", "/admin/*", "!/admin/assets/*"]
+  },
+  "triggers": { "crons": ["*/15 * * * *", "17 3 * * *"] },
+  "vars": {
+    "APP_ENV": "production",
+    "APP_DEBUG": "false",
+    "MONGODB_DB": "gd-business-site-starter",
+    "SITE_ORIGIN": "https://gd-business-site-starter.hossainsadrul.workers.dev",
+    "CORS_ALLOWED_ORIGINS": "",
+    "LOCALE_DEFAULT": "en",
+    "LOCALE_FALLBACK": "en",
+    "LOCALE_SUPPORTED": "en",
+    "UPLOADS_MAX_MB": "5",
+    "MEDIA_MAX_FILES": "6000",
+    "MEDIA_BASE_PATH": "/media",
+    "MEDIA_GIT_BRANCH": "main",
+    "MAIL_PROVIDER": "none",
+    "GITHUB_REPO": "sadrulhossain/gd-business-site-starter",
+    "GITHUB_WORKFLOW_FILE": "deploy.yml",
+    "GITHUB_REF": "main",
+    "PUBLISH_DEBOUNCE_MINUTES": "5"
+  }
+}

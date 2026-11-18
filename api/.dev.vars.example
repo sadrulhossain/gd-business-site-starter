@@ -1,0 +1,11 @@
+# Copy to api/.dev.vars to run `wrangler dev` outside Docker (the Docker dev stack passes these itself).
+# .dev.vars is git-ignored. Production secrets are never kept in a file: `wrangler secret put <NAME>` (docs/DEPLOY.md).
+MONGODB_URI=mongodb://localhost:28017
+JWT_ACCESS_SECRET=dev-only-access-secret-0123456789abcdef0123
+REFRESH_TOKEN_PEPPER=dev-only-refresh-pepper-0123456789abcdef01
+COOKIE_NAME=rt
+SITE_ORIGIN=http://localhost:28302
+# Optional: needed only to test uploads and the publish pipeline against a real repository.
+# GITHUB_REPO_TOKEN=
+# MAIL_API_KEY=
+# NOTIFY_WEBHOOK_URL=

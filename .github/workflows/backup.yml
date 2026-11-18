@@ -1,0 +1,54 @@
+name: backup
+
+# GitHub runs scheduled workflows only from the default branch, which is main.
+on:
+  schedule:
+    - cron: '23 3 * * 0'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Dump
+        env:
+          BACKUP_MONGODB_URI: ${{ secrets.BACKUP_MONGODB_URI }}
+        # The mongo image (same pin as MONGO_VERSION in .env.example) ships mongodump. Read-only URI.
+        run: |
+          set -eu
+          [ -n "$BACKUP_MONGODB_URI" ] || { echo "secret BACKUP_MONGODB_URI is not set" >&2; exit 1; }
+          db=$(node -e "console.log(JSON.parse(require('fs').readFileSync('wrangler.jsonc','utf8')).vars.MONGODB_DB)")
+          mkdir -p "$RUNNER_TEMP/backup"
+          docker run --rm -e BACKUP_MONGODB_URI -v "$RUNNER_TEMP/backup:/out" mongo:8.0.38 \
+            sh -c 'mongodump --uri "$BACKUP_MONGODB_URI" --db "$1" --gzip --archive=/out/dump.archive' sh "$db"
+          test -s "$RUNNER_TEMP/backup/dump.archive"
+
+      - name: Encrypt
+        env:
+          BACKUP_PASSPHRASE: ${{ secrets.BACKUP_PASSPHRASE }}
+        # Artifacts of a public repository are readable by anyone: only the encrypted file is ever uploaded.
+        run: |
+          set -eu
+          [ -n "$BACKUP_PASSPHRASE" ] || { echo "secret BACKUP_PASSPHRASE is not set" >&2; exit 1; }
+          cd "$RUNNER_TEMP/backup"
+          openssl enc -aes-256-cbc -pbkdf2 -salt -in dump.archive -out dump.archive.enc -pass env:BACKUP_PASSPHRASE
+          rm -f dump.archive
+          test -s dump.archive.enc
+          echo "BACKUP_DATE=$(date -u +%F)" >> "$GITHUB_ENV"
+
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: backup-${{ env.BACKUP_DATE }}
+          path: ${{ runner.temp }}/backup/dump.archive.enc
+          if-no-files-found: error
+          # 90 days is the longest GitHub Free allows for a public repository; check the repository's own limit in
+          # Settings, Actions, General (docs/DEPLOY.md).
+          retention-days: 90

@@ -15,4 +15,4 @@ Tick a phase only when it is finished and committed.
 | [x] | M7 | portal static export | |
 | [x] | M8 | Cloudflare delivery | workflows, wrangler.jsonc, assembly, DEPLOY.md; nothing deployed; spikes a, e, g, h verified on the real deployment (DEPLOY.md Part D) |
 | [x] | M9 | hardening and QA | security review with 5 fixes and a test each, indexes in code, limits measured locally, axe on all page types, docs/LIMITS.md and SECURITY.md; deployed checks and Lighthouse listed as residual |
-| [ ] | M10 | release | |
+| [x] | M10 | release | legacy-api removed, README, CUSTOMIZE, UPGRADE and CHANGELOG (v2.0.0) rewritten, final checks green, tag v2.0.0 (local) |

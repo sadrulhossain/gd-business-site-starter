@@ -48,7 +48,7 @@ Versions of images and packages are pinned in `docs/VERSIONS.md`; the `*_VERSION
 | INDEXES_MONGODB_URI | GitHub secret (optional) | none | the readWrite string; lets `deploy.yml` create new indexes before the new code goes live. Without it the daily cron does it |
 | BACKUP_PASSPHRASE | GitHub secret | none | encrypts every backup; keep a copy elsewhere |
 | COMPOSE_PROJECT_NAME / COMPOSE_PROFILES | Dev (compose) | gdsite / dev | container names are `${COMPOSE_PROJECT_NAME}-<tech>` |
-| NODE_VERSION, NODE_DEBIAN_SUFFIX, MONGO_VERSION, MAILPIT_VERSION, NEXT_VERSION, VITE_VERSION, REACT_VERSION | Dev (compose); CI | see VERSIONS.md | `MONGO_VERSION` is also the image of the CI Mongo service and the backup's `mongodump` |
-| MONGO_PORT, MAILPIT_SMTP_PORT, MAILPIT_UI_PORT, PORTAL_DEV_PORT, ADMIN_DEV_PORT, API_DEV_PORT | Dev (compose) | 28017, 28025, 28026, 28300, 28301, 28302 | host ports, bound to 127.0.0.1; `make ports` checks them |
+| NODE_VERSION, NODE_DEBIAN_SUFFIX, MONGO_VERSION, NEXT_VERSION, VITE_VERSION, REACT_VERSION | Dev (compose); CI | see VERSIONS.md | `MONGO_VERSION` is also the image of the CI Mongo service and the backup's `mongodump` |
+| MONGO_PORT, PORTAL_DEV_PORT, ADMIN_DEV_PORT, API_DEV_PORT | Dev (compose) | 28017, 28300, 28301, 28302 | host ports, bound to 127.0.0.1; `make ports` checks them |
 
 Cron triggers are set in `wrangler.jsonc` (`triggers.crons`): every 15 minutes (publish tick) and `17 3 * * *` (daily Atlas ping and cleanup of expired captchas and refresh tokens). No storage bindings exist; the only binding is `ASSETS`.

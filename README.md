@@ -36,7 +36,7 @@ You need Docker with Compose, `make` and a browser. Nothing else is installed on
 
 ```sh
 git clone <your fork> site && cd site
-make up        # creates .env from .env.example, checks ports, starts MongoDB, the API (wrangler dev), admin and portal (a Mailpit container also starts; the API does not send SMTP mail)
+make up        # creates .env from .env.example, checks ports, starts MongoDB, the API (wrangler dev), admin and portal
 ```
 
 Before the first seed, open `.env` and set `SUPERADMIN_EMAIL` and `SUPERADMIN_PASSWORD` (12 characters or more), and replace the `dev-only-` secrets if you

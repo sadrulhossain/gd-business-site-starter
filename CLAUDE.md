@@ -2,7 +2,6 @@
 
 ## Repo map
 - `api/` — Express 5 API for one Cloudflare Worker (MongoDB Atlas, wrangler); stub until Phase M1
-- `legacy-api/` — read-only Laravel reference (tag laravel-v1.0.0); nothing imports from it; deleted in M10
 - `web/admin` — Vite React admin app (served at /admin/)
 - `web/portal` — Next.js static-export public portal
 - `packages/` — shared packages

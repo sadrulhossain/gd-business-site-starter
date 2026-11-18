@@ -23,12 +23,12 @@ export async function signAccessToken(env: Env, userId: number): Promise<{ token
   return { token, expiresIn };
 }
 
-/** Returns the user id, or null for any invalid, expired or malformed token. */
-export async function verifyAccessToken(env: Env, token: string): Promise<number | null> {
+/** Returns the user id and issue time (seconds), or null for any invalid, expired or malformed token. */
+export async function verifyAccessToken(env: Env, token: string): Promise<{ id: number; iat: number } | null> {
   try {
     const { payload } = await jwtVerify(token, accessKey(env), { algorithms: ['HS256'] });
     const id = Number(payload.sub);
-    return Number.isInteger(id) && id > 0 ? id : null;
+    return Number.isInteger(id) && id > 0 && typeof payload.iat === 'number' ? { id, iat: payload.iat } : null;
   } catch {
     return null;
   }

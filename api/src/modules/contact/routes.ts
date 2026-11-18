@@ -48,7 +48,7 @@ export function contactRoutes(api: Api, env: Env): void {
     }
 
     const parsed = contactSchema.safeParse(rawBody);
-    const details: Record<string, string[]> = {};
+    const details: Record<string, string[]> = Object.create(null); // see http/validate.ts
     if (!parsed.success) {
       for (const issue of parsed.error.issues) {
         if (issue.code === 'unrecognized_keys') for (const k of issue.keys) (details[k] ??= []).push('This field is not allowed.');

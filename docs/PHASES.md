@@ -14,5 +14,5 @@ Tick a phase only when it is finished and committed.
 | [x] | M6 | admin | |
 | [x] | M7 | portal static export | |
 | [x] | M8 | Cloudflare delivery | workflows, wrangler.jsonc, assembly, DEPLOY.md; nothing deployed; spikes a, e, g, h verified on the real deployment (DEPLOY.md Part D) |
-| [ ] | M9 | hardening and QA | |
+| [x] | M9 | hardening and QA | security review with 5 fixes and a test each, indexes in code, limits measured locally, axe on all page types, docs/LIMITS.md and SECURITY.md; deployed checks and Lighthouse listed as residual |
 | [ ] | M10 | release | |

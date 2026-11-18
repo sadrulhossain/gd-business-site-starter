@@ -195,15 +195,9 @@ importers:
 
   api:
     dependencies:
-      bcryptjs:
-        specifier: 3.0.3
-        version: 3.0.3
       express:
         specifier: 5.3.0
         version: 5.3.0(supports-color@10.2.2)
-      hash-wasm:
-        specifier: 4.13.0
-        version: 4.13.0
       jose:
         specifier: 6.2.17
         version: 6.2.17
@@ -226,6 +220,12 @@ importers:
       '@types/supertest':
         specifier: 7.2.1
         version: 7.2.1
+      bcryptjs:
+        specifier: 3.0.3
+        version: 3.0.3
+      hash-wasm:
+        specifier: 4.13.0
+        version: 4.13.0
       sanitize-html:
         specifier: 2.18.2
         version: 2.18.2
@@ -299,6 +299,9 @@ importers:
         specifier: 5.1.0
         version: 5.1.0(@types/react@19.3.0)(react@19.3.1)(use-sync-external-store@1.7.0(react@19.3.1))
     devDependencies:
+      '@axe-core/playwright':
+        specifier: 4.14.0
+        version: 4.14.0(playwright-core@1.65.0)
       '@playwright/test':
         specifier: 1.65.0
         version: 1.65.0

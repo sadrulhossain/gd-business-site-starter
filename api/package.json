@@ -10,12 +10,11 @@
     "spike:deploy": "wrangler deploy -c spikes/wrangler.jsonc",
     "deploy:dry": "wrangler deploy --dry-run --outdir .wrangler/dry",
     "seed": "node src/seed/run.ts",
+    "indexes": "node src/seed/indexes.ts",
     "openapi": "node src/openapi/generate.ts"
   },
   "dependencies": {
-    "bcryptjs": "3.0.3",
     "express": "5.3.0",
-    "hash-wasm": "4.13.0",
     "mongoose": "9.12.2",
     "jose": "6.2.17"
   },
@@ -25,6 +24,8 @@
     "@types/express": "5.0.6",
     "@types/node": "catalog:",
     "@types/supertest": "7.2.1",
+    "bcryptjs": "3.0.3",
+    "hash-wasm": "4.13.0",
     "sanitize-html": "2.18.2",
     "supertest": "7.3.2",
     "typescript": "catalog:",

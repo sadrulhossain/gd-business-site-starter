@@ -110,7 +110,7 @@ const refreshTokenSchema = new Schema<RefreshTokenDoc>(
     family_id: { type: String, required: true, index: true },
     token_hash: { type: String, required: true, unique: true },
     expires_at: { type: Date, required: true, index: { expires: 0 } }, // TTL
-    used_at: { type: Date, default: null },
+    used_at: { type: Date, default: null, index: true }, // the daily cleanup deletes by used_at
     revoked_at: { type: Date, default: null },
   },
   { versionKey: false, collection: 'refresh_tokens' },
@@ -198,8 +198,9 @@ const postSchema = new Schema<PostDoc>(
   },
   { ...ts, collection: 'posts' },
 );
-postSchema.index({ is_published: 1, published_at: 1 });
-postSchema.index({ category_id: 1 });
+// Public list: equality on is_published, range on published_at, sort published_at desc then _id desc (no in-memory sort).
+postSchema.index({ is_published: 1, published_at: -1, _id: -1 });
+postSchema.index({ category_id: 1, is_published: 1, published_at: -1, _id: -1 });
 postSchema.plugin(markDirtyPlugin, { tags: ['posts'] });
 
 const contactMessageSchema = new Schema<ContactMessageDoc>(

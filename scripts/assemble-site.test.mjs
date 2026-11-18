@@ -109,9 +109,9 @@ test('redirects: conflicting sources fail, static rules come first', () => {
 })
 
 test('wrangler-vars reads plain JSON and rejects a bad origin', () => {
-  const good = { vars: { SITE_ORIGIN: 'https://x.workers.dev', LOCALE_DEFAULT: 'en', LOCALE_FALLBACK: 'en', LOCALE_SUPPORTED: 'en,bn' } }
+  const good = { vars: { SITE_ORIGIN: 'https://x.workers.dev', MONGODB_DB: 'db', LOCALE_DEFAULT: 'en', LOCALE_FALLBACK: 'en', LOCALE_SUPPORTED: 'en,bn' } }
   assert.equal(readVars(JSON.stringify(good)).LOCALE_SUPPORTED, 'en,bn')
   assert.throws(() => readVars(JSON.stringify({ vars: { ...good.vars, SITE_ORIGIN: 'https://x.dev/' } })), /https origin/)
   assert.throws(() => readVars('{ // comment\n}'), /plain JSON/)
-  assert.deepEqual(Object.keys(readVars(real('wrangler.jsonc'))), ['SITE_ORIGIN', 'LOCALE_DEFAULT', 'LOCALE_FALLBACK', 'LOCALE_SUPPORTED'])
+  assert.deepEqual(Object.keys(readVars(real('wrangler.jsonc'))), ['SITE_ORIGIN', 'MONGODB_DB', 'LOCALE_DEFAULT', 'LOCALE_FALLBACK', 'LOCALE_SUPPORTED'])
 })

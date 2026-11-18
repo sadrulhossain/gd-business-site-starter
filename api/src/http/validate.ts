@@ -11,7 +11,8 @@ export function validationError(details: Record<string, string[]>): HttpError {
 export function parse<T extends z.ZodType>(schema: T, data: unknown): z.output<T> {
   const r = schema.safeParse(data ?? {});
   if (r.success) return r.data;
-  const details: Record<string, string[]> = {};
+  // No prototype: a client-chosen key such as __proto__ must be an ordinary key, not Object.prototype.
+  const details: Record<string, string[]> = Object.create(null);
   const add = (key: string, msg: string) => (details[key] ??= []).push(msg);
   for (const issue of r.error.issues) {
     if (issue.code === 'unrecognized_keys') {

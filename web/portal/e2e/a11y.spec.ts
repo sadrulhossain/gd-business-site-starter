@@ -2,7 +2,8 @@ import AxeBuilder from '@axe-core/playwright'
 import { expect, test } from '@playwright/test'
 
 // WCAG 2.1 A/AA scan of every public page in both languages, against the static export (no screenshots).
-const paths = ['/', '/about/', '/services/', '/pricing/', '/blog/', '/contact/', '/privacy/', '/terms/', '/missing-page/']
+// One URL per page type: home, content pages, list and detail, blog list/pagination/category/post, legal, 404.
+const paths = ['/', '/about/', '/services/', '/services/2/', '/pricing/', '/faq/', '/gallery/', '/showcase/', '/blog/', '/blog/page/2/', '/blog/category/news/', '/blog/post-5/', '/contact/', '/privacy/', '/terms/', '/missing-page/']
 
 for (const prefix of ['', '/bn']) {
   for (const path of paths) {

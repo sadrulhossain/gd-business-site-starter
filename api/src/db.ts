@@ -10,7 +10,7 @@ mongoose.set('strictQuery', true);
  * database opens its own small connection and closes it when the response ends.
  */
 export function openConnection(env: Env): mongoose.Connection {
-  return mongoose.createConnection(env.MONGODB_URI, {
+  const conn = mongoose.createConnection(env.MONGODB_URI, {
     dbName: env.MONGODB_DB,
     maxPoolSize: 2,
     minPoolSize: 0,
@@ -18,6 +18,9 @@ export function openConnection(env: Env): mongoose.Connection {
     connectTimeoutMS: 3000,
     autoIndex: false,
   });
+  // A failed connection is reported by the query that needed it; this keeps it from also surfacing as an unhandled rejection.
+  conn.asPromise().catch(() => undefined);
+  return conn;
 }
 
 export async function ping(conn: mongoose.Connection): Promise<void> {

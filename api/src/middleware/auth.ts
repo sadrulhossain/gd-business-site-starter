@@ -18,18 +18,21 @@ export const authenticate = (env: Env): RequestHandler => async (req, res, next)
   try {
     const header = req.get('authorization') ?? '';
     const m = /^Bearer (\S+)$/i.exec(header);
-    const id = m ? await verifyAccessToken(env, m[1]!) : null;
-    if (!id) throw unauthenticated();
+    const claims = m ? await verifyAccessToken(env, m[1]!) : null;
+    if (!claims) throw unauthenticated();
 
     const { User } = res.locals.models();
     const [row] = await User.aggregate<{
-      _id: number; name: string; email: string; role_ids: number[]; is_active: boolean;
+      _id: number; name: string; email: string; role_ids: number[]; is_active: boolean; password_changed_at?: Date | null;
       roles: { name: string; permissions: string[] }[];
     }>([
-      { $match: { _id: id } },
+      { $match: { _id: claims.id } },
       { $lookup: { from: 'roles', localField: 'role_ids', foreignField: '_id', as: 'roles' } },
     ]);
     if (!row || !row.is_active) throw unauthenticated();
+    // A password change signs the user out everywhere: access tokens issued in an earlier second stop working at once,
+    // not only after their 15 minutes (refresh tokens are revoked at the same time).
+    if (row.password_changed_at && claims.iat < Math.floor(row.password_changed_at.getTime() / 1000)) throw unauthenticated();
 
     const roleNames = row.roles.map((r) => r.name).sort();
     const isSuperadmin = roleNames.includes(SUPERADMIN_ROLE);

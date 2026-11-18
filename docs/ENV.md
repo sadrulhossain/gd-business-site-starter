@@ -45,6 +45,7 @@ Versions of images and packages are pinned in `docs/VERSIONS.md`; the `*_VERSION
 | SUPERADMIN_NAME / SUPERADMIN_EMAIL / SUPERADMIN_PASSWORD | Seed | `Super Admin` / empty / empty | the superadmin is created only when email and password are set; an existing password is never reset |
 | CLOUDFLARE_API_TOKEN / CLOUDFLARE_ACCOUNT_ID | GitHub secret | none | deploy only; token scoped to Workers Scripts on this one account |
 | BACKUP_MONGODB_URI | GitHub secret | none | the **read-only** Atlas string, for the weekly backup |
+| INDEXES_MONGODB_URI | GitHub secret (optional) | none | the readWrite string; lets `deploy.yml` create new indexes before the new code goes live. Without it the daily cron does it |
 | BACKUP_PASSPHRASE | GitHub secret | none | encrypts every backup; keep a copy elsewhere |
 | COMPOSE_PROJECT_NAME / COMPOSE_PROFILES | Dev (compose) | gdsite / dev | container names are `${COMPOSE_PROJECT_NAME}-<tech>` |
 | NODE_VERSION, NODE_DEBIAN_SUFFIX, MONGO_VERSION, MAILPIT_VERSION, NEXT_VERSION, VITE_VERSION, REACT_VERSION | Dev (compose); CI | see VERSIONS.md | `MONGO_VERSION` is also the image of the CI Mongo service and the backup's `mongodump` |

@@ -13,6 +13,6 @@ Tick a phase only when it is finished and committed.
 | [x] | M5 | blog, contact, publish pipeline | |
 | [x] | M6 | admin | |
 | [x] | M7 | portal static export | |
-| [ ] | M8 | Cloudflare delivery | |
+| [x] | M8 | Cloudflare delivery | workflows, wrangler.jsonc, assembly, DEPLOY.md; nothing deployed; spikes a, e, g, h verified on the real deployment (DEPLOY.md Part D) |
 | [ ] | M9 | hardening and QA | |
 | [ ] | M10 | release | |

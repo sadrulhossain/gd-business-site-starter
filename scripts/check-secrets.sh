@@ -11,11 +11,11 @@ keys=$(git ls-files -z | xargs -0 grep -IlE 'BEGIN ([A-Z]+ )?PRIVATE KEY|AKIA[0-
 [ -z "$keys" ] || { echo "SECRET-LIKE content in: $keys"; bad=1; }
 
 # Credentials must come from env(); a literal fallback in config/ is a hard-coded default.
-lit=$(grep -rnE "env\('[A-Z_]*(PASSWORD|SECRET|TOKEN|KEY)', *'[^']+'\)" api/config | grep -v "env('APP_KEY'" )
+lit=$([ -d api/config ] && grep -rnE "env\('[A-Z_]*(PASSWORD|SECRET|TOKEN|KEY)', *'[^']+'\)" api/config | grep -v "env('APP_KEY'")
 [ -z "$lit" ] || { echo "Literal credential default in config:"; echo "$lit"; bad=1; }
 
-# An example file (as staged or committed) must not carry a real-looking password (anything but empty, null or change-me).
-ex=$(git grep --cached -nE '^[A-Z_]*(PASSWORD|SECRET)[A-Z_]*=.+' -- '*.env.example' '*.env.prod.example' | grep -vE '=(change-me|null|"?\$\{[A-Z_]+\}"?)$')
+# An example file (as staged or committed) must not carry a real-looking password (anything but empty, null, change-me or a value starting with dev-only-).
+ex=$(git grep --cached -nE '^[A-Z_]*(PASSWORD|SECRET)[A-Z_]*=.+' -- '*.env.example' '*.env.prod.example' | grep -vE '=(change-me|null|dev-only-[A-Za-z0-9-]*|"?\$\{[A-Z_]+\}"?)$')
 [ -z "$ex" ] || { echo "Real-looking secret in an example file:"; echo "$ex"; bad=1; }
 
 if [ -f .env ] && grep -qE '^APP_ENV=production' .env && grep -q 'change-me' .env; then

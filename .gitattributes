@@ -1,1 +1,3 @@
 * text=auto eol=lf
+# Images are written by the API through the GitHub API; never convert or diff them.
+media/** binary

@@ -1,0 +1,98 @@
+name: deploy
+
+on:
+  push:
+    branches: [main]
+    # A media commit made by the API must not start a build by itself; the API dispatches the build after its quiet period.
+    paths-ignore:
+      - 'media/**'
+      - 'docs/**'
+      - '*.md'
+      - '**/*.md'
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: Branch, tag or commit to deploy
+        required: false
+        default: main
+        type: string
+      bootstrap:
+        description: First deploy only. Skips the portal build and deploys the admin and a placeholder page, so the API exists before the first portal build
+        required: false
+        default: false
+        type: boolean
+
+# A second run waits for the first; it never cancels a deploy that is half way.
+concurrency:
+  group: site-deploy
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      BOOTSTRAP: ${{ inputs.bootstrap && 'true' || 'false' }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ inputs.ref || github.ref }}
+          persist-credentials: false
+      - run: corepack enable
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24.22.3
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      # SITE_ORIGIN and LOCALE_* come from wrangler.jsonc, the same values the Worker runs with.
+      - name: Read site settings
+        run: node scripts/wrangler-vars.mjs >> "$GITHUB_ENV"
+
+      - name: Typecheck and unit tests
+        run: |
+          pnpm -r --if-present typecheck
+          pnpm --filter admin test
+          [ "$BOOTSTRAP" = "true" ] || pnpm --filter portal test
+          node --test scripts/
+
+      - name: Build admin
+        env:
+          VITE_API_URL: ''
+        run: pnpm --filter admin build
+
+      - name: Build portal
+        if: ${{ env.BOOTSTRAP != 'true' }}
+        env:
+          NEXT_PUBLIC_API_URL: ''
+        # BUILD_API_URL includes /api. If the API cannot be read, the build fails here and the previous deployment stays live.
+        run: |
+          export BUILD_API_URL="$SITE_ORIGIN/api"
+          export SITE_URL="$SITE_ORIGIN"
+          pnpm --filter portal build
+
+      - name: Assemble site
+        run: |
+          if [ "$BOOTSTRAP" = "true" ]; then node scripts/assemble-site.mjs --bootstrap; else node scripts/assemble-site.mjs; fi
+          node scripts/check-assets.mjs
+
+      # The workspace's pinned wrangler, not npx, and no third-party deploy action.
+      - name: Deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: pnpm --filter @gd/api exec wrangler deploy -c ../wrangler.jsonc
+
+      - name: Health check
+        # On the bootstrap run the Worker secrets may not be set yet, so a failing health check is only a warning there.
+        continue-on-error: ${{ env.BOOTSTRAP == 'true' }}
+        run: |
+          for _ in 1 2 3 4 5 6; do
+            if curl -fsS --max-time 20 "$SITE_ORIGIN/api/v1/health"; then echo; exit 0; fi
+            sleep 10
+          done
+          echo "health check failed: $SITE_ORIGIN/api/v1/health" >&2
+          exit 1

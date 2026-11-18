@@ -8,7 +8,6 @@ The PHP, Laravel, nginx, MariaDB, Composer and Composer package rows were remove
 |-----------|-----|-------|--------|------|------------|
 | Node.js 24 LTS "Krypton" | 24.22.3 | 24.22.3 | https://nodejs.org/en/blog/vulnerability/november-2026-security-releases | 2026-11-11 | `node:24.22.3-alpine` exists (pulled 2026-11-12) |
 | Next.js | 16.4.6 | 16.4.6 | https://github.com/vercel/next.js/releases/tag/v16.4.6 | 2026-11-12 | n/a |
-| Mailpit | v1.33.1 | v1.33.1 | https://github.com/axllent/mailpit/releases/tag/v1.33.1 | 2026-11-12 | `axllent/mailpit:v1.33.1` exists |
 | Vite | 8.3.8 | 8.3.8 | https://www.npmjs.com/package/vite/v/8.3.8 | 2026-11-12 | n/a (npm) |
 | React / React DOM | 19.3.1 | 19.3.1 | https://www.npmjs.com/package/react/v/19.3.1 | 2026-11-12 | n/a (npm) |
 | pnpm | 12.18.0 | 12.18.0 | https://www.npmjs.com/package/pnpm/v/12.18.0 | 2026-11-12 | n/a (corepack, `packageManager` in root package.json) |
@@ -33,7 +32,7 @@ The PHP, Laravel, nginx, MariaDB, Composer and Composer package rows were remove
 - Node: the 11 Nov 2026 official security release patches 24.x at **v24.22.3** (fixes 16 CVEs, highest severity High; 26.x -> v26.13.1, 22.x -> v22.23.5). v24.22.3 is on nodejs.org/dist (dated 2026-11-10), but the official Docker image has only 24.22.2 so far. Until `node:24.22.3-*` appears, do not build images from `node:24.22.2` as the pin; recheck the tag.
 - Next.js: bumped from 16.4.5 to 16.4.6 on 2026-11-12 (user decision).
 - Laravel: 13.29.0 is the floor; Composer constraint `^13.29` resolves to latest 13.x.
-- Phase 1 additions (Mailpit, Vite, React/React DOM) are new pins added to support the dev profile and hello apps; floors equal pins and advisories were not checked. Pending approval.
+- Phase 1 additions (Vite, React/React DOM) are new pins added to support the dev profile and hello apps; floors equal pins and advisories were not checked. Pending approval.
 - Node 24.22.3 image: `.env` keeps the correct pin. Phase 1 was verified locally with `NODE_VERSION=24.22.2` (not published yet, see above). Remove the override once `node:24.22.3-alpine` exists.
 - Phase 2: laravel/framework resolved to v13.42.0 (floor >=13.29.0); `composer audit` clean on 2026-11-12. Pest is pinned to 4.x as requested (5.3.5 exists). No Redis client is installed (Redis was dropped in phase 8, see DECISIONS.md 010).
 - Phase 2: the Laravel 13 skeleton's own default dev dependencies (tinker, pail, pao, collision, mockery, faker, phpunit via Pest) are kept unpinned; everything else was added deliberately above.

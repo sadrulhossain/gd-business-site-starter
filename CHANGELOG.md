@@ -3,6 +3,11 @@
 Format: [Keep a Changelog](https://keepachangelog.com), versions follow [SemVer](https://semver.org).
 Each entry lists new environment variables and seed steps, because upgrades need them (see docs/UPGRADE.md).
 
+## [Unreleased]
+
+### Removed
+- The Mailpit dev container and its variables (`MAILPIT_VERSION`, `MAILPIT_SMTP_PORT`, `MAILPIT_UI_PORT`): the API sends no SMTP mail, so nothing used it. Delete those three lines from your `.env`.
+
 ## [2.0.0] - 2026-11-18
 
 A rewrite onto free tiers: the Laravel, MariaDB and VPS stack of 1.0.0 is replaced. Version 1 stays available as the tag `laravel-v1.0.0`.

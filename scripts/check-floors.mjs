@@ -1,5 +1,5 @@
 // Fails when a version is below its floor in docs/VERSIONS.md, or when a dependency breaks the pinning rules.
-//   1. Image pins in .env (NODE_VERSION, MONGO_VERSION, MAILPIT_VERSION) are not below their floor.
+//   1. Image pins in .env (NODE_VERSION, MONGO_VERSION) are not below their floor.
 //   2. Every package the lockfile resolves that has a VERSIONS.md row is at or above the floor (the lowest installed copy counts).
 //   3. Every direct dependency (package.json of the root, api, web/*, packages/*) has a VERSIONS.md row (CLAUDE.md rule 2),
 //      is pinned exactly (or comes from the catalog / workspace) and equals the pin in the table.
@@ -42,7 +42,7 @@ const errors = []
 
 // 1. images
 const env = existsSync('.env') ? readFileSync('.env', 'utf8') : readFileSync('.env.example', 'utf8')
-for (const [key, re] of Object.entries({ NODE_VERSION: /^Node/, MONGO_VERSION: /^MongoDB server/, MAILPIT_VERSION: /^Mailpit/ })) {
+for (const [key, re] of Object.entries({ NODE_VERSION: /^Node/, MONGO_VERSION: /^MongoDB server/ })) {
   const v = env.match(new RegExp(`^${key}=(.+)$`, 'm'))?.[1]
   const row = rows.find((r) => re.test(r.component))
   if (v && row) checks.push([key, semver(v), row.floor])

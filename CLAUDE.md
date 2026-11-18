@@ -6,7 +6,7 @@
 - `web/portal` — Next.js static-export public portal
 - `packages/` — shared packages
 - `media/` — uploaded images, committed through the GitHub API
-- `docker/` — local dev entrypoint (docker-compose.yml at the root: MongoDB, Mailpit, and one node container running API, admin and portal)
+- `docker/` — local dev entrypoint (docker-compose.yml at the root: MongoDB and one node container running API, admin and portal)
 - `.github/workflows/` — build and deploy with wrangler (GitHub Actions, no Cloudflare build minutes)
 - `docs/` — PHASES.md, VERSIONS.md, ENV.md, DECISIONS.md, PATTERNS.md, DEPLOY.md, LIMITS.md, SECURITY.md, CUSTOMIZE.md, UPGRADE.md
 

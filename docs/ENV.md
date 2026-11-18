@@ -13,15 +13,15 @@ Versions of images and packages are pinned in `docs/VERSIONS.md`; the `*_VERSION
 
 | Variable | Where | Default | Notes |
 |----------|-------|---------|-------|
-| MONGODB_URI | Worker secret; dev; seed; CI | dev `mongodb://mongo:27017` | Atlas string of the **readWrite** user, with `/gdsite` and `serverSelectionTimeoutMS=5000` |
-| MONGODB_DB | Worker var; dev; seed | gdsite | tests use `<MONGODB_DB>_testing` |
+| MONGODB_URI | Worker secret; dev; seed; CI | dev `mongodb://mongo:27017` | Atlas string of the **readWrite** user, with `/gd-business-site-starter` and `serverSelectionTimeoutMS=5000` |
+| MONGODB_DB | Worker var; dev; seed | gd-business-site-starter | tests use `<MONGODB_DB>_testing` |
 | JWT_ACCESS_SECRET | Worker secret; dev | none (required) | 32 or more random characters; signs the 15-minute access token |
 | REFRESH_TOKEN_PEPPER | Worker secret; dev | none (required) | 32 or more random characters; keys the HMAC of refresh tokens |
 | GITHUB_REPO_TOKEN | Worker secret; dev (optional) | empty | fine-grained, this repository only, Contents write and Actions write, with an expiry; without it uploads return 503 and publishing is off |
 | MAIL_API_KEY | Worker secret | empty | only for `MAIL_PROVIDER=http` |
 | NOTIFY_WEBHOOK_URL | Worker secret | empty | only for `MAIL_PROVIDER=webhook` |
 | APP_ENV / APP_DEBUG | Worker var; dev | production / false | `APP_DEBUG=true` shows error details; never in production |
-| SITE_ORIGIN | Worker var; dev; read by the deploy workflow | `https://gd-site.<subdomain>.workers.dev` | public origin of the single Worker, no trailing slash; the only origin besides `CORS_ALLOWED_ORIGINS` allowed to call `/auth/refresh` and `/logout`; the portal build uses it as `SITE_URL` and `BUILD_API_URL` |
+| SITE_ORIGIN | Worker var; dev; read by the deploy workflow | `https://gd-business-site-starter.<subdomain>.workers.dev` | public origin of the single Worker, no trailing slash; the only origin besides `CORS_ALLOWED_ORIGINS` allowed to call `/auth/refresh` and `/logout`; the portal build uses it as `SITE_URL` and `BUILD_API_URL` |
 | CORS_ALLOWED_ORIGINS | Worker var; dev | empty (closed) | comma separated exact origins; empty in production (same origin) |
 | COOKIE_NAME | Worker var; dev | `__Host-rt` | `rt` on plain-http development |
 | ACCESS_TOKEN_TTL_SECONDS / REFRESH_TOKEN_TTL_DAYS | Worker var | 900 / 30 | |

@@ -8,7 +8,7 @@ One Worker, one origin, no server. Everything runs on free plans: Cloudflare Wor
 | `/admin/*` | Worker: the file if it exists, else the admin app (`api/src/assets.ts`) |
 | `/api/*` | Worker: Express API on MongoDB Atlas |
 
-The Worker is named `gd-site` (root `wrangler.jsonc`). Its address is `https://gd-site.<your-subdomain>.workers.dev`. The development config `api/wrangler.jsonc` is a different Worker name and is never deployed.
+The Worker is named `gd-business-site-starter` (root `wrangler.jsonc`). Its address is `https://gd-business-site-starter.<your-subdomain>.workers.dev`. The development config `api/wrangler.jsonc` is a different Worker name and is never deployed.
 
 **What I could not verify.** Phase M1 spikes a, e, g and h (password hashing CPU, Atlas latency, GitHub media commits, single-origin routing) were skipped by decision; see `docs/SPIKES.md`. Part D tests each one on the real deployment, with a fallback if it fails. Do not announce the site before Part D passes.
 
@@ -18,17 +18,17 @@ You do these by hand because they need your logins and tokens. Nothing in this r
 
 ### Part A: accounts and tokens
 
-- [ ] **1. Cloudflare account and workers.dev subdomain.** Sign up at dash.cloudflare.com (free). Open **Workers & Pages**; the first visit asks you to choose a subdomain (`<name>.workers.dev`). Your site will be `https://gd-site.<name>.workers.dev`. If `<name>` is not `hossainsadrul`, edit `vars.SITE_ORIGIN` in `wrangler.jsonc` and commit it (the build and the cookie origin read it).
+- [ ] **1. Cloudflare account and workers.dev subdomain.** Sign up at dash.cloudflare.com (free). Open **Workers & Pages**; the first visit asks you to choose a subdomain (`<name>.workers.dev`). Your site will be `https://gd-business-site-starter.<name>.workers.dev`. If `<name>` is not `hossainsadrul`, edit `vars.SITE_ORIGIN` in `wrangler.jsonc` and commit it (the build and the cookie origin read it).
 - [ ] **2. Cloudflare account ID.** In the dashboard, open Workers & Pages; the **Account ID** is on the right side (also in the URL after `dash.cloudflare.com/`). Copy it for step 6.
-- [ ] **3. Atlas cluster.** At cloud.mongodb.com create a project and a **free M0** cluster. Region: the one nearest your visitors and Cloudflare's edge (an Atlas region in the same area as most visitors; Workers run near the visitor, so a far region adds latency to every API call). The M1 latency spike never ran, so Part D measures it. Name the database `gdsite` (it appears when first written; it must match `vars.MONGODB_DB`).
+- [ ] **3. Atlas cluster.** At cloud.mongodb.com create a project and a **free M0** cluster. Region: the one nearest your visitors and Cloudflare's edge (an Atlas region in the same area as most visitors; Workers run near the visitor, so a far region adds latency to every API call). The M1 latency spike never ran, so Part D measures it. Name the database `gd-business-site-starter` (it appears when first written; it must match `vars.MONGODB_DB`).
 - [ ] **4. Two Atlas database users** (Database Access, Add New Database User, password authentication, long random passwords, avoid `@ : /` or URL-encode them):
-  - `gdsite_app`: **readWrite on `gdsite` only** (Specific Privileges; remove "Read and write to any database").
-  - `gdsite_backup`: **read on `gdsite` only**.
+  - `gd-business-site-starter-app`: **readWrite on `gd-business-site-starter` only** (Specific Privileges; remove "Read and write to any database").
+  - `gd-business-site-starter-backup`: **read on `gd-business-site-starter` only**.
 - [ ] **5. Atlas network access.** Network Access, Add IP Address, **Allow access from anywhere (0.0.0.0/0)**. Workers have no fixed addresses, so an allow-list cannot work. The risk: anyone who has the connection string and password can connect from anywhere. Mitigations in place: TLS only (Atlas default), strong passwords, least-privilege users (the backup user cannot write; neither user can touch other databases), and you rotate the string if it leaks.
   Then build the two connection strings (Connect, Drivers, Node.js) and add the database name and a short server selection timeout:
   ```
-  mongodb+srv://gdsite_app:<password>@<cluster>.mongodb.net/gdsite?retryWrites=true&w=majority&serverSelectionTimeoutMS=5000
-  mongodb+srv://gdsite_backup:<password>@<cluster>.mongodb.net/gdsite?retryWrites=true&w=majority&serverSelectionTimeoutMS=5000
+  mongodb+srv://gd-business-site-starter-app:<password>@<cluster>.mongodb.net/gd-business-site-starter?retryWrites=true&w=majority&serverSelectionTimeoutMS=5000
+  mongodb+srv://gd-business-site-starter-backup:<password>@<cluster>.mongodb.net/gd-business-site-starter?retryWrites=true&w=majority&serverSelectionTimeoutMS=5000
   ```
   Never paste these anywhere but the prompts below. **Limits to know:** M0 stores 512 MB, has **no automatic backups** (this repo's weekly backup workflow is your only backup), and **pauses after about 60 days without activity** (the daily cron pings it; do not disable it).
 - [ ] **6. GitHub repository secrets.** Repository, Settings, Secrets and variables, Actions, New repository secret:
@@ -63,13 +63,13 @@ You do these by hand because they need your logins and tokens. Nothing in this r
   pnpm exec wrangler secret put GITHUB_REPO_TOKEN -c ../wrangler.jsonc    # step 8
   ```
   Always pass `-c ../wrangler.jsonc`; without it wrangler uses the development config and a different Worker. Optional, only if you set `MAIL_PROVIDER`: `MAIL_API_KEY` (provider `http`) or `NOTIFY_WEBHOOK_URL` (provider `webhook`; also set `MAIL_PROVIDER` in `wrangler.jsonc`). Changing a secret takes effect at once; no redeploy.
-- [ ] **13. Health.** Open `https://gd-site.<name>.workers.dev/api/v1/health`. Expected: `{"status":"ok","database":"ok"}`. If it says `degraded`, the Atlas string or the network access (step 5) is wrong.
+- [ ] **13. Health.** Open `https://gd-business-site-starter.<name>.workers.dev/api/v1/health`. Expected: `{"status":"ok","database":"ok"}`. If it says `degraded`, the Atlas string or the network access (step 5) is wrong.
 - [ ] **14. Seed the database** from your computer (not in CI). Core data (roles, menus, your superadmin) without demo content:
   ```
   MONGODB_URI='<the readWrite string>' SUPERADMIN_NAME='Your Name' SUPERADMIN_EMAIL='you@example.com' SUPERADMIN_PASSWORD='<12+ characters>' pnpm --filter @gd/api seed
   ```
   Add `-- --demo` to the command for sample content. It is safe to run again: it never overwrites edits or resets an existing password.
-- [ ] **15. Sign in** at `https://gd-site.<name>.workers.dev/admin/` with that email and password, then change the password. Fill in Settings and your content.
+- [ ] **15. Sign in** at `https://gd-business-site-starter.<name>.workers.dev/admin/` with that email and password, then change the password. Fill in Settings and your content.
 - [ ] **16. First portal build.** Actions, **deploy**, Run workflow, ref `main`, **bootstrap unticked**. The job reads the live API, builds the portal, assembles `dist/site`, deploys, and checks health. Open `/`.
 - [ ] **17. Check the first run's numbers.** The log line `check-assets: N files of 20000, media X MB` should be far below the limits.
 
@@ -81,10 +81,10 @@ You do these by hand because they need your logins and tokens. Nothing in this r
 
 Do all four before you consider the site live.
 
-- [ ] **a. Password hashing fits the free CPU limit** (ADR 016, PBKDF2 at 100,000 iterations, 10 ms CPU per request on the Free plan). In one terminal run `cd api && pnpm exec wrangler tail gd-site -c ../wrangler.jsonc --format json`; in the admin, sign out and in 10 times. **Pass:** every `/api/v1/auth/login` shows `outcome: ok`. **Fail:** `exceededCpu` or Cloudflare error 1102 on login. Fallbacks, in order: Workers Paid plan (about 5 USD a month, 30 s CPU, no code change); or an algorithm change in `api/src/auth/password.ts` (hashes are self-describing, so no migration), which needs a new decision record. Do not lower the iteration count without recording it.
-- [ ] **e. Atlas latency and region.** `for i in $(seq 20); do curl -s -o /dev/null -w '%{time_total}\n' https://gd-site.<name>.workers.dev/api/v1/health; done`. **Pass:** typically under 0.5 s. **Fail:** consistently above 1 s: create the cluster again in a region closer to your visitors (M0 cannot move), change `MONGODB_URI`, and seed again. The daily Atlas ping and the 5 s `serverSelectionTimeoutMS` keep a cold start from hanging.
+- [ ] **a. Password hashing fits the free CPU limit** (ADR 016, PBKDF2 at 100,000 iterations, 10 ms CPU per request on the Free plan). In one terminal run `cd api && pnpm exec wrangler tail gd-business-site-starter -c ../wrangler.jsonc --format json`; in the admin, sign out and in 10 times. **Pass:** every `/api/v1/auth/login` shows `outcome: ok`. **Fail:** `exceededCpu` or Cloudflare error 1102 on login. Fallbacks, in order: Workers Paid plan (about 5 USD a month, 30 s CPU, no code change); or an algorithm change in `api/src/auth/password.ts` (hashes are self-describing, so no migration), which needs a new decision record. Do not lower the iteration count without recording it.
+- [ ] **e. Atlas latency and region.** `for i in $(seq 20); do curl -s -o /dev/null -w '%{time_total}\n' https://gd-business-site-starter.<name>.workers.dev/api/v1/health; done`. **Pass:** typically under 0.5 s. **Fail:** consistently above 1 s: create the cluster again in a region closer to your visitors (M0 cannot move), change `MONGODB_URI`, and seed again. The daily Atlas ping and the 5 s `serverSelectionTimeoutMS` keep a cold start from hanging.
 - [ ] **g. Media commits through the GitHub API.** In the admin, upload two images at the same time (two browser tabs). **Pass:** both succeed, `media/` on `main` gains both files in the GitHub history, and the Actions tab shows **no** build from those commits (`media/**` is ignored) until the quiet period passes, then exactly one. **Fail:** 503 means the token or `GITHUB_REPO` is wrong; 409/422 on simultaneous uploads means the commit code needs a retry (report it with the response text).
-- [ ] **h. Single-origin routing.** Run these against your address (`H=https://gd-site.<name>.workers.dev`):
+- [ ] **h. Single-origin routing.** Run these against your address (`H=https://gd-business-site-starter.<name>.workers.dev`):
   ```
   curl -sI $H/                          # 200 text/html, portal CSP, short cache
   curl -sI $H/admin/                    # 200, admin CSP, Cache-Control: no-cache
@@ -95,13 +95,13 @@ Do all four before you consider the site live.
   curl -sI $H/does-not-exist            # 404, the portal's 404 page
   curl -sI $H/en/                       # 301 to /  (only if the portal has /en/*)
   ```
-  Then reload `/admin/users/42` in the browser (it must open the app, not a 404). In the Cloudflare dashboard, Workers & Pages, gd-site, Observability, only `/api/*` and `/admin/*` (except `/admin/assets/*`) should appear. **Fail:** if `/admin/users/42` returns the portal 404, the admin fallback is not running; check `run_worker_first` in the deployed config (dashboard, gd-site, Settings, Runtime) and that `assets.binding` is `ASSETS`. If `_headers` rules show up wrong on the fallback response, report the exact response headers.
+  Then reload `/admin/users/42` in the browser (it must open the app, not a 404). In the Cloudflare dashboard, Workers & Pages, gd-business-site-starter, Observability, only `/api/*` and `/admin/*` (except `/admin/assets/*`) should appear. **Fail:** if `/admin/users/42` returns the portal 404, the admin fallback is not running; check `run_worker_first` in the deployed config (dashboard, gd-business-site-starter, Settings, Runtime) and that `assets.binding` is `ASSETS`. If `_headers` rules show up wrong on the fallback response, report the exact response headers.
 
 ## Everyday operation
 
 A content change in the admin marks the site dirty; a cron every 15 minutes starts the **deploy** workflow after a quiet period of 2 minutes (at most one build per 5 minutes). The admin's **Publish** button starts it at once. A commit to `main` also deploys, except changes limited to `media/**`, `docs/**` and Markdown files.
 
-**Logs.** `cd api && pnpm exec wrangler tail gd-site -c ../wrangler.jsonc`. Cloudflare keeps request logs in the dashboard (Observability) on the Free plan for a short time only.
+**Logs.** `cd api && pnpm exec wrangler tail gd-business-site-starter -c ../wrangler.jsonc`. Cloudflare keeps request logs in the dashboard (Observability) on the Free plan for a short time only.
 
 **Health.** `GET /api/v1/health`.
 
@@ -122,9 +122,9 @@ A content change in the admin marks the site dirty; a cron every 15 minutes star
 1. Actions, **backup**, a run, download the artifact (a zip containing `dump.archive.enc`) and unzip it.
 2. Decrypt: `openssl enc -d -aes-256-cbc -pbkdf2 -in dump.archive.enc -out dump.archive -pass pass:'<BACKUP_PASSPHRASE>'`
 3. Restore **into a scratch database first**, with a user that may write (the app user):
-   `docker run --rm -v "$PWD:/b" mongo:8.0.38 mongorestore --uri '<readWrite URI>' --gzip --archive=/b/dump.archive --nsFrom 'gdsite.*' --nsTo 'gdsite_restore.*'`
-4. Compare in Atlas (Browse Collections): collection names and document counts of `gdsite_restore` against `gdsite`.
-5. To restore production: drop the damaged collections (or the database) in Atlas, then run the same command with `--nsFrom 'gdsite.*' --nsTo 'gdsite.*'`. Run the seed afterwards only if the roles or menus are missing. Delete `gdsite_restore` and the decrypted `dump.archive` when done.
+   `docker run --rm -v "$PWD:/b" mongo:8.0.38 mongorestore --uri '<readWrite URI>' --gzip --archive=/b/dump.archive --nsFrom 'gd-business-site-starter.*' --nsTo 'gd-business-site-starter_restore.*'`
+4. Compare in Atlas (Browse Collections): collection names and document counts of `gd-business-site-starter_restore` against `gd-business-site-starter`.
+5. To restore production: drop the damaged collections (or the database) in Atlas, then run the same command with `--nsFrom 'gd-business-site-starter.*' --nsTo 'gd-business-site-starter.*'`. Run the seed afterwards only if the roles or menus are missing. Delete `gd-business-site-starter_restore` and the decrypted `dump.archive` when done.
 Backups hold your users' contact messages and password hashes. Treat the passphrase and the decrypted file as secrets.
 
 ## When the portal build fails

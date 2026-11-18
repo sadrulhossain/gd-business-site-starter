@@ -1,5 +1,5 @@
 {
-  "name": "gd-site",
+  "name": "gd-business-site-starter",
   "main": "api/src/worker.ts",
   "compatibility_date": "2026-11-17",
   "compatibility_flags": ["nodejs_compat"],
@@ -15,8 +15,8 @@
   "vars": {
     "APP_ENV": "production",
     "APP_DEBUG": "false",
-    "MONGODB_DB": "gdsite",
-    "SITE_ORIGIN": "https://gd-site.hossainsadrul.workers.dev",
+    "MONGODB_DB": "gd-business-site-starter",
+    "SITE_ORIGIN": "https://gd-business-site-starter.hossainsadrul.workers.dev",
     "CORS_ALLOWED_ORIGINS": "",
     "LOCALE_DEFAULT": "en",
     "LOCALE_FALLBACK": "en",

@@ -28,7 +28,7 @@ jobs:
           --health-retries 12
     env:
       MONGODB_URI: mongodb://localhost:27017
-      MONGODB_DB: gdsite
+      MONGODB_DB: gd-business-site-starter
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:

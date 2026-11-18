@@ -12,7 +12,7 @@ export const PASSWORD = 'a-long-test-password';
 
 export const testEnv = (over: Partial<Env> = {}): Env => ({
   MONGODB_URI: process.env.MONGODB_URI ?? 'mongodb://mongo:27017',
-  MONGODB_DB: `${process.env.MONGODB_DB ?? 'gdsite'}_testing`,
+  MONGODB_DB: `${process.env.MONGODB_DB ?? 'gd-business-site-starter'}_testing`,
   APP_DEBUG: 'false',
   SITE_ORIGIN: 'http://site.test',
   JWT_ACCESS_SECRET: 'test-access-secret-test-access-secret-0001',

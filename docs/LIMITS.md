@@ -10,12 +10,12 @@ filled in by running the steps in `docs/DEPLOY.md`, Part D (`scripts/measure-api
 | Limit | Value | Used | At 80 percent | Source |
 |-------|-------|------|---------------|--------|
 | Requests per day | 100,000 (resets 00:00 UTC) | the portal is static assets (not counted as Worker requests); only `/api/*` and `/admin/*` run the Worker. A visit to the portal makes no API call except the contact form | watch Observability; a bot flood is the risk. Turn on Cloudflare's security level or move to Paid (10 million a month included) | [Workers limits](https://developers.cloudflare.com/workers/platform/limits/) |
-| CPU time per request | 10 ms | see "CPU and wall time" below; **login is the endpoint at risk** (PBKDF2) | Paid plan (30 s), or a cheaper password hash with a recorded decision | same |
+| CPU time per request | 10 ms | see "CPU and wall time" below; **login is the endpoint at risk** (PBKDF2) | Paid plan (30 s) removes the CPU error; a stronger hash needs WASM Argon2id or a Node host (SECURITY.md R1) | same |
 | Subrequests per request | 50 | an upload makes about 8 GitHub calls and 1 to 5 database operations; a list makes 2 to 4 database operations | none needed; the media commit retries at most 3 times | same |
 | Cron triggers per account | 5 | 2 | keep the schedule at two entries | same |
 | Static asset files per version | 20,000 | `check-assets.mjs` prints it on each build (the portal export plus admin plus media) | at 16,000 the build fails; prune media or split | same |
 | Static asset file size | 25 MiB | images are at most 5 MB each (`UPLOADS_MAX_MB`) | build fails at 20 MiB | same |
-| Worker size | 3 MB after gzip on Free (10 MB on Paid) | 1.0 MB gzipped (5.7 MB raw), see "Bundle" | at 2.4 MB review dependencies; the limit is the compressed size reported by `wrangler deploy` | same |
+| Worker size | 64 MiB uncompressed on both plans; no compressed limit | 5.7 MB raw (1.0 MB gzipped), see "Bundle" | none expected; re-check after adding a dependency | same |
 
 ## MongoDB Atlas (M0)
 
@@ -91,7 +91,7 @@ How to read this honestly:
 
 ## Bundle
 
-`wrangler deploy --dry-run` on 2026-11-18: `worker.js` 5.69 MB raw, 1.02 MB gzipped (about a third of the Free limit). Re-check with the same command after adding a dependency; the deploy prints the real "Total Upload" and gzip size.
+`wrangler deploy --dry-run` on 2026-11-18: `worker.js` 5.69 MB raw, 1.02 MB gzipped (about 9 percent of the 64 MiB limit). Re-check with the same command after adding a dependency; the deploy prints the real "Total Upload" and gzip size.
 
 ## Frontend gates (Phase M9, 2026-11-18, local, static export served like Cloudflare)
 

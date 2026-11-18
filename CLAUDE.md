@@ -1,17 +1,16 @@
-# gd-business-site-boilerplate
+# gd-business-site-starter
 
 ## Repo map
-- `api/` — Express 5 API for one Cloudflare Worker (MongoDB Atlas, wrangler); stub until Phase M1
+- `api/` — Express 5 API for one Cloudflare Worker (MongoDB Atlas, wrangler)
 - `web/admin` — Vite React admin app (served at /admin/)
 - `web/portal` — Next.js static-export public portal
 - `packages/` — shared packages
-- `media/` — uploaded images, committed through the GitHub API (from M3)
-- `docker/` — local dev Dockerfiles and compose config (MongoDB for dev; replaced in M1)
+- `media/` — uploaded images, committed through the GitHub API
+- `docker/` — local dev entrypoint (docker-compose.yml at the root: MongoDB, Mailpit, and one node container running API, admin and portal)
 - `.github/workflows/` — build and deploy with wrangler (GitHub Actions, no Cloudflare build minutes)
-- `docs/` — PHASES.md, VERSIONS.md, ENV.md, DECISIONS.md (ADR 012), PATTERNS.md
+- `docs/` — PHASES.md, VERSIONS.md, ENV.md, DECISIONS.md, PATTERNS.md, DEPLOY.md, LIMITS.md, SECURITY.md, CUSTOMIZE.md, UPGRADE.md
 
 ## Make commands
-Planned for the new stack; Phase M1 replaces the current Makefile (still the Laravel one until then).
 - `make up` / `make down` — start / stop the local stack (API on wrangler dev, MongoDB, admin, portal)
 - `make ports` — check host ports from .env are free or ours
 - `make seed` / `make seed-core` — idempotent seed with / without the demo content

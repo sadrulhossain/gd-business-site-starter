@@ -30,7 +30,7 @@ You do these by hand because they need your logins and tokens. Nothing in this r
   mongodb+srv://gd-business-site-starter-app:<password>@<cluster>.mongodb.net/gd-business-site-starter?retryWrites=true&w=majority&serverSelectionTimeoutMS=5000
   mongodb+srv://gd-business-site-starter-backup:<password>@<cluster>.mongodb.net/gd-business-site-starter?retryWrites=true&w=majority&serverSelectionTimeoutMS=5000
   ```
-  Never paste these anywhere but the prompts below. **Limits to know:** M0 stores 512 MB, has **no automatic backups** (this repo's weekly backup workflow is your only backup), and **pauses after about 60 days without activity** (the daily cron pings it; do not disable it).
+  Never paste these anywhere but the prompts below. **Limits to know** ([source](https://www.mongodb.com/docs/atlas/reference/free-shared-limitations/), read 2026-11-18): M0 stores 0.5 GB (data and indexes), allows 100 operations a second, 500 connections and 10 GB of data transfer in and out per rolling week, and **pauses after 30 days with no connection** (the daily cron prevents that; do not disable it). Atlas can take daily snapshots on M0 and keep four: switch them on under Backup in Atlas, but the weekly encrypted dump of this repository (`backup.yml`) is the backup you control and have restored.
 - [ ] **6. GitHub repository secrets.** Repository, Settings, Secrets and variables, Actions, New repository secret:
 
   | Secret | Value |
@@ -39,6 +39,8 @@ You do these by hand because they need your logins and tokens. Nothing in this r
   | `CLOUDFLARE_ACCOUNT_ID` | step 2 |
   | `BACKUP_MONGODB_URI` | the **read-only** string from step 5 |
   | `BACKUP_PASSPHRASE` | 32 or more random characters (`openssl rand -base64 36`); store a copy in your password manager, because a backup cannot be read without it |
+
+  Optional: `INDEXES_MONGODB_URI`, the **readWrite** string again. With it, every deploy first runs `pnpm --filter @gd/api indexes` (creates any index a new release added, before the new code goes live). Without it nothing breaks: the seed command and the daily cron create indexes too, so a new index exists within a day. The reason it is optional: it puts a write-capable database credential in GitHub.
 
   There is no GitHub variable to set: the deploy reads `SITE_ORIGIN` and `LOCALE_*` from `wrangler.jsonc`.
 - [ ] **7. Cloudflare API token for the deploy.** Dashboard, Manage Account, Account API tokens, Create Token, **Edit Cloudflare Workers** template ([GitHub Actions guide](https://developers.cloudflare.com/workers/ci-cd/external-cicd/github-actions/)). Under Account Resources choose **only this account**. Remove any zone permission and zone resource (a zone scope is needed only if you add a custom domain later). The deploy needs Workers Scripts: Edit; I could not confirm the exact list of scope names from the docs, so if the first deploy fails with an authentication error naming a permission, add exactly that one. Set an expiry and note the date. Copy the token once; it is not shown again.

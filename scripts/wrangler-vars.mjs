@@ -1,10 +1,10 @@
-// Prints SITE_ORIGIN and LOCALE_* from the root wrangler.jsonc as KEY=value lines, for `>> "$GITHUB_ENV"` in deploy.yml.
+// Prints SITE_ORIGIN, MONGODB_DB and LOCALE_* from the root wrangler.jsonc as KEY=value lines, for `>> "$GITHUB_ENV"` in deploy.yml.
 // The Worker and the portal build read the same values, so there is no GitHub variable to keep in step.
 // wrangler.jsonc must stay plain JSON (no comments).
 import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 
-const KEYS = ['SITE_ORIGIN', 'LOCALE_DEFAULT', 'LOCALE_FALLBACK', 'LOCALE_SUPPORTED']
+const KEYS = ['SITE_ORIGIN', 'MONGODB_DB', 'LOCALE_DEFAULT', 'LOCALE_FALLBACK', 'LOCALE_SUPPORTED']
 
 export function readVars(text) {
   let config

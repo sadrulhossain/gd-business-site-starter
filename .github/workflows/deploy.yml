@@ -79,6 +79,15 @@ jobs:
           if [ "$BOOTSTRAP" = "true" ]; then node scripts/assemble-site.mjs --bootstrap; else node scripts/assemble-site.mjs; fi
           node scripts/check-assets.mjs
 
+      # Optional: needs a GitHub secret INDEXES_MONGODB_URI (a readWrite Atlas string). Without it, the daily cron
+      # creates any new index within a day (docs/DEPLOY.md). Idempotent; runs before the new code goes live.
+      - name: Create indexes
+        env:
+          INDEXES_MONGODB_URI: ${{ secrets.INDEXES_MONGODB_URI }}
+        run: |
+          if [ -z "$INDEXES_MONGODB_URI" ]; then echo "INDEXES_MONGODB_URI is not set; skipping (the daily cron creates new indexes)"; exit 0; fi
+          MONGODB_URI="$INDEXES_MONGODB_URI" pnpm --filter @gd/api run indexes
+
       # The workspace's pinned wrangler, not npx, and no third-party deploy action.
       - name: Deploy
         env:
